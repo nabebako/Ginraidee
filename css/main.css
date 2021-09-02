@@ -9,3 +9,7 @@ body
 .first--hidden {
     display: hidden;
 }
+
+.no-style--list {
+    list-style: none;
+}
