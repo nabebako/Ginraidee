@@ -9,10 +9,3 @@ window.onload = function() { /*Setting up event listeners*/
 }
 
 
-
-
-/*
-document.querySelector('input').addEventListener('input', (x) => {
-    console.log(x);
-})
-*/
