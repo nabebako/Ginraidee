@@ -5,3 +5,7 @@ body
 .main {
     display: flex;
 }
+
+.first--hidden {
+    display: hidden;
+}
