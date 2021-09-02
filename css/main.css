@@ -13,3 +13,7 @@ body
 .no-style--list {
     list-style: none;
 }
+
+.clickable:hover {
+    cursor: pointer;
+}
