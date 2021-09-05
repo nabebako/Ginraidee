@@ -45,18 +45,18 @@
             <div class = "greeting--img--banner">
                 <div> <!--Div for the top picture banner-->
                     <div class = "make--center">
+                        <a href = "#"> <!--Change the href-->
                         <!--PLACEHOLDER--> <img class = "logo" src = "/Users/ken/Documents/GitHub/food-lion/resources/logoipsum-logo-29.svg"> <!--The logo(we don't have one)-->
+                        </a>
                         <input class = "search--bar" type = "text" id = "Search-Query" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
                         <!--                        -->
                         <!--ADD A SEARCH RESULT HERE-->
                         <!--                        -->
                     </div>
                 </div>
-                <a href = "www.google.com">
-                    <!--PLACEHOLDER--> <svg class = "overlap--img" width = "100%" height = "400px"> <!--Insert the large background picture, later-->
-                        <rect width = "100%" height = "100%" style = "fill: green;"/>
-                    </svg>
-                </a>
+                <!--PLACEHOLDER--> <svg class = "overlap--img" width = "100%" height = "400px"> <!--Insert the large background picture, later-->
+                    <rect width = "100%" height = "100%" style = "fill: green;"/>
+                </svg>
             </div>
             <div> <!--Side nav/menu-, on the left-->
                 <!--                -->
@@ -67,7 +67,6 @@
                 <!--                            -->
                 <!-- Add pictures and link here -->
                 <!--                            -->
-
             </div>
             <div> <!--Weekly picks, on the right-->
                 <div> <!--1st pick-->
@@ -88,9 +87,15 @@
                 <img> <!--Find an img?-->
                 <div> <!--The text-->
                     <p>Not sure what to have?</p>
-                    <p id = "Questionnaire-pop-up" class = "clickable">Tell Us What You Like</p> <!--bring up a window for the questionnaire-->
+                    <p class = "clickable" id = "Questionnaire-pop-up" >Tell Us What You Like</p> <!--bring up a window for the questionnaire-->
                 </div>
-                <div> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
+                <div class = "pop-up--window pop-up--background" id = "pop-up--background"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
+                </div>
+                <div class = "pop-up--window pop-up--foreground" id = "pop-up--foreground">
+                    <img id = "window--close"> <!--Exit icon-->
+                    
+
+
                     <!--Waiting for the desing-->
                 </div>
             </div>
