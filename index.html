@@ -5,43 +5,56 @@
         <link rel = "icon" href = "">
         <link rel = "stylesheet" href = "/Users/ken/Documents/GitHub/food-lion/css/main.css"> <!--Change the path later-->
         <script src = "/Users/ken/Documents/GitHub/food-lion/scripts/main.js"></script> <!--Change the path later-->
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com"> <!--Fonts-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!--Fonts-->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet"> <!--Fonts-->
     </head>
     <body>
         <header class = "">
-            <div> <!--Top navigation thingy-->
+            <div class = "top--nav--container"> <!--Top navigation thingy-->
                 <div> <!--Hamburger nav-->
+                    <svg viewBox="0 0 100 80" width="40" height="40"> <!--Hambuger icon-->
+                        <rect width="100" height="20"></rect>
+                        <rect y="30" width="100" height="20"></rect>
+                        <rect y="60" width="100" height="20"></rect>
+                    </svg>
                     <nav class = "first--hidden"> <!--Nav under the hamburger menu-->
                         <ul>
                             <a></a>
                         </ul>
                     </nav>
                 </div>
-                <nav> <!--Main nav--> 
-                    <ul class = "no-style--list">
-                        <li><a href = "">Breakfast</a></li>
-                        <li><a href = "">Lunch</a></li>
-                        <li><a href = "">Dinner</a></li>
-                        <li><a href = "">Dessert</a></li>
-                        <li><a href = "">Easy Recipes</a></li>
+                <nav> <!--Main nav-->
+                    <ul class = "horizontal--nav--list">
+                        <li><a class = "nav--link" href = "">Breakfast</a></li>
+                        <li><a class = "nav--link" href = "">Lunch</a></li>
+                        <li><a class = "nav--link" href = "">Dinner</a></li>
+                        <li><a class = "nav--link" href = "">Dessert</a></li>
+                        <li><a class = "nav--link" href = "">Easy Recipes</a></li>
                     </ul>
                 </nav>
                 <div class = "shopping--list"> <!--Link to the shopping list page-->
                     <a href = "/pages/shopping-list.html">
-                        <img> <!--Insert notepad img-->
+                        <img class = "notepad--img--for--now" src="/Users/ken/Documents/GitHub/food-lion/resources/1200px-Icon-notepad.svg.png"> <!--Insert notepad img-->
                     </a>
                 </div>
             </div>
         </header>
         <main>
-            <img> <!--Insert the large background picture-->
-            <div> <!--Div for the top picture banner-->
-                <div>
-                    <img> <!--The logo(we don't have one)-->
-                    <input type = "search" class = "" id = "Search-Query" placeholder = "Enter some text">
-                    <!--                     -->
-                    <!--ADD A SEARCH BAR HERE-->
-                    <!--                     -->
+            <div class = "greeting--img--banner">
+                <div> <!--Div for the top picture banner-->
+                    <div class = "make--center">
+                        <!--THIS IS A PLACEHOLDER--> <img class = "logo--on--img" src = "/Users/ken/Documents/GitHub/food-lion/resources/logoipsum-logo-29.svg"> <!--The logo(we don't have one)-->
+                        <input class = "search--bar" type = "search" id = "Search-Query" placeholder = "何を食べたい知るか？"> <!--Know what you want? Look it up.-->
+                        <!--                     -->
+                        <!--ADD A SEARCH BAR HERE-->
+                        <!--                     -->
+                    </div>
                 </div>
+                <!--PLACEHOLDER--> <svg class = "overlap--img" width = "100%" height = "400px"> <!--Insert the large background picture, later-->
+                    <rect width = "100%" height = "100%" style="fill: green;"/>
+                </svg>
             </div>
             <div> <!--Side nav/menu-, on the left-->
                 <!--                -->
