@@ -2,8 +2,12 @@
 
 * {
     font-family: 'Noto Sans JP', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
+body {
+    margin: 0;
+}
 
 .first--hidden {
     display: hidden;
@@ -40,6 +44,10 @@
 }
 
 .greeting--img--banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     position: relative;
 
     width: 100%;
@@ -56,20 +64,28 @@
 
 .make--center {
     max-width: fit-content;
-    margin: auto;
+}
+
+.logo {
+    display: block;
+
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    padding: 12px;
 }
 
 .search--bar {
     display: block;
 
-    height: 2.8rem;
-    width: 35ch;
+    font-size: 1.2rem;
+
+    width: 28ch;
 
     border-width: 1px;
     border-radius: 30px;
     border-color: black; /*Change the colour of the border*/
 
-    padding: 0 1.2rem;
+    padding: .5rem 1.2rem;
 }
 
 .search--bar:focus {
