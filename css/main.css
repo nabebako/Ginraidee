@@ -14,6 +14,11 @@ body {
     overflow: hidden;
 }
 
+.dropdown--list {
+    position: absolute;
+    background-color: #fff;
+}
+
 .hidden {
     display: none;
 }
@@ -49,7 +54,6 @@ body {
 }
 
 .greeting--img--banner {
-
 
     position: relative;
 
