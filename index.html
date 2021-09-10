@@ -14,12 +14,8 @@
         <header class = "">
             <div class = "top--nav--container"> <!--Top navigation thingy-->
                 <div> <!--Hamburger nav-->
-                    <svg viewBox="0 0 100 80" width="40" height="40"> <!--Hambuger icon-->
-                        <rect width="100" height="20"></rect>
-                        <rect y="30" width="100" height="20"></rect>
-                        <rect y="60" width="100" height="20"></rect>
-                    </svg>
-                    <nav class = "first--hidden"> <!--Nav under the hamburger menu-->
+                    <img id = "hamburger--nav" src = "resources/SVG/hamburger--nav.svg" width = "30" height = "30"> <!--Hambuger icon-->
+                    <nav id = "ham--nav--contents" class = "hidden"> <!--Nav under the hamburger menu-->
                         <ul>
                             <a></a>
                         </ul>
@@ -42,11 +38,11 @@
             </div>
         </header>
         <main>
-            <div class = "greeting--img--banner">
+            <div class = "greeting--img--banner make--center">
                 <div> <!--Div for the top picture banner-->
-                    <div class = "make--center">
+                    <div class = "">
                         <a href = "#"> <!--Change the href-->
-                        <!--PLACEHOLDER--> <img class = "logo" src = "resources/logoipsum-logo-29.svg"> <!--The logo(we don't have one)-->
+                        <!--PLACEHOLDER--> <img class = "logo" src = "resources/SVG/logoipsum-logo-29.svg"> <!--The logo(we don't have one)-->
                         </a>
                         <input class = "search--bar" type = "text" id = "Search-Query" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
                         <!--                        -->
@@ -89,11 +85,60 @@
                     <p>Not sure what to have?</p>
                     <p class = "clickable" id = "Questionnaire-pop-up" >Tell Us What You Like</p> <!--bring up a window for the questionnaire-->
                 </div>
-                <div class = "pop-up--window pop-up--background" id = "pop-up--background"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
+                <div class = "hidden pop-up--background" id = "pop-up--background"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
                 </div>
-                <div class = "pop-up--window pop-up--foreground" id = "pop-up--foreground">
-                    <img id = "window--close" class = "exit--button" src = "resources/cross.svg" height = "40" width = "40"> <!--Exit icon-->
+                <div class = "hidden pop-up--foreground" id = "pop-up--foreground">
+                    <img id = "window--close" class = "exit--button" src = "resources/SVG/cross.svg" height = "40" width = "40"> <!--Exit icon-->
+                    <div class = "make--center"> <!--Picture on the right with text on top-->
+                        <p>What kind of food do you like?</p>
+                        <img class = "overlap--img">
+                    </div>
+                    <div>
+                        <fieldset>
+                            <div class = "checkbox">
+                                <input type = "checkbox" id = "pork" name = "food--preference" value = "pork">
+                                <label for = "pork">Pork</label>
+                            </div>
+                            <div>
+                                <input type = "checkbox" id = "beef" name = "food--preference" value = "beef">
+                                <label for = "beef">Beef</label>
+                            </div>
+                            <div class = "checkbox">
+                                <input type = "checkbox" id = "" name = "food--preference" value = "">
+                                <label>Chicken</label>
+                            </div>
+                            <div class = "checkbox">
+                                <input type = "checkbox" id = "" name = "food--preference" value = "">
+                                <label>Shrimp</label>
+                            </div>
+                            <div class = "checkbox">
+                                <input type = "checkbox" id = "" name = "food--preference" value = "">
+                                <label>Fish</label>
+                            </div>
+                        </fieldset>    
+
+
+
+
                     
+                        <input type = "checkbox" id = "food--preference" name = "food--preference" >
+                        <ul> <!--List of options for the questionare-->
+                            <li id = "" class = ""><p>Pork</p></li>
+                            <li id = "" class = ""><p>Beef</p></li>
+                            <li id = "" class = ""><p>Chicken</p></li>
+                            <li id = "" class = ""><p>Shrimp</p></li>
+                            <li id = "" class = ""><p>Fish</p></li>
+                            <li id = "" class = ""><p>Seafood</p></li>
+                            <li id = "" class = ""><p>Lamb</p></li>
+                            <li id = "" class = ""><p>Vegetarian</p></li>
+                            <li id = "" class = ""><p>Fruits</p></li>
+                            <li id = "" class = ""><p>Healthy</p></li>
+                            <li id = "" class = ""><p>Fastfood</p></li>
+                            <li id = "" class = ""><p>Fried</p></li>
+                            <li id = "" class = ""><p>Boiled</p></li>
+                            <li id = "" class = ""><p>Stemed</p></li>
+                        </ul>
+                    </div>
 
 
                     <!--Waiting for the desing-->

@@ -14,8 +14,8 @@ body {
     overflow: hidden;
 }
 
-.first--hidden {
-    display: hidden;
+.hidden {
+    display: none;
 }
 
 .top--nav--container {
@@ -49,9 +49,7 @@ body {
 }
 
 .greeting--img--banner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
 
     position: relative;
 
@@ -68,7 +66,9 @@ body {
 }
 
 .make--center {
-    max-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo {
@@ -98,9 +98,6 @@ body {
     box-shadow: 0 0 3px aqua; /*Change the colour of the shadow*/
 }
 
-.pop-up--window {
-    display: none;
-}
 
 .pop-up--background {
     position: fixed;
@@ -114,8 +111,8 @@ body {
 }
 
 .pop-up--foreground {
-    width: 700px; /*Change it later*/
-    height: 400px; /*Change it later*/
+/*Change it later*/
+/*Change it later*/
     background-color: white;
 
     position: fixed;
