@@ -23,8 +23,8 @@ window.onload = function() { /*Setting up event listeners*/
         console.log('Window Created');
     });
     document.getElementById('window--close').addEventListener('click', () => {
-        document.getElementById('pop-up--foreground').style.display = 'hidden';
-        document.getElementById('pop-up--background').style.display = 'hidden';
+        document.getElementById('pop-up--foreground').style.display = 'none';
+        document.getElementById('pop-up--background').style.display = 'none';
         console.log('Windown Destroyed');
     });
 }
