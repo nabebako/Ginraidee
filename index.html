@@ -12,55 +12,80 @@
     </head>
     <body>
         <header class = "">
-            <div class = "top--nav--container"> <!--Top navigation thingy-->
-                <div> <!--Hamburger nav-->
+            <div class = "flex--centered-contents centered" style = "width: 80%;"> <!--Top navigation thingy-->
+                <div style = "height: 30px"> <!--Hamburger nav-->
                     <img id = "hamburger--nav" src = "resources/SVG/hamburger--nav.svg" width = "30" height = "30"> <!--Hambuger icon-->
-                    <nav id = "ham--nav--contents" class = "dropdown--list hidden"> <!--Nav under the hamburger menu-->
+                    <div id = "ham--nav--contents" class = "dropdown--list hidden"> <!--Nav under the hamburger menu-->
                         <ul><a>1</a></ul>
-                    </nav>
+                    </div>
                 </div>
-                <nav> <!--Main nav-->
-                    <ul class = "horizontal--nav--list">
-                        <li><a class = "nav--link" href = "">Breakfast</a></li>
-                        <li><a class = "nav--link" href = "">Lunch</a></li>
-                        <li><a class = "nav--link" href = "">Dinner</a></li>
-                        <li><a class = "nav--link" href = "">Dessert</a></li>
-                        <li><a class = "nav--link" href = "">Easy Recipes</a></li>
-                    </ul>
+                <nav class = "centered flex--centered-contents"> <!--Main nav-->
+                    <a class = "undecorated--link link--padding spacing" href = "">Breakfast</a>
+                    <a class = "undecorated--link link--padding spacing" href = "">Lunch</a>
+                    <a class = "undecorated--link link--padding spacing" href = "">Dinner</a>
+                    <a class = "undecorated--link link--padding spacing" href = "">Dessert</a>
+                    <a class = "undecorated--link link--padding spacing" href = "">Easy Recipes</a>
                 </nav>
-                <div class = "shopping--list"> <!--Link to the shopping list page-->
+                <div class = ""> <!--Link to the shopping list page-->
                     <a href = "pages/shopping-list.html">
-                        <!--PLACEHOLDER--> <img class = "notepad--img--for--now" src="resources/1200px-Icon-notepad.svg.png"> <!--Insert notepad img-->
+                        <!--Shopping List--><!--PLACEHOLDER--> <img class = "" width = "40" height = "40" src="resources/1200px-Icon-notepad.svg.png"> <!--Insert notepad img-->
                     </a>
+                    <div id = "" class = "hidden"> <!--Shopping list tag-->
+                        <p>Shopping List</p>
+                    </div>
                 </div>
             </div>
         </header>
         <main>
-            <div class = "greeting--img--banner make--center">
-                <div> <!--Div for the top picture banner-->
-                    <div class = "">
-                        <a href = "#"> <!--Change the href-->
-                        <!--PLACEHOLDER--> <img class = "logo" src = "resources/SVG/logo-1.svg"> <!--The logo(we don't have one)-->
-                        </a>
-                        <input class = "search--bar" type = "text" id = "Search-Query" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
-                        <!--                        -->
-                        <!--ADD A SEARCH RESULT HERE-->
-                        <!--                        -->
-                    </div>
-                </div>
-                <!--PLACEHOLDER--> <svg class = "overlap--img" width = "100%" height = "400px"> <!--Insert the large background picture, later-->
-                    <rect width = "100%" height = "100%" style = "fill: green;"/>
+            <div class = "greeting--img--banner overlay-container bottom--spacing">
+                <!--PLACEHOLDER--> <svg width = "100%" height = "400px"> <!--Insert the large background picture, later-->
+                    <rect width = "100%" height = "100%" style = "fill: #000;"/>
                 </svg>
+
+                <div class = "overlay"> <!--Div for the top picture banner-->
+                    <a href = "#"> <!--Change the href-->
+                    <!--PLACEHOLDER--> <img class = "logo" src = "resources/SVG/logo-1.svg"> <!--The logo(we don't have one)-->
+                    </a>
+                    <input class = "search--bar" type = "text" id = "Search-Query" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                    <!--                        -->
+                    <!--ADD A SEARCH RESULT HERE-->
+                    <!--                        -->
+                </div>
             </div>
             <div> <!--Side nav/menu-, on the left-->
                 <!--                -->
                 <!-- Add stuff here -->
                 <!--                -->
             </div>
-            <div> <!--Top picks section, in the middle-->
-                <!--                            -->
-                <!-- Add pictures and link here -->
-                <!--                            -->
+            <div class = "centered bottom--spacing">
+                <!--Top picks section--> <div class = "flex--centered-contents" style = "max-width: 600px; justify-content: space-between;">
+                <a>
+                    <div class = "menu--selection--container overlay-container centered">
+                        <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                        <p id = "first-menu-selection" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                    </div>
+                </a>
+                <a>
+                    <div class = "menu--selection--container overlay-container centered">
+                        <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                        <p id = "second-menu-selection" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                    </div>
+                </a>
+                </div>
+                <!--Top picks section--> <div class = "flex--centered-contents" style = "max-width: 600px; justify-content: space-between;">
+                <a>
+                    <div class = "menu--selection--container overlay-container centered">
+                        <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                        <p id = "third-menu-selection" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                    </div>
+                </a>
+                <a>
+                    <div class = "menu--selection--container overlay-container centered">
+                        <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                        <p id = "fourth-menu-selection" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                    </div>
+                </a>
+                </div>
             </div>
             <div> <!--Weekly picks, on the right-->
                 <div> <!--1st pick-->
@@ -77,70 +102,66 @@
                 <!-- Add more pick, how much? idk -->
                 <!--                              -->
             </div>
-            <div> <!--Questionnaire section-->
+            <div class = "centered flex--centered-contents" style = "width: 1000px; height: 300px; box-shadow: 0 0 1px #000 ;"> <!--Questionnaire section-->
                 <img> <!--Find an img?-->
                 <div> <!--The text-->
-                    <p>Not sure what to have?</p>
-                    <p class = "clickable" id = "Questionnaire-pop-up" >Tell Us What You Like</p> <!--bring up a window for the questionnaire-->
-                </div>
-                <div class = "hidden pop-up--background" id = "pop-up--background"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
-                </div>
-                <div class = "hidden pop-up--foreground" id = "pop-up--foreground">
-                    <img id = "window--close" class = "exit--button" src = "resources/SVG/cross.svg" height = "40" width = "40"> <!--Exit icon-->
-                    <div class = "make--center"> <!--Picture on the right with text on top-->
-                        <p>What kind of food do you like?</p>
-                        <img class = "overlap--img">
+                    <p class = "centered" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Not sure what to have?</p>
+                    <div id = "Questionnaire-pop-up" class = "centered clickable button-styles">
+                        <p style = "font-size: 1.2rem; padding: 10px 15px; font-weight: 200;">TELL US WHAT YOU LIKE</p> <!--bring up a window for the questionnaire-->
                     </div>
-                    <div>
-                        <fieldset>
-                            <div class = "checkbox">
-                                <input type = "checkbox" id = "pork" name = "food--preference" value = "pork">
-                                <label for = "pork">Pork</label>
-                            </div>
-                            <div>
-                                <input type = "checkbox" id = "beef" name = "food--preference" value = "beef">
-                                <label for = "beef">Beef</label>
-                            </div>
-                            <div class = "checkbox">
-                                <input type = "checkbox" id = "" name = "food--preference" value = "">
-                                <label>Chicken</label>
-                            </div>
-                            <div class = "checkbox">
-                                <input type = "checkbox" id = "" name = "food--preference" value = "">
-                                <label>Shrimp</label>
-                            </div>
-                            <div class = "checkbox">
-                                <input type = "checkbox" id = "" name = "food--preference" value = "">
-                                <label>Fish</label>
-                            </div>
-                        </fieldset>    
+                </div>
+                <div id = "pop-up--background" class = "pop-up--background hidden"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
+                </div>
+            </div>
+            <div id = "pop-up--foreground" class = "pop-up--foreground hidden">
+                <!--Exit icon--> <img id = "window--close" class = "exit--button" src = "resources/SVG/cross.svg" height = "40" width = "40">
+                <div class = "centered">  <!--Picture on the right with text on top-->
+                    <p>What kind of food do you like?</p>
+                    <img class = "overlap--img">
+                </div>
+                <div>
+                    <fieldset>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "pork" name = "food--preference" value = "pork">
+                            <label for = "pork">Pork</label>
+                        </div>
+                        <div>
+                            <input type = "checkbox" id = "beef" name = "food--preference" value = "beef">
+                            <label for = "beef">Beef</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "" name = "food--preference" value = "">
+                            <label>Chicken</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "" name = "food--preference" value = "">
+                            <label>Shrimp</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "" name = "food--preference" value = "">
+                            <label>Fish</label>
+                        </div>
+                    </fieldset>    
 
-
-
-
-                    
-                        <input type = "checkbox" id = "food--preference" name = "food--preference" >
-                        <ul> <!--List of options for the questionare-->
-                            <li id = "" class = ""><p>Pork</p></li>
-                            <li id = "" class = ""><p>Beef</p></li>
-                            <li id = "" class = ""><p>Chicken</p></li>
-                            <li id = "" class = ""><p>Shrimp</p></li>
-                            <li id = "" class = ""><p>Fish</p></li>
-                            <li id = "" class = ""><p>Seafood</p></li>
-                            <li id = "" class = ""><p>Lamb</p></li>
-                            <li id = "" class = ""><p>Vegetarian</p></li>
-                            <li id = "" class = ""><p>Fruits</p></li>
-                            <li id = "" class = ""><p>Healthy</p></li>
-                            <li id = "" class = ""><p>Fastfood</p></li>
-                            <li id = "" class = ""><p>Fried</p></li>
-                            <li id = "" class = ""><p>Boiled</p></li>
-                            <li id = "" class = ""><p>Stemed</p></li>
-                        </ul>
-                    </div>
-
-
+                    <input type = "checkbox" id = "food--preference" name = "food--preference" >
+                    <ul> <!--List of options for the questionare-->
+                        <li id = "" class = ""><p>Pork</p></li>
+                        <li id = "" class = ""><p>Beef</p></li>
+                        <li id = "" class = ""><p>Chicken</p></li>
+                        <li id = "" class = ""><p>Shrimp</p></li>
+                        <li id = "" class = ""><p>Fish</p></li>
+                        <li id = "" class = ""><p>Seafood</p></li>
+                        <li id = "" class = ""><p>Lamb</p></li>
+                        <li id = "" class = ""><p>Vegetarian</p></li>
+                        <li id = "" class = ""><p>Fruits</p></li>
+                        <li id = "" class = ""><p>Healthy</p></li>
+                        <li id = "" class = ""><p>Fastfood</p></li>
+                        <li id = "" class = ""><p>Fried</p></li>
+                        <li id = "" class = ""><p>Boiled</p></li>
+                        <li id = "" class = ""><p>Stemed</p></li>
+                    </ul>
+                </div>
                     <!--Waiting for the desing-->
-                </div>
             </div>
         </main>
         <footer>

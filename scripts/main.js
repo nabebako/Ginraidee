@@ -28,6 +28,7 @@ window.onload = function() { /*Setting up event listeners*/
     document.getElementById('window--close').addEventListener('click', () => {
         document.getElementById('pop-up--foreground').style.display = 'none';
         document.getElementById('pop-up--background').style.display = 'none';
+        document.body.classList.remove('stop--scroll');
         console.log('Windown Destroyed');
     });
     
