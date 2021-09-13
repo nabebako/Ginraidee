@@ -97,7 +97,7 @@ p {
 .centered {
     margin-left: auto;
     margin-right: auto;
-    width: fit-content;
+    width: max-content;
 }
 
 .flex--centered-contents {
@@ -125,7 +125,7 @@ p {
 
     font-size: 1.2rem;
 
-    width: 28ch;
+    min-width: 28ch;
     height: 2ch;
 
     border-width: 1px;
