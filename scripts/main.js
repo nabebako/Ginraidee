@@ -2,8 +2,8 @@ var search_qurey = '';
 let hamburger_nav_is_open = false;
 
 function fade_in(element, max_op) {
-    element.style.classList.remove('hidden');
-    var op = 0.1;  // initial opacity
+    element.classList.remove('hidden');
+    var op = 0.1;
     var timer = setInterval(() => {
         if (op >= max_op) {
             clearInterval(timer);
@@ -19,7 +19,7 @@ function fade_out(element) {
     var timer = setInterval(() => {
         if (op <= 0.1) {
             clearInterval(timer);
-            element.style.classList.add('hidden');
+            element.classList.add('hidden');
         }
         element.style.opacity = op;
         element.style.filter = 'alpha(opacity=' + op * 100 + ")";
@@ -38,8 +38,8 @@ window.onload = function() { /*Setting up event listeners*/
     document.getElementById('Questionnaire-pop-up').addEventListener('click', () => {
         /*Create a pop-up window.*/
         document.body.classList.add('stop--scroll'); /*Stops scrolling*/
-        fade_in(document.getElementById('pop-up--foreground'), 0.3);
-        fade_in(document.getElementById('pop-up--background'), 1);
+        fade_in(document.getElementById('pop-up--background'), .3);
+        fade_in(document.getElementById('pop-up--foreground'), 1);
         console.log('Window Created');
     });
 
