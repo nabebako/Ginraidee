@@ -156,7 +156,6 @@ p {
 .pop-up--foreground {
     
     width: 800px; /*Change it later*/
-    height: 450px; /*Change it later*/
     background-color: white;
 
     position: fixed;
@@ -180,4 +179,9 @@ p {
 
 .h-nav-cont {
     width: 160px;
+}
+
+.checkbox {
+    width: 8.2rem;
+    height: 2rem;
 }

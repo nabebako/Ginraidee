@@ -17,10 +17,10 @@
                 <div> <!--Hamburger nav-->
                     <img id = "h-nav" src = "resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
                     <div id = "h-nav-cont" class = "h-nav-cont dropdown--list hidden" style = "z-index: 1;"> <!--Nav under the hamburger menu-->
-                        <a class = "block" href = "">1</a>
-                        <a class = "block" href = "">1</a>
-                        <a class = "block" href = "">1</a>
-                        <a class = "block" href = "">1</a>
+                        <a class = "block undecorated--link" href = "">1</a>
+                        <a class = "block undecorated--link" href = "">1</a>
+                        <a class = "block undecorated--link" href = "">1</a>
+                        <a class = "block undecorated--link" href = "">1</a>
                     </div>
                 </div>
                 <nav class = "centered flex--centered-contents"> <!--Main nav-->
@@ -118,7 +118,7 @@
             <div id = "pop-up--background" class = "pop-up--background hidden"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
             </div>
             <div id = "pop-up--foreground" class = "pop-up--foreground hidden">
-                <!--Exit icon--> <img id = "window--close" class = "exit--button" src = "resources/SVG/cross.svg" height = "40" width = "40">
+                <!--Exit icon--> <img id = "window--close" class = "exit--button" src = "resources/SVG/cross.svg" style = "height: 24px; width: 24px;">
                 <div class = "centered">  <!--Picture on the right with text on top-->
                     <p>What kind of food do you like?</p>
                     <img class = "overlap--img">
@@ -144,10 +144,6 @@
                         <div class = "checkbox">
                             <input type = "checkbox" id = "fish" name = "food--preference" value = "fish">
                             <label for = "fish">Fish</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "pork" name = "food--preference" value = "pork">
-                            <label for = "pork">Pork</label>
                         </div>
                         <div class = "checkbox">
                             <input type = "checkbox" id = "seafood" name = "food--preference" value = "seafood">
