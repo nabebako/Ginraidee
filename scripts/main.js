@@ -51,18 +51,18 @@ window.onload = function() { /*Setting up event listeners*/
         console.log('Windown Destroyed');
     });
     
-    var hamburger_nav = document.getElementById('hamburger--nav');
+    var hamburger_nav = document.getElementById('h-nav');
     hamburger_nav.addEventListener('click', () => {
         if(!hamburger_nav_is_open)
         {
             hamburger_nav.src = 'resources/SVG/triangle--nav.svg';
-            document.getElementById('ham--nav--contents').classList.remove('hidden');
+            document.getElementById('h-nav-cont').classList.remove('hidden');
             hamburger_nav_is_open = true;
         } 
         else
         {
             hamburger_nav.src = 'resources/SVG/hamburger--nav.svg';
-            document.getElementById('ham--nav--contents').classList.add('hidden');
+            document.getElementById('h-nav-cont').classList.add('hidden');
             hamburger_nav_is_open = false;
         }
     });

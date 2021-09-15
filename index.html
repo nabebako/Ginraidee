@@ -7,17 +7,20 @@
         <script src = "scripts/main.js"></script>
         <meta charset = "utf-16"/>
         
-        <link rel="preconnect" href="https://fonts.googleapis.com"> <!--Fonts-->
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!--Fonts-->
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet"> <!--Fonts-->
+        <!--Fonts--> <link rel="preconnect" href="https://fonts.googleapis.com">
+        <!--Fonts--> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Fonts--> <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
     </head>
     <body>
         <header class = "">
             <div class = "flex--centered-contents centered" style = "width: 80%;"> <!--Top navigation thingy-->
-                <div style = "height: 30px"> <!--Hamburger nav-->
-                    <img id = "hamburger--nav" src = "resources/SVG/hamburger--nav.svg" width = "30" height = "30"> <!--Hambuger icon-->
-                    <div id = "ham--nav--contents" class = "dropdown--list hidden"> <!--Nav under the hamburger menu-->
-                        <ul><a>1</a></ul>
+                <div> <!--Hamburger nav-->
+                    <img id = "h-nav" src = "resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
+                    <div id = "h-nav-cont" class = "h-nav-cont dropdown--list hidden" style = "z-index: 1;"> <!--Nav under the hamburger menu-->
+                        <a class = "block" href = "">1</a>
+                        <a class = "block" href = "">1</a>
+                        <a class = "block" href = "">1</a>
+                        <a class = "block" href = "">1</a>
                     </div>
                 </div>
                 <nav class = "centered flex--centered-contents"> <!--Main nav-->
@@ -126,41 +129,63 @@
                             <input type = "checkbox" id = "pork" name = "food--preference" value = "pork">
                             <label for = "pork">Pork</label>
                         </div>
-                        <div>
+                        <div class = "checkbox">
                             <input type = "checkbox" id = "beef" name = "food--preference" value = "beef">
                             <label for = "beef">Beef</label>
                         </div>
                         <div class = "checkbox">
-                            <input type = "checkbox" id = "" name = "food--preference" value = "">
+                            <input type = "checkbox" id = "chicken" name = "food--preference" value = "chicken">
                             <label>Chicken</label>
                         </div>
                         <div class = "checkbox">
-                            <input type = "checkbox" id = "" name = "food--preference" value = "">
+                            <input type = "checkbox" id = "shrimp" name = "food--preference" value = "shrimp">
                             <label>Shrimp</label>
                         </div>
                         <div class = "checkbox">
-                            <input type = "checkbox" id = "" name = "food--preference" value = "">
+                            <input type = "checkbox" id = "fish" name = "food--preference" value = "fish">
                             <label>Fish</label>
                         </div>
-                    </fieldset>    
-
-                    <input type = "checkbox" id = "food--preference" name = "food--preference" >
-                    <ul> <!--List of options for the questionare-->
-                        <li id = "" class = ""><p>Pork</p></li>
-                        <li id = "" class = ""><p>Beef</p></li>
-                        <li id = "" class = ""><p>Chicken</p></li>
-                        <li id = "" class = ""><p>Shrimp</p></li>
-                        <li id = "" class = ""><p>Fish</p></li>
-                        <li id = "" class = ""><p>Seafood</p></li>
-                        <li id = "" class = ""><p>Lamb</p></li>
-                        <li id = "" class = ""><p>Vegetarian</p></li>
-                        <li id = "" class = ""><p>Fruits</p></li>
-                        <li id = "" class = ""><p>Healthy</p></li>
-                        <li id = "" class = ""><p>Fastfood</p></li>
-                        <li id = "" class = ""><p>Fried</p></li>
-                        <li id = "" class = ""><p>Boiled</p></li>
-                        <li id = "" class = ""><p>Stemed</p></li>
-                    </ul>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "pork" name = "food--preference" value = "pork">
+                            <label>Pork</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "seafood" name = "food--preference" value = "seafood">
+                            <label>Seafood</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "lamb" name = "food--preference" value = "lamb">
+                            <label>Lamb</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "vegetarian" name = "food--preference" value = "vegetarian">
+                            <label>Vegetarian</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "fruits" name = "food--preference" value = "fruits">
+                            <label>Fruits</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "healthy" name = "food--preference" value = "healthy">
+                            <label>Healthy</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "fastfood" name = "food--preference" value = "fastfood">
+                            <label>Fastfood</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "fried" name = "food--preference" value = "fried">
+                            <label>Fried</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "boiled" name = "food--preference" value = "boiled">
+                            <label>Boiled</label>
+                        </div>
+                        <div class = "checkbox">
+                            <input type = "checkbox" id = "stemed" name = "food--preference" value = "stemed">
+                            <label>stemed</label>
+                        </div>
+                    </fieldset>
                 </div>
                     <!--Waiting for the desing-->
             </div>

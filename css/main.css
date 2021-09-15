@@ -60,7 +60,7 @@ p {
     display: none;
 }
 
-.block--display {
+.block {
     display: block !important;
 }
 
@@ -176,4 +176,8 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+}
+
+.h-nav-cont {
+    width: 160px;
 }
