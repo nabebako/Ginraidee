@@ -29,14 +29,30 @@ function fade_out(element) {
 
 
 
-window.onload = function() { /*Setting up event listeners*/
-    document.getElementById('Search-Query').addEventListener('input', (qurey) => {
+window.onload = function() { 
+    /*Setting up event listeners*/
+    const SQ = document.getElementById('Search-Query');
+    const SQ_results = document.getElementById('search-result');
+
+    SQ.addEventListener('input', (qurey) => {
         search_qurey = qurey.target.value.replaceAll(/[^0-9a-z ]/ig, '');
         console.log('query: ' + search_qurey);
     });
 
+    SQ.addEventListener('focus', () => {
+        /* Add the search results */
+
+        SQ_results.classList.remove('hidden');
+    });
+
+    SQ.addEventListener('blur', () => {
+        /* Remove search results */
+        SQ_results.classList.add('hidden');
+    });
+
     document.getElementById('Questionnaire-pop-up').addEventListener('click', () => {
         /*Create a pop-up window.*/
+
         document.body.classList.add('stop--scroll'); /*Stops scrolling*/
         fade_in(document.getElementById('pop-up--background'), .3);
         fade_in(document.getElementById('pop-up--foreground'), 1);
@@ -45,6 +61,7 @@ window.onload = function() { /*Setting up event listeners*/
 
     document.getElementById('window--close').addEventListener('click', () => {
         /*Get rid of the pop-up window*/
+
         fade_out(document.getElementById('pop-up--foreground'));
         fade_out(document.getElementById('pop-up--background'));
         document.body.classList.remove('stop--scroll');
@@ -53,13 +70,12 @@ window.onload = function() { /*Setting up event listeners*/
     
     var hamburger_nav = document.getElementById('h-nav');
     hamburger_nav.addEventListener('click', () => {
-        if(!hamburger_nav_is_open)
+        if(!hamburger_nav_is_open) 
         {
             hamburger_nav.src = 'resources/SVG/triangle--nav.svg';
             document.getElementById('h-nav-cont').classList.remove('hidden');
             hamburger_nav_is_open = true;
-        } 
-        else
+        } else 
         {
             hamburger_nav.src = 'resources/SVG/hamburger--nav.svg';
             document.getElementById('h-nav-cont').classList.add('hidden');

@@ -16,7 +16,7 @@
             <div class = "flex--centered-contents centered" style = "width: 80%;"> <!--Top navigation thingy-->
                 <div> <!--Hamburger nav-->
                     <img id = "h-nav" src = "resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
-                    <div id = "h-nav-cont" class = "h-nav-cont dropdown--list hidden" style = "z-index: 1;"> <!--Nav under the hamburger menu-->
+                    <div id = "h-nav-cont" class = "h-nav-cont dropdown hidden" style = "z-index: 1;"> <!--Nav under the hamburger menu-->
                         <a class = "block undecorated--link" href = "">1</a>
                         <a class = "block undecorated--link" href = "">1</a>
                         <a class = "block undecorated--link" href = "">1</a>
@@ -42,16 +42,18 @@
         </header>
         <main>
             <div class = "greeting--img--banner overlay-container bottom--spacing">
-                <img src = "resources/background.jpg" style = "width: 100%;"> <!-- Background img-->
-
-                <div class = "overlay"> <!--Div for the top picture banner-->
-                    <a href = "#"> <!--Change the href-->
-                    <!--PLACEHOLDER--> <img class = "logo" src = "resources/SVG/logo-1.svg"> <!--The logo(we don't have one)-->
+                <img src = "resources/background.jpg" style = "width: 100%; max-height: 800px; object-fit: cover;"> 
+                <!-- ^ Background img ^ -->
+                <div class = "overlay" style = "top: 46%">
+                    <a href = ""> <!--Change the href-->
+                        <img class = "logo" src = "resources/SVG/logo-2.svg">
                     </a>
-                    <input class = "search--bar" type = "text" id = "Search-Query" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
-                    <!--                        -->
-                    <!--ADD A SEARCH RESULT HERE-->
-                    <!--                        -->
+                    <input id = "Search-Query" class = "search--bar" type = "text" id = "Search-Query" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                    <div id = "search-result" class = "hidden dropdown" style = "width: 30rem; left: 50%; transform: translateX(-50%);">
+                        <img src = "resources/SVG/img-placeholder.svg" style = "height: 40px; width: 40px;">
+                    <!-- ^ Dynamic search results ^ -->
+
+                    </div>
                 </div>
             </div>
             <div> <!--Side nav/menu-, on the left-->
