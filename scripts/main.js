@@ -82,6 +82,13 @@ window.onload = function() {
             hamburger_nav_is_open = false;
         }
     });
+    document.getElementById('submit').addEventListener('click', () => {
+        /* Get the tickboxs status */
+
+        var x = Array.from(document.querySelectorAll('#form input')).reduce((acc, input) => ({...acc, [input.id]: input.checked}) ,{});
+        console.log(x);
+
+    });
 }
 
 

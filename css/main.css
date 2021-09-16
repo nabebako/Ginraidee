@@ -45,9 +45,10 @@ p {
     overflow: hidden;
 }
 
-.button-styles {
+.button {
     background-color: #00A651;
-    border-radius: 50px
+    border-radius: 50px;
+    text-align: center;
 }
 
 
@@ -182,4 +183,19 @@ p {
 .checkbox {
     width: 8.2rem;
     height: 2rem;
+    margin: 1rem .4rem;
+
+    text-align: center;
+
+    display: inline-block;
+
+    border-style: solid;
+    border-color: #fff;
+    border-width: 3px;
+    border-radius: 50px;
+}
+
+input:checked + label[class='checkbox']{
+    border-color: #00A651;
+    
 }

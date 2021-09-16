@@ -110,7 +110,7 @@
                 <img> <!--Find an img?-->
                 <div> <!--The text-->
                     <p class = "centered" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Not sure what to have?</p>
-                    <div id = "Questionnaire-pop-up" class = "centered clickable button-styles">
+                    <div id = "Questionnaire-pop-up" class = "centered clickable button">
                         <p style = "font-size: 1.2rem; padding: 10px 15px; font-weight: 200;">TELL US WHAT YOU LIKE</p> <!--bring up a window for the questionnaire-->
                     </div>
                 </div>
@@ -124,64 +124,52 @@
                     <img class = "overlap--img">
                 </div>
                 <div>
-                    <fieldset>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "pork" name = "food--preference" value = "pork">
-                            <label for = "pork">Pork</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "beef" name = "food--preference" value = "beef">
-                            <label for = "beef">Beef</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "chicken" name = "food--preference" value = "chicken">
-                            <label for = "chicken">Chicken</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "shrimp" name = "food--preference" value = "shrimp">
-                            <label for = "shrimp">Shrimp</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "fish" name = "food--preference" value = "fish">
-                            <label for = "fish">Fish</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "seafood" name = "food--preference" value = "seafood">
-                            <label for = "seafood">Seafood</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "lamb" name = "food--preference" value = "lamb">
-                            <label for = "lamb">Lamb</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "vegetarian" name = "food--preference" value = "vegetarian">
-                            <label for = "vegetarian">Vegetarian</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "fruits" name = "food--preference" value = "fruits">
-                            <label for = "fruits">Fruits</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "healthy" name = "food--preference" value = "healthy">
-                            <label for = "healthy">Healthy</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "fastfood" name = "food--preference" value = "fastfood">
-                            <label for = "fastfood">Fastfood</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "fried" name = "food--preference" value = "fried">
-                            <label for = "fried">Fried</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "boiled" name = "food--preference" value = "boiled">
-                            <label for = "boiled">Boiled</label>
-                        </div>
-                        <div class = "checkbox">
-                            <input type = "checkbox" id = "stemed" name = "food--preference" value = "stemed">
-                            <label for = "stemed">stemed</label>
-                        </div>
-                    </fieldset>
+                    <div id = "form">
+
+                        <input class = "hidden" type = "checkbox" id = "pork" name = "food--preference" value = "pork">
+                        <label class = "checkbox" for = "pork">Pork</label>
+
+                        <input class = "hidden" type = "checkbox" id = "beef" name = "food--preference" value = "beef">
+                        <label class = "checkbox" for = "beef">Beef</label>
+
+                        <input class = "hidden" type = "checkbox" id = "chicken" name = "food--preference" value = "chicken">
+                        <label class = "checkbox" for = "chicken">Chicken</label>
+
+                        <input class = "hidden" type = "checkbox" id = "shrimp" name = "food--preference" value = "shrimp">
+                        <label class = "checkbox" for = "shrimp">Shrimp</label>
+
+                        <input class = "hidden" type = "checkbox" id = "fish" name = "food--preference" value = "fish">
+                        <label class = "checkbox" for = "fish">Fish</label>
+
+                        <input class = "hidden" type = "checkbox" id = "seafood" name = "food--preference" value = "seafood">
+                        <label class = "checkbox" for = "seafood">Seafood</label>
+
+                        <input class = "hidden" type = "checkbox" id = "lamb" name = "food--preference" value = "lamb">          
+                        <label class = "checkbox" for = "lamb">Lamb</label>
+
+                        <input class = "hidden" type = "checkbox" id = "vegetarian" name = "food--preference" value = "vegetarian">
+                        <label class = "checkbox" for = "vegetarian">Vegetarian</label>
+
+                        <input class = "hidden" type = "checkbox" id = "fruits" name = "food--preference" value = "fruits">
+                        <label class = "checkbox" for = "fruits">Fruits</label>
+
+                        <input class = "hidden" type = "checkbox" id = "healthy" name = "food--preference" value = "healthy">
+                        <label class = "checkbox" for = "healthy">Healthy</label>
+                        
+                        <input class = "hidden" type = "checkbox" id = "fastfood" name = "food--preference" value = "fastfood">
+                        <label class = "checkbox" for = "fastfood">Fastfood</label>
+
+                        <input class = "hidden" type = "checkbox" id = "fried" name = "food--preference" value = "fried">
+                        <label class = "checkbox" for = "fried">Fried</label>
+
+                        <input class = "hidden" type = "checkbox" id = "boiled" name = "food--preference" value = "boiled">
+                        <label class = "checkbox" for = "boiled">Boiled</label>
+
+                        <input class = "hidden" type = "checkbox" id = "stemed" name = "food--preference" value = "stemed">
+                        <label class = "checkbox " for = "stemed">stemed</label>
+
+                        <div class = "button clickable" id = "submit">submit</div>
+                    </div>
                 </div>
                     <!--Waiting for the desing-->
             </div>
