@@ -1,5 +1,6 @@
 var search_qurey = '';
 let hamburger_nav_is_open = false;
+var form_ans = {};
 
 function fade_in(element, max_op) {
     element.classList.remove('hidden');
@@ -33,6 +34,7 @@ window.onload = function() {
     /*Setting up event listeners*/
     const SQ = document.getElementById('Search-Query');
     const SQ_results = document.getElementById('search-result');
+    const close_botton = document.getElementById('window--close');
 
     SQ.addEventListener('input', (qurey) => {
         search_qurey = qurey.target.value.replaceAll(/[^0-9a-z ]/ig, '');
@@ -59,7 +61,7 @@ window.onload = function() {
         console.log('Window Created');
     });
 
-    document.getElementById('window--close').addEventListener('click', () => {
+    close_botton.addEventListener('click', () => {
         /*Get rid of the pop-up window*/
 
         fade_out(document.getElementById('pop-up--foreground'));
@@ -68,6 +70,9 @@ window.onload = function() {
         console.log('Windown Destroyed');
     });
     
+    close_botton.addEventListener('mouseover', () => close_botton.src = 'resources/SVG/cross-green.svg');
+    close_botton.addEventListener('mouseleave', () => close_botton.src = 'resources/SVG/cross.svg');
+
     var hamburger_nav = document.getElementById('h-nav');
     hamburger_nav.addEventListener('click', () => {
         if(!hamburger_nav_is_open) 
@@ -82,13 +87,15 @@ window.onload = function() {
             hamburger_nav_is_open = false;
         }
     });
+
     document.getElementById('submit').addEventListener('click', () => {
         /* Get the tickboxs status */
-
-        var x = Array.from(document.querySelectorAll('#form input')).reduce((acc, input) => ({...acc, [input.id]: input.checked}) ,{});
-        console.log(x);
+        form_ans['types_of_foods'] = Array.from(document.querySelectorAll('#form input')).reduce((acc, input) => ({...acc, [input.id]: input.checked}) ,{});
+        
+        console.log(form_ans);
 
     });
+
 }
 
 
