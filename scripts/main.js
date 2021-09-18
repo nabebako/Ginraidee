@@ -80,7 +80,8 @@ window.onload = function() {
             hamburger_nav.src = 'resources/SVG/triangle--nav.svg';
             document.getElementById('h-nav-cont').classList.remove('hidden');
             hamburger_nav_is_open = true;
-        } else 
+        } 
+        else 
         {
             hamburger_nav.src = 'resources/SVG/hamburger--nav.svg';
             document.getElementById('h-nav-cont').classList.add('hidden');
