@@ -195,6 +195,9 @@ p {
 .checkbox {
     margin: .2rem;
 
+    height: 6.4rem;
+    width: 6.4rem;
+
     text-align: center;
     vertical-align: middle;
 
@@ -203,19 +206,13 @@ p {
     border-style: solid;
     border-color: #fff;
     border-width: 3px;
-    border-radius: 50px;
+    border-radius: 50%;
 }
 
-input:checked + label[class='checkbox']{
+input:checked + label{
     border-color: #00A651;
 }
 
 .checkbox:hover {
     background-color: #e0e0e0;
-}
-
-
-.checkbox-contents {
-    width: 8.2rem;
-    height: 2.4rem;
 }
