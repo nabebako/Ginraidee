@@ -90,7 +90,7 @@ window.onload = function() {
 
     document.getElementById('submit').addEventListener('click', () => {
         /* Get the tickboxs status */
-        form_ans['types_of_foods'] = Array.from(document.querySelectorAll('#form input')).reduce((acc, input) => ({...acc, [input.id]: input.checked}) ,{});
+        form_ans['types_of_foods'] = Array.from(document.querySelectorAll('#form input')).filter((query) => query.checked).map((query) => query.value);
         
         console.log(form_ans);
 
