@@ -36,6 +36,14 @@ p {
     width: fit-content;
 }
 
+.nonselect {
+    user-select: none;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
 
 .stop--scroll {
     height: 100%;
@@ -46,6 +54,8 @@ p {
     background-color: #00A651;
     border-radius: 50px;
     text-align: center;
+
+    padding: .7rem 1.6rem;
 }
 
 
@@ -66,16 +76,13 @@ p {
     display: block !important;
 }
 
-.undecorated--link {
+.nondeco-link {
     text-decoration: none;
     color: black;
 }
 
-.spacing {
+.nav-link {
     margin: 0 1rem;
-}
-
-.link--padding {
     padding: 1rem;
 }
 
@@ -97,10 +104,6 @@ p {
     height: inherit;
 }
 
-.menu--selection--container {
-    width: fit-content;
-}
-
 .h-center {
     margin-left: auto;
     margin-right: auto;
@@ -113,88 +116,10 @@ p {
     align-items: center;
 }
 
-.logo {
-    display: block;
-
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    padding: 12px;
-}
-
 .food-img
 {
     width: 300px;
     height: 300px;
-}
-
-.search--bar {
-    display: block;
-
-    font-size: 1.2rem;
-
-    width: 30rem;
-    height: 2rem;
-
-    border-width: 1px;
-    border-radius: 24px;
-    border-color: #000; /*Change the colour of the border*/
-
-    padding: .5rem 1.2rem;
-}
-
-.sr-container {
-    width: 30rem;
-    height: 300px;
-    
-    left: 50%;
-    transform: translateX(-50%);
-
-    z-index: 2;
-
-    border-radius: 0 0 15px 15px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #e0e0e0;
-}
-
-.search--bar:focus {
-    outline: none;
-}
-
-
-.pop-up--background {
-    position: fixed;
-    left: 0;
-    top: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background-color: #000;
-    opacity: .3;
-}
-
-.pop-up--foreground {
-    
-    width: 800px; /*Change it later*/
-    background-color: #fff;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.exit--button {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-}
-
-
-
-.h-nav-cont {
-    width: 160px;
 }
 
 .checkbox {
@@ -228,11 +153,72 @@ input:checked + label{
 
 
 
-.nonselect {
-    user-select: none;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
+#Search-Query {
+    display: block;
+
+    font-size: 1.2rem;
+
+    width: 30rem;
+    height: 2rem;
+
+    border-width: 1px;
+    border-radius: 24px;
+    border-color: #000; /*Change the colour of the border*/
+
+    padding: .5rem 1.2rem;
+}
+
+#Search-Query:focus {
+    outline: none;
+}
+
+#search-result {
+    width: 30rem;
+    height: 300px;
+    
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 2;
+
+    border-radius: 0 0 15px 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #e0e0e0;
+}
+
+#pop-up--background {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #000;
+    opacity: .3;
+}
+
+#pop-up--foreground {
+    width: 800px; /*Change it later*/
+    background-color: #fff;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#window-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+#logo {
+    display: block;
+
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    padding: 12px;
 }
