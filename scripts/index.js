@@ -1,5 +1,6 @@
 
 
+
 var search_qurey = '';
 let hamburger_nav_is_open = false;
 var form_ans = {};
@@ -117,5 +118,3 @@ window.onload = function() {
 
 
 }
-
-
