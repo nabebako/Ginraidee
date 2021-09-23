@@ -23,3 +23,5 @@ function fade_out(element) {
         op -= op * 0.1;
     }, 10);
 }
+
+export {fade_in, fade_out};

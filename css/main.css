@@ -222,3 +222,7 @@ input:checked + label{
     margin-bottom: 2rem;
     padding: 12px;
 }
+
+#main-nav {
+    margin: 0 12rem;
+}

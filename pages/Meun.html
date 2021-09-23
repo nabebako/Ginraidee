@@ -12,27 +12,18 @@
     </head>
     <body>
         <header class = "nonselect">
-            <div class = "center-content h-center" style = "width: 80%;"> <!--Top navigation thingy-->
+            <div class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
                 <div>
                     <img src = "../resources/SVG/logo-1.svg" style = "width: 140px;"> <!-- Small logo -->
                 </div>
-                <nav class = "h-center center-content"> <!--Main nav-->
+                <nav id = "main-nav" class = "center-content"> <!--Main nav-->
                     <a class = "nondeco-link nav-link" href = "">Breakfast</a>
                     <a class = "nondeco-link nav-link" href = "">Lunch</a>
                     <a class = "nondeco-link nav-link" href = "">Dinner</a>
                     <a class = "nondeco-link nav-link" href = "">Dessert</a>
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
-                <div style = "margin-right: 30px; margin-left: 40px;"> <!--Hamburger nav-->
-                    <img id = "h-nav" src = "../resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
-                    <div id = "h-nav-cont" class = "dropdown hidden" style = "z-index: 1; width: 160px;"> <!--Nav under the hamburger menu-->
-                        <a class = "block nondeco-link" href = "">1</a>
-                        <a class = "block nondeco-link" href = "">1</a>
-                        <a class = "block nondeco-link" href = "">1</a>
-                        <a class = "block nondeco-link" href = "">1</a>
-                    </div>
-                </div>
-                <div class = ""> <!--Link to the shopping list page-->
+                <div style="margin-left: 100px;"> <!--Link to the shopping list page-->
                     <a href = "../pages/shopping-list.html">
                         <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/SVG/cart.svg">
                     </a>
@@ -43,10 +34,19 @@
             </div>
         </header>
         <main>
-
+            <div style = "margin-right: 30px; margin-left: 40px;"> <!--Hamburger nav-->
+                <img id = "h-nav" src = "../resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
+                <div id = "h-nav-cont" class = "dropdown hidden" style = "z-index: 1; width: 160px;"> <!--Nav under the hamburger menu-->
+                    <a class = "block nondeco-link" href = "">1</a>
+                    <a class = "block nondeco-link" href = "">1</a>
+                    <a class = "block nondeco-link" href = "">1</a>
+                    <a class = "block nondeco-link" href = "">1</a>
+                </div>
+            </div>
         </main>
         <footer>
 
         </footer>
     </body>
+    <script src = "../scripts/main.js"></script>
 </html>
