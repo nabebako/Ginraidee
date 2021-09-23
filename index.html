@@ -3,8 +3,10 @@
     <head>
         <title>Ginraidee</title>
         <link rel = "icon" href = "">
-        <link rel = "stylesheet" href = "css/main.css">
-        <script src = "scripts/main.js"></script>
+        <link rel = "stylesheet" href = "./css/main.css">
+        <script src = "./scripts/main.js"></script>
+        <script src = "./scripts/search.js"></script>
+        <script src = "./scripts/form.js"></script>
         <meta charset = "utf-8"/>
         
         <!--Fonts--> <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +17,7 @@
         <header class = "nonselect">
             <div class = "center-content h-center" style = "width: 80%;"> <!--Top navigation thingy-->
                 <div> <!--Hamburger nav-->
-                    <img id = "h-nav" src = "resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
+                    <img id = "h-nav" src = "./resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
                     <div id = "h-nav-cont" class = "dropdown hidden" style = "z-index: 1; width: 160px;"> <!--Nav under the hamburger menu-->
                         <a class = "block nondeco-link" href = "">1</a>
                         <a class = "block nondeco-link" href = "">1</a>
@@ -31,8 +33,8 @@
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
                 <div class = ""> <!--Link to the shopping list page-->
-                    <a href = "pages/shopping-list.html">
-                        <!--Shopping List--> <img class = "" width = "40" height = "40" src="resources/SVG/cart.svg">
+                    <a href = "./pages/shopping-list.html">
+                        <!--Shopping List--> <img class = "" width = "40" height = "40" src="./resources/SVG/cart.svg">
                     </a>
                     <div id = "" class = "hidden"> <!--Shopping list tag-->
                         <p>Shopping List</p>
@@ -42,15 +44,15 @@
         </header>
         <main>
             <div class = "overlay-container" style = "margin-bottom: 4rem;">
-                <img src = "resources/background.jpg" style = "width: 100%; max-height: 800px; object-fit: cover;"> 
+                <img src = "./resources/background.jpg" style = "width: 100%; max-height: 800px; object-fit: cover;"> 
                 <!-- ^ Background img ^ -->
                 <div class = "overlay" style = "top: 46%">
                     <a href = ""> <!--Change the href-->
-                        <img id = "logo" src = "resources/SVG/logo-2.svg">
+                        <img id = "logo" src = "./resources/SVG/logo-2.svg">
                     </a>
                     <input id = "Search-Query" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
                     <div id = "search-result" class = "hidden dropdown">
-                        <img src = "resources/SVG/img-placeholder.svg" style = "height: 40px; width: 40px;">
+                        <img src = "./resources/SVG/img-placeholder.svg" style = "height: 40px; width: 40px;">
                     <!-- ^ Dynamic search results ^ -->
                     </div>
                 </div>
@@ -59,13 +61,13 @@
                 <!--Top picks section--> <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                            <!-- Place holder --> <img class = "food-img" src = "./resources/SVG/img-placeholder.svg">
                             <p id = "top-menu-1" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                            <!-- Place holder --> <img class = "food-img" src = "./resources/SVG/img-placeholder.svg">
                             <p id = "top-menu-2" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
@@ -73,13 +75,13 @@
                 <!--Top picks section--> <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                            <!-- Place holder --> <img class = "food-img" src = "./resources/SVG/img-placeholder.svg">
                             <p id = "top-menu-3" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "resources/SVG/img-placeholder.svg">
+                            <!-- Place holder --> <img class = "food-img" src = "./resources/SVG/img-placeholder.svg">
                             <p id = "top-menu-4" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
@@ -97,7 +99,7 @@
             <div id = "pop-up--background" class = "hidden"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
             </div>
             <div id = "pop-up--foreground" class = "hidden nonselect">
-                <!--Exit icon--> <img id = "window-close" src = "resources/SVG/cross.svg" style = "height: 24px; width: 24px;">
+                <!--Exit icon--> <img id = "window-close" src = "./resources/SVG/cross.svg" style = "height: 24px; width: 24px;">
                 <div class = "h-center">  <!--Picture on the right with text on top-->
                     <p style = "font-size: 2rem; font-weight: 300; padding: 1.2rem;">What kind of food do you like?</p>
                     <img>
@@ -106,7 +108,7 @@
                     <div id = "form">
                         <input class = "hidden" type = "checkbox" id = "pork" name = "food--preference" value = "pork">
                         <label class = "checkbox overlay-container" for = "pork">
-                            <img src = "resources/SVG/img-placeholder.svg" class = "" style = "object-fit: cover; border-radius: 50%;">
+                            <img src = "./resources/SVG/img-placeholder.svg" class = "" style = "object-fit: cover; border-radius: 50%;">
                             <div class = "overlay center-content">
                                 <p class = "nonselect">Pork</p>
                             </div>
