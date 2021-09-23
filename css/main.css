@@ -151,6 +151,18 @@ input:checked + label{
     border-color: #00A651 !important;
 }
 
+.checkbox-img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover; 
+    border-radius: 50%;
+}
+
+.text-over-img {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
 
 
 #Search-Query {
