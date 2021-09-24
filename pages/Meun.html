@@ -3,7 +3,6 @@
     <head>
         <title>Menu</title>
         <link rel = "icon" href = "">
-        <link rel = "stylesheet" href = "../css/main.css">
         <meta charset = "utf-8">
 
         <!--Fonts--> <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +11,7 @@
     </head>
     <body>
         <header class = "nonselect">
-            <div class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
+            <div id = "nav-container" class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
                 <div>
                     <img src = "../resources/SVG/logo-1.svg" style = "width: 140px;"> <!-- Small logo -->
                 </div>
@@ -23,7 +22,7 @@
                     <a class = "nondeco-link nav-link" href = "">Dessert</a>
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
-                <div style="margin-left: 100px;"> <!--Link to the shopping list page-->
+                <div style = "margin-left: 100px;"> <!--Link to the shopping list page-->
                     <a href = "../pages/shopping-list.html">
                         <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/SVG/cart.svg">
                     </a>
@@ -34,19 +33,41 @@
             </div>
         </header>
         <main>
-            <div style = "margin-right: 30px; margin-left: 40px;"> <!--Hamburger nav-->
-                <img id = "h-nav" src = "../resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
-                <div id = "h-nav-cont" class = "dropdown hidden" style = "z-index: 1; width: 160px;"> <!--Nav under the hamburger menu-->
-                    <a class = "block nondeco-link" href = "">1</a>
-                    <a class = "block nondeco-link" href = "">1</a>
-                    <a class = "block nondeco-link" href = "">1</a>
-                    <a class = "block nondeco-link" href = "">1</a>
+            <div id = "menu-container" class = "h-center">
+                <div> <!-- title -->
+                    <p id = "name">NAME</p>
+                    <p id = "backlink" class = "nonselect">bl_1 / bl_2 / bl_3 / bl_4</p>
                 </div>
+                <img id = "meun-img" src = "../resources/SVG/img-placeholder.svg" style = "display: inline-block;">
+                <div style = "display: inline-block;">
+                    <p>Ingredient</p>
+                    <img> <!-- minus sign -->
+                    <p id = "serving">1</p>
+                    <img> <!-- plus sign -->
+                </div>
+                <div id = "ingredients"></div>
+                <div>
+                    <div id = "add-to-list">
+                        <img> <!-- Puls sign -->
+                        <p>Add to list</p>
+                    </div>
+                    <div id = "download">
+                        <img> <!-- Download -->
+                        <p>Download</p>
+                    </div>
+                    <div id = "print">
+                        <img> <!-- Print -->
+                        <p>Print</p>
+                    </div>
+                </div>
+                <p>Prepration</p>
+                <div id = "prep"></div>
             </div>
         </main>
         <footer>
 
         </footer>
     </body>
-    <script src = "../scripts/main.js"></script>
+    <link rel = "stylesheet" href = "../css/main.css">
+    <link rel = "stylesheet" href = "../css/menu.css">
 </html>
