@@ -3,7 +3,6 @@
 
 * {
     font-family: 'Noto Sans JP', 'Assistant', sans-serif;
-    -webkit-font-smoothing: antialiased;
 
     /*Get rid of user agnet styles*/
     margin-block-start: 0;
@@ -114,6 +113,10 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.inline {
+    display: inline-block;
 }
 
 .food-img
