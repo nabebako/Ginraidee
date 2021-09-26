@@ -13,7 +13,7 @@
         <header class = "nonselect">
             <div id = "nav-container" class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
                 <div>
-                    <img src = "../resources/SVG/logo-1.svg" style = "width: 140px;"> <!-- Small logo -->
+                    <img id = "logo" src = "../resources/SVG/logo-1.svg" style = "width: 140px;"> <!-- logo -->
                 </div>
                 <nav id = "main-nav" class = "center-content"> <!--Main nav-->
                     <a class = "nondeco-link nav-link" href = "">Breakfast</a>
@@ -22,7 +22,7 @@
                     <a class = "nondeco-link nav-link" href = "">Dessert</a>
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
-                <div style = "margin-left: 100px;"> <!--Link to the shopping list page-->
+                <div id = "shopping-list"> <!--Link to the shopping list page-->
                     <a href = "../pages/shopping-list.html">
                         <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/SVG/cart.svg">
                     </a>
@@ -36,17 +36,44 @@
             <div id = "menu-container" class = "h-center">
                 <div> <!-- title -->
                     <p id = "name">NAME</p>
-                    <p id = "backlink" class = "nonselect">bl_1 / bl_2 / bl_3 / bl_4</p>
+                    <p class = "nonselect" style = "color: #515151;">
+                        <a class = "backlink" href = "">bl_1</a> / 
+                        <a class = "backlink" href = "">bl_2</a> / 
+                        <a class = "backlink" href = "">bl_3</a> / 
+                        <a class = "backlink" href = "">bl_4</a>
+                    </p>
                 </div>
                 <div id = "top-part-container">
                     <img id = "meun-img" src = "../resources/SVG/img-placeholder.svg">
                     <div id = "ingredient-container">
-                        <div class = "center-content">
+                        <div id = "serving-container" class = "center-content">
                             <p id = "serving-title">Serving</p>
-                            <div id = "" class = "center-content" style = "margin-top: 6px;">
+                            <div id = "serving-option-container" class = "center-content">
                                 <img id = "serving-minus" class = "clickable" src = "../resources/SVG/minus.svg"> <!-- minus sign -->
                                 <input id = "serving" type = "number" value = "1" min = "1" max = "99">
                                 <img id = "serving-add" class = "clickable" src = "../resources/SVG/add.svg"> <!-- plus sign -->
+                                <select id = "serving-mobile">
+                                    <option value = "1">1</option>
+                                    <option value = "2">2</option>
+                                    <option value = "3">3</option>
+                                    <option value = "4">4</option>
+                                    <option value = "5">5</option>
+                                    <option value = "6">6</option>
+                                    <option value = "7">7</option>
+                                    <option value = "8">8</option>
+                                    <option value = "9">9</option>
+                                    <option value = "10">10</option>
+                                    <option value = "11">11</option>
+                                    <option value = "12">12</option>
+                                    <option value = "13">13</option>
+                                    <option value = "14">14</option>
+                                    <option value = "15">15</option>
+                                    <option value = "16">16</option>
+                                    <option value = "17">17</option>
+                                    <option value = "18">18</option>
+                                    <option value = "19">19</option>
+                                    <option value = "20">20</option>
+                                </select>
                             </div>
                         </div>
                         <p>Ingredient</p>

@@ -1,33 +1,46 @@
+function ingrident_count(serving_count) {
+    console.log(serving_count);
+
+    /* Chnage the value of ingridents*/
+    document.getElementById('ingredients');
+    return [];
+}
+
+const Serving = document.getElementById('serving');
+const Serving_mobile = document.getElementById('serving-mobile');
+
 document.getElementById('serving-minus').addEventListener('click', () => {
 
-    if(document.getElementById('serving').value > 1)
+    if(Serving.value > 1)
     {
-        document.getElementById('serving').value--;
+        Serving.value--;
+        ingrident_count(Serving.value);
     }
 });
 
 document.getElementById('serving-add').addEventListener('click', () => {
     
-    if(document.getElementById('serving').value < 20)
+    if(Serving.value < 20)
     {
-        document.getElementById('serving').value++;
-
+        Serving.value++;
+        ingrident_count(Serving.value);
     }
 });
 
-document.getElementById('serving').addEventListener('input', (input) => {
+Serving.addEventListener('input', () => {
 
-    var val = input.target.value;
-    console.log(input.target.value);
-    if(val < 0)
-    {
-        
-        document.getElementById('serving').value = 1;
+    if(Serving.value < 0)
+    {   
+        Serving.value = 1;
     }
-    else if(val > 20)
+    else if(Serving.value > 20)
     {
-
-        document.getElementById('serving').value = 20;
+        Serving.value = 20;
     }
+    ingrident_count(Serving.value);
+});
 
-})
+Serving_mobile.addEventListener('change', () => {
+
+    ingrident_count(Serving_mobile.value);
+});

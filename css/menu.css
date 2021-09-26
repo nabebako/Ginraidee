@@ -1,11 +1,10 @@
-#name {
-    font-size: 4.6rem;
-    font-weight: 700;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-#backlink {
-    color: #515151;
-}
+input[type=number] { -moz-appearance: textfield; }
 
 header {
     border-bottom-style: solid;
@@ -13,14 +12,29 @@ header {
     border-color: #e0e0e0;
 }
 
-#menu-container {
-    margin-top: 25px;
-    width: 200px;
+#name {
+    font-size: 4.6rem;
+    font-weight: 700;
 }
 
-#meun-img {
-    object-fit: contain;
+.backlink:visited { 
+    color: inherit;
 }
+
+.backlink {
+    transition-property: color;
+    transition-duration: 450ms;
+}
+
+.backlink:hover {
+    color: #00A651;
+}
+
+#menu-container {
+    margin-top: 25px;
+}
+
+#meun-img { object-fit: contain; }
 
 #top-part-container {
     display: flex;
@@ -28,77 +42,61 @@ header {
     justify-content: left;
 }
 
-#ingredient-container {
-    padding-left: 50px;
-}
+#ingredient-container { padding-left: 50px; }
 
 #serving-title {
     font-size: 2rem;
-
     margin-right: 16px;
 }
 
+#serving-option-container {
+    margin-top: 6px;
+}
 
-#serving {
-    width: 45px;
-    height: 2.4rem;
-    margin: 0 12px;
-    border: none;
-
-    outline-color: #00A651;
-
+#serving, #serving-mobile {
     border-style: solid;
     border-color: #9f9f9f;
     border-width: 1px;
     border-radius: 3px;
 
-    font-size: 1.4rem;
+    font-size: 1rem;
     text-align: center;
-
     color: #000;
+
+    outline-color: #00A651;
     background-color: #fff;
 }
-
-#serving-minus {
-    width: 24px;
+#serving {
+    width: 2rem;
+    height: 1.625rem;
+    margin: 0 .75rem;
 }
+#serving-mobile { padding: 2px 0; }
+#serving-minus, #serving-add { height: 24px; }
 
-#serving-add{
-    width: 24px;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-
-@media screen and (max-width: 480px){
-    
-}
-
+/* For screen size of phone */
 @media screen and (min-width: 481px){
-    
+
+    #shopping-list { margin: 0;}
+
+    #menu-container { width: fit-content; }
+
+    #serving-container { display: block; }
+    #serving-option-container { justify-content: left; }
+    #serving, #serving-minus, #serving-add { display: none; }
 }
 
+/* For screen size of landscape tablets */
 @media screen and (min-width: 769px) {
-    #main-nav {
-        margin: 0 auto;
+    .nav-link {
+        padding: .2rem;
     }
 
-    #nav-container {
-        width: 90%;
-    }
+    #logo { src: url(../resources/SVG/logo-1.svg); } /* Change the logo to a sqaure one*/
 
-    #menu-container {
-        width: 1200px;
-        padding-left: 50px;
-    }
+    #shopping-list { margin: 0 50px; }
+    #main-nav { margin: 0 auto; }
+    #nav-container { width: 90%; }
 
     #meun-img {
         width: 600px;
@@ -106,20 +104,36 @@ input[type=number] {
     }
 } 
 
-@media screen and (min-width: 1025px) {
-
+/* Special case */
+@media screen and (min-width: 930px) {
+    
+    #serving-container { display: flex; }
 }
 
+/* For screen size of laptop/desktop */
+@media screen and (min-width: 1025px) {
+    .nav-link {
+        margin: 0 1rem;
+        padding: 1rem;
+    }
+    
+    #menu-container {
+        width: 1200px;
+        padding-left: 50px;
+    }
+    #shopping-list {
+        margin-left: 100px;
+        margin-right: 0;
+    }
+    #serving, #serving-minus, #serving-add { display: block; }
+    #serving-mobile { display: none; }
+}
+
+/* For screen size of desktop monitor */
 @media screen and (min-width: 1400px){
 
-
-    #nav-container {
-        width: fit-content;
-    }
-
-    #main-nav {
-        margin: 0 12rem;
-    }
+    #nav-container { width: fit-content; }
+    #main-nav { margin: 0 12rem; }
 }
 
 
