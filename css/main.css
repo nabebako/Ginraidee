@@ -16,9 +16,7 @@
     margin: 0;
 }
 
-body {
-    margin: 0;
-}
+body { margin: 0; }
 
 img {
     display: block;
@@ -57,23 +55,16 @@ p {
     padding: .7rem 1.6rem;
 }
 
-
 .dropdown {
     position: absolute;
     background-color: #fff;
 }
 
-.dropdown:hover {
-    display: block;
-}
+.dropdown:hover { display: block; }
 
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
 
-.block {
-    display: block !important;
-}
+.block { display: block !important; }
 
 .nondeco-link {
     text-decoration: none;
@@ -85,14 +76,9 @@ p {
     padding: 1rem;
 }
 
-.clickable:hover {
-    cursor: pointer;
-}
+.clickable:hover { cursor: pointer; }
 
-.overlay-container {
-    position: relative;
-}
-
+.overlay-container { position: relative; }
 .overlay {
     position: absolute;
     top: 50%;
@@ -115,9 +101,7 @@ p {
     align-items: center;
 }
 
-.inline {
-    display: inline-block;
-}
+.inline { display: inline-block; }
 
 .food-img
 {
@@ -144,15 +128,9 @@ p {
     transition-property: all;
     
 }
+.checkbox:hover { border-color: #e0e0e0; }
 
-.checkbox:hover {
-    border-color: #e0e0e0;
-    
-}
-
-input:checked + label{
-    border-color: #00A651 !important;
-}
+input:checked + label{ border-color: #00A651 !important; }
 
 .checkbox-img {
     width: inherit;
@@ -166,7 +144,6 @@ input:checked + label{
     font-size: 1.2rem;
     font-weight: 500;
 }
-
 
 #Search-Query {
     display: block;
@@ -183,9 +160,9 @@ input:checked + label{
     padding: .5rem 1.2rem;
 }
 
-#Search-Query:focus {
-    outline: none;
-}
+#main-nav { margin: 0 12rem; }
+
+#Search-Query:focus { outline: none; }
 
 #search-result {
     width: 30rem;
@@ -230,14 +207,3 @@ input:checked + label{
     top: 20px;
 }
 
-#logo {
-    display: block;
-
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    padding: 12px;
-}
-
-#main-nav {
-    margin: 0 12rem;
-}
