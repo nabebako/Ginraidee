@@ -1,0 +1,24 @@
+{
+    "name": "Scrambled eggs",
+    "type": [],
+    "time": "8 minutes",
+    "skill": "novice",
+    "ingrident": [
+        "2 eggs",
+        "2 tablespoons sliced Cheddar cheese",
+        "2 thin slices ham",
+        "1 teaspoon heavy whipping cream",
+        "1/2 teaspoon butter"
+    ],
+    "equipment": [
+        "Stove",
+        "Frying Pan",
+        "Bowl",
+        "Folk",
+        "Slotted turner"
+    ],
+    "steps": {
+        "1": "Whisk eggs together in a small bowl until smooth. Mix in Cheddar cheese, ham, and heavy cream.",
+        "2": "Melt butter in a skillet over medium heat. Pour in egg mixture; cook and stir until set but still moist, 3 to 5 minutes."
+    }
+}

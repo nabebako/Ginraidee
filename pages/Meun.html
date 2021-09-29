@@ -3,18 +3,19 @@
     <head>
         <title>Menu</title>
         <link rel = "icon" href = "">
-        <link rel = "stylesheet" href = "../css/main.css">
         <meta charset = "utf-8">
 
-        <!--Fonts--> <link rel="preconnect" href="https://fonts.googleapis.com">
-        <!--Fonts--> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <!--Fonts--> <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+        <!--Fonts--> <link rel = "preconnect" href="https://fonts.googleapis.com">
+        <!--Fonts--> <link rel = "preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Fonts--> <link href = "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
     </head>
     <body>
         <header class = "nonselect">
-            <div class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
+            <div id = "nav-container" class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
                 <div>
-                    <img src = "../resources/SVG/logo-1.svg" style = "width: 140px;"> <!-- Small logo -->
+                    <a href = "../index.html">
+                        <img id = "logo" src = "../resources/SVG/logo-1.svg" style = "width: 140px;"> <!-- logo -->
+                    </a>
                 </div>
                 <nav id = "main-nav" class = "center-content"> <!--Main nav-->
                     <a class = "nondeco-link nav-link" href = "">Breakfast</a>
@@ -23,9 +24,9 @@
                     <a class = "nondeco-link nav-link" href = "">Dessert</a>
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
-                <div style="margin-left: 100px;"> <!--Link to the shopping list page-->
+                <div id = "shopping-list"> <!--Link to the shopping list page-->
                     <a href = "../pages/shopping-list.html">
-                        <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/SVG/cart.svg">
+                        <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/SVG/shopping-list.svg">
                     </a>
                     <div id = "" class = "hidden"> <!--Shopping list tag-->
                         <p>Shopping List</p>
@@ -34,19 +35,77 @@
             </div>
         </header>
         <main>
-            <div style = "margin-right: 30px; margin-left: 40px;"> <!--Hamburger nav-->
-                <img id = "h-nav" src = "../resources/SVG/hamburger--nav.svg" width = "30" height = "30" style = "margin: 20px 0;"> <!--Hambuger icon-->
-                <div id = "h-nav-cont" class = "dropdown hidden" style = "z-index: 1; width: 160px;"> <!--Nav under the hamburger menu-->
-                    <a class = "block nondeco-link" href = "">1</a>
-                    <a class = "block nondeco-link" href = "">1</a>
-                    <a class = "block nondeco-link" href = "">1</a>
-                    <a class = "block nondeco-link" href = "">1</a>
+            <div id = "menu-container" class = "h-center">
+                <div> <!-- title -->
+                    <p id = "name">NAME</p>
+                    <p class = "nonselect" style = "color: #515151;">
+                        <a class = "backlink" href = "">bl_1</a> / 
+                        <a class = "backlink" href = "">bl_2</a> / 
+                        <a class = "backlink" href = "">bl_3</a> / 
+                        <a class = "backlink" href = "">bl_4</a>
+                    </p>
                 </div>
+                <div id = "top-part-container">
+                    <img id = "meun-img" src = "../resources/SVG/img-placeholder.svg">
+                    <div id = "ingredient-container">
+                        <div id = "serving-container" class = "center-content">
+                            <p id = "serving-title">Serving</p>
+                            <div id = "serving-option-container" class = "center-content">
+                                <img id = "serving-minus" class = "clickable" src = "../resources/SVG/minus.svg"> <!-- minus sign -->
+                                <input id = "serving" type = "number" value = "1" min = "1" max = "99">
+                                <img id = "serving-add" class = "clickable" src = "../resources/SVG/add.svg"> <!-- plus sign -->
+                                <select id = "serving-mobile">
+                                    <option value = "1">1</option>
+                                    <option value = "2">2</option>
+                                    <option value = "3">3</option>
+                                    <option value = "4">4</option>
+                                    <option value = "5">5</option>
+                                    <option value = "6">6</option>
+                                    <option value = "7">7</option>
+                                    <option value = "8">8</option>
+                                    <option value = "9">9</option>
+                                    <option value = "10">10</option>
+                                    <option value = "11">11</option>
+                                    <option value = "12">12</option>
+                                    <option value = "13">13</option>
+                                    <option value = "14">14</option>
+                                    <option value = "15">15</option>
+                                    <option value = "16">16</option>
+                                    <option value = "17">17</option>
+                                    <option value = "18">18</option>
+                                    <option value = "19">19</option>
+                                    <option value = "20">20</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p>Ingredient</p>
+                        <div id = "ingredients">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id = "add-to-list">
+                        <img> <!-- Puls sign -->
+                        <p>Add to list</p>
+                    </div>
+                    <div id = "download">
+                        <img> <!-- Download -->
+                        <p>Download</p>
+                    </div>
+                    <div id = "print">
+                        <img> <!-- Print -->
+                        <p>Print</p>
+                    </div>
+                </div>
+                <p>Prepration</p>
+                <div id = "prep"></div>
             </div>
         </main>
         <footer>
 
         </footer>
     </body>
-    <script src = "../scripts/main.js"></script>
+    <link rel = "stylesheet" href = "../css/main.css">
+    <link rel = "stylesheet" href = "../css/menu.css">
+    <script src = "../scripts/serving-counter.js"></script>
 </html>

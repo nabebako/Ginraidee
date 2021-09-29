@@ -1,0 +1,146 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] { -moz-appearance: textfield; }
+
+header {
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #e0e0e0;
+}
+
+#name {
+    font-size: 4.6rem;
+    font-weight: 700;
+}
+
+.backlink:visited { 
+    color: inherit;
+}
+
+.backlink {
+    transition-property: color;
+    transition-duration: 450ms;
+}
+
+.backlink:hover {
+    color: #00A651;
+}
+
+#menu-container {
+    margin-top: 25px;
+}
+
+#meun-img { object-fit: contain; }
+
+#top-part-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+}
+
+#ingredient-container { padding-left: 50px; }
+
+#serving-title {
+    font-size: 2rem;
+    margin-right: 16px;
+}
+
+#serving-option-container {
+    margin-top: 6px;
+}
+
+#serving, #serving-mobile {
+    border-style: solid;
+    border-color: #9f9f9f;
+    border-width: 1px;
+    border-radius: 3px;
+
+    font-size: 1rem;
+    text-align: center;
+    color: #000;
+
+    outline-color: #00A651;
+    background-color: #fff;
+}
+#serving {
+    width: 2rem;
+    height: 1.625rem;
+    margin: 0 .75rem;
+}
+#serving-mobile { padding: 2px 0; }
+#serving-minus, #serving-add { height: 24px; }
+
+/* For screen size of phone */
+@media screen and (min-width: 481px){
+
+    #shopping-list { margin: 0;}
+
+    #menu-container { width: fit-content; }
+
+    #serving-container { display: block; }
+    #serving-option-container { justify-content: left; }
+    #serving, #serving-minus, #serving-add { display: none; }
+}
+
+/* For screen size of landscape tablets */
+@media screen and (min-width: 769px) {
+    .nav-link {
+        padding: .2rem;
+    }
+
+    #logo { src: url(../resources/SVG/logo-1.svg); } /* Change the logo to a sqaure one*/
+
+    #shopping-list { margin: 0 50px; }
+    #main-nav { margin: 0 auto; }
+    #nav-container { width: 90%; }
+
+    #meun-img {
+        width: 600px;
+        height: 600px;
+    }
+} 
+
+/* Special case */
+@media screen and (min-width: 930px) {
+    
+    #serving-container { display: flex; }
+}
+
+/* For screen size of laptop/desktop */
+@media screen and (min-width: 1025px) {
+    .nav-link {
+        margin: 0 1rem;
+        padding: 1rem;
+    }
+    
+    #menu-container {
+        width: 1200px;
+        padding-left: 50px;
+    }
+    #shopping-list {
+        margin-left: 100px;
+        margin-right: 0;
+    }
+    #serving, #serving-minus, #serving-add { display: block; }
+    #serving-mobile { display: none; }
+}
+
+/* For screen size of desktop monitor */
+@media screen and (min-width: 1400px){
+
+    #nav-container { width: fit-content; }
+    #main-nav { margin: 0 12rem; }
+}
+
+
+/*
+320px — 480px: Mobile devices
+481px — 768px: iPads, Tablets
+769px — 1024px: Small screens, laptops
+1025px — 1200px: Desktops, large screens
+1201px and more —  Extra large screens, TV
+*/

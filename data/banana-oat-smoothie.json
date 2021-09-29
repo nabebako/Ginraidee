@@ -1,0 +1,19 @@
+{
+    "name": "Banana-oat Smoothie",
+    "type": [],
+    "time": "5 minutes",
+    "skill": "novice",
+    "ingrident": [
+        "1/2 cup rolled oats (50 g)",
+        "1 banana",
+        "1 cup milk (240 mL)"
+    ],
+    "equipment": [
+        "Blender"
+    ],
+    "steps": {
+        "1": "Add rolled oats to a blender and blend until the oats are the size of a fine crumb.",
+        "2": "Add banana and milk, and blend well.",
+        "3": "Pour in glass for serving."
+    }
+}
