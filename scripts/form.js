@@ -46,8 +46,8 @@ document.getElementById('Questionnaire-pop-up').addEventListener('click', () => 
     console.log('Windown Destroyed');
 });
  
-close_botton.addEventListener('mouseover', () => close_botton.src = 'resources/SVG/cross-green.svg');
-close_botton.addEventListener('mouseleave', () => close_botton.src = 'resources/SVG/cross.svg');
+close_botton.addEventListener('mouseover', () => close_botton.src = 'resources/svg/cross-green.svg');
+close_botton.addEventListener('mouseleave', () => close_botton.src = 'resources/svg/cross.svg');
 
 document.getElementById('submit').addEventListener('click', () => {
     /* Get the tickboxs status */

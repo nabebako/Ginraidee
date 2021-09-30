@@ -92,7 +92,7 @@ header {
         padding: .2rem;
     }
 
-    #logo { src: url(../resources/SVG/logo-1.svg); } /* Change the logo to a sqaure one*/
+    #logo { src: url(../resources/SVG/logo-small.svg); } /* Change the logo to a sqaure one*/
 
     #shopping-list { margin: 0 50px; }
     #main-nav { margin: 0 auto; }
