@@ -12,6 +12,8 @@ header {
     border-color: #e0e0e0;
 }
 
+ul { padding-left: 30px; }
+
 #name {
     font-size: 4.6rem;
     font-weight: 700;
@@ -44,8 +46,6 @@ header {
 
 #menu-container { margin-top: 25px; }
 
-#meun-img { object-fit: contain; }
-
 #top-part-container {
     display: flex;
     align-items: flex-start;
@@ -54,7 +54,13 @@ header {
 
 #side-img-container { padding-left: 50px; }
 
-#serving-container { justify-content: left; }
+#ing_ser_container { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#serving_container { justify-content: left; }
 
 #serving-title {
     font-size: 2rem;
@@ -84,6 +90,11 @@ header {
 #serving-mobile { padding: 2px 0; }
 #serving-minus, #serving-add { height: 24px; }
 
+#ingredient_title {
+    font-size: 2.4rem;
+    margin-bottom: .4rem;
+}
+
 /* For screen size of phone */
 @media screen and (min-width: 481px){
 
@@ -94,7 +105,7 @@ header {
 
     #menu-container { width: fit-content; }
 
-    #serving-container { display: block; }
+    #serving_container { display: block; }
     #serving-option-container { justify-content: left; }
     #serving, #serving-minus, #serving-add { display: none; }
 }
@@ -109,9 +120,11 @@ header {
     #main-nav { margin: 0 auto; }
     #nav-container { width: 90%; }
 
-    #meun-img {
+    #menu-img {
         width: 600px;
-        height: 600px;
+        height: 400px;
+
+        object-fit: cover;
     }
 } 
 
@@ -121,7 +134,10 @@ header {
     #logo-main { display: block; }
     #logo-small { display: none; }
     
-    #serving-container { display: flex; }
+    #serving_container { 
+        display: flex;
+        margin-bottom: .8rem;
+    }
 }
 
 /* For screen size of laptop/desktop */

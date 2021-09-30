@@ -1,4 +1,9 @@
-document.getElementById('add_to_list').addEventListener('click', () => {}); // Add the page id to list
+function append_to_list(input) {
+    // Add input to the customer list
+    console.log(input);
+
+}
+
 
 document.getElementById('download').addEventListener('click', () => {}); // Dowload the page in print format
 

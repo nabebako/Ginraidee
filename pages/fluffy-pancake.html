@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang = "jp">
+    <head>
+        <title>Fluffy Pancake</title>
+        <link rel = "icon" href = "../resources/svg/logo-small.svg">
+        <meta charset = "utf-8">
+
+        <!--Fonts--> <link rel = "preconnect" href="https://fonts.googleapis.com">
+        <!--Fonts--> <link rel = "preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Fonts--> <link href = "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class = "nonselect">
+            <div id = "nav-container" class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
+                <div>
+                    <a href = "../index.html">
+                        <img id = "logo-main" src = "../resources/svg/logo-main-2.svg" height = "44"> <!-- logo -->
+                        <img id = "logo-small" src = "../resources/svg/logo-small.svg" height = "44">
+                    </a>
+                </div>
+                <nav id = "main-nav" class = "center-content"> <!--Main nav-->
+                    <a class = "nondeco-link nav-link" href = "">Breakfast</a>
+                    <a class = "nondeco-link nav-link" href = "">Lunch</a>
+                    <a class = "nondeco-link nav-link" href = "">Dinner</a>
+                    <a class = "nondeco-link nav-link" href = "">Dessert</a>
+                    <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
+                </nav>
+                <div id = "shopping-list"> <!--Link to the shopping list page-->
+                    <a href = "../pages/shopping-list.html">
+                        <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/svg/shopping-list.svg">
+                    </a>
+                    <div id = "" class = "hidden"> <!--Shopping list tag-->
+                        <p>Shopping List</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div id = "menu-container" class = "h-center">
+                <div style = "margin-bottom: 1.2rem;"> <!-- title -->
+                    <p id = "name">Fluffy Pancake</p>
+                    <p class = "nonselect" style = "color: #515151;">
+                        <a class = "backlink" href = "">Breakfast</a> / 
+                        <a class = "backlink" href = "">Soft</a> /
+                    </p>
+                </div>
+                <div id = "top-part-container">
+                    <img id = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
+                    <div id = "side-img-container">
+                        <div class = "center-content" style = "margin-bottom: 1.2rem;">
+                            <div id = "add_to_list" class = "action-button center-content clickable nonselect" onclick = "append_to_list('fluffy-pancake')">
+                                <img src = "../resources/svg/img-placeholder.svg" height = "20"> <!-- Puls sign -->
+                                <p class = "button-text">Add to list</p>
+                            </div>
+                            <div id = "download" class = "action-button center-content clickable nonselect">
+                                <img src = "../resources/svg/img-placeholder.svg" height = "20"> <!-- Download -->
+                                <p class = "button-text">Download</p>
+                            </div>
+                            <div id = "print" class = "action-button center-content clickable nonselect">
+                                <img src = "../resources/svg/img-placeholder.svg" height = "20"> <!-- Print -->
+                                <p class = "button-text">Print</p>
+                            </div>
+                        </div>
+                        <div id = "ing_ser_container">
+                            <p id = "ingredient_title">Ingredient</p>
+                            <div id = "serving_container" class = "center-content">
+                                <p id = "serving-title">Serving</p>
+                                <div id = "serving-option-container" class = "center-content">
+                                    <img id = "serving-minus" class = "clickable" src = "../resources/svg/minus.svg"> <!-- minus sign -->
+                                    <input id = "serving" type = "number" value = "1" min = "1" max = "99">
+                                    <img id = "serving-add" class = "clickable" src = "../resources/svg/add.svg"> <!-- plus sign -->
+                                    <select id = "serving-mobile">
+                                        <option value = "1">1</option>
+                                        <option value = "2">2</option>
+                                        <option value = "3">3</option>
+                                        <option value = "4">4</option>
+                                        <option value = "5">5</option>
+                                        <option value = "6">6</option>
+                                        <option value = "7">7</option>
+                                        <option value = "8">8</option>
+                                        <option value = "9">9</option>
+                                        <option value = "10">10</option>
+                                        <option value = "11">11</option>
+                                        <option value = "12">12</option>
+                                        <option value = "13">13</option>
+                                        <option value = "14">14</option>
+                                        <option value = "15">15</option>
+                                        <option value = "16">16</option>
+                                        <option value = "17">17</option>
+                                        <option value = "18">18</option>
+                                        <option value = "19">19</option>
+                                        <option value = "20">20</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <ul id = "ingredients">
+                            <li><p>4 cups of sifted flour (500 g)</p></li>
+                            <li><p>4 tablespoons of baking powder</p></li>
+                            <li><p>4 cups of warm-to-touch milk (960 mL)</p></li>
+                            <li><p>3/4 cups of melted butter (170 g)</p></li>
+                            <li><p>3 egg yolks</p></li>
+                            <li><p>4 egg whites</p></li>
+                            <li><p>maple syrup</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <p>Prepration</p>
+                <div id = "prep">
+                    <ul>
+                        <li><p>Whisk together the flour and baking powder in a large bowl.</p></li>
+                        <li><p>In a separate bowl, add the butter, milk, and egg yolks, stirring to combine.</p></li>
+                        <li><p>In a third bowl, use a hand mixer to beat the egg whites until soft peaks form.</p></li>
+                        <li><p>Pour the milk mixture into the flour mixture and stir with rubber spatula until just combined. Add the beaten egg whites and gently fold to combine.</p></li>
+                        <li><p>Heat an 8-inch (20cm) nonstick skillet over low heat. Pour 1.5 cups of pancake batter into the skillet, smooth out the top, then cover with a lid. Cook until golden brown on the bottom and a toothpick inserted into the center comes out clean, about 20 minutes. Transfer the pancake to a plate and repeat, making 3 more pancakes with the remaining batter.</p></li>
+                        <li><p>Serve with maple syrup.</p></li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+    <link rel = "stylesheet" href = "../css/main.css">
+    <link rel = "stylesheet" href = "../css/menu.css">
+    <script src = "../scripts/serving-counter.js"></script>
+    <script src = "../scripts/action-button.js"></script>
+</html>

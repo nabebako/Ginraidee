@@ -2,7 +2,7 @@
 <html lang = "jp">
     <head>
         <title>Menu</title>
-        <link rel = "icon" href = "">
+        <link rel = "icon" href = "../resources/svg/logo-small.svg">
         <meta charset = "utf-8">
 
         <!--Fonts--> <link rel = "preconnect" href="https://fonts.googleapis.com">
@@ -47,10 +47,10 @@
                     </p>
                 </div>
                 <div id = "top-part-container">
-                    <img id = "meun-img" src = "../resources/svg/img-placeholder.svg">
+                    <img id = "menu-img" src = "../resources/svg/img-placeholder.svg">
                     <div id = "side-img-container">
                         <div class = "center-content" style = "margin-bottom: 1.2rem;">
-                            <div id = "add_to_list" class = "action-button center-content clickable nonselect">
+                            <div id = "add_to_list" class = "action-button center-content clickable nonselect" onclick = "append_to_list('Menu')">
                                 <img src = "../resources/svg/img-placeholder.svg" height = "20"> <!-- Puls sign -->
                                 <p class = "button-text">Add to list</p>
                             </div>
@@ -93,7 +93,7 @@
                                 </select>
                             </div>
                         </div>
-                        <p>Ingredient</p>
+                        <p id = "ingredient_title">Ingredient</p>
                         <div id = "ingredients">
                         </div>
                     </div>
@@ -109,4 +109,5 @@
     <link rel = "stylesheet" href = "../css/main.css">
     <link rel = "stylesheet" href = "../css/menu.css">
     <script src = "../scripts/serving-counter.js"></script>
+    <script src = "../scripts/action-button.js"></script>
 </html>
