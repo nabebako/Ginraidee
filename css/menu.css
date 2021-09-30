@@ -17,22 +17,32 @@ header {
     font-weight: 700;
 }
 
-.backlink:visited { 
-    color: inherit;
-}
+.backlink:visited { color: inherit; }
 
 .backlink {
     transition-property: color;
     transition-duration: 450ms;
 }
 
-.backlink:hover {
-    color: #00A651;
-}
+.backlink:hover { color: #00A651; }
 
-#menu-container {
-    margin-top: 25px;
+.rectangle-button {
+    width: 8.4rem;
+    height: 3rem;
+
+    margin-right: 2rem;
+
+    background-color: #00A651;
+
+    transition-property: all;
+    transition-duration: 200ms;
 }
+.rectangle-button:hover { background-color: #FEBD40; }
+
+.button-text { margin-left: .8rem; }
+
+
+#menu-container { margin-top: 25px; }
 
 #meun-img { object-fit: contain; }
 
@@ -42,16 +52,16 @@ header {
     justify-content: left;
 }
 
-#ingredient-container { padding-left: 50px; }
+#side-img-container { padding-left: 50px; }
+
+#serving-container { justify-content: left; }
 
 #serving-title {
     font-size: 2rem;
     margin-right: 16px;
 }
 
-#serving-option-container {
-    margin-top: 6px;
-}
+#serving-option-container { margin-top: 6px; }
 
 #serving, #serving-mobile {
     border-style: solid;
@@ -77,6 +87,9 @@ header {
 /* For screen size of phone */
 @media screen and (min-width: 481px){
 
+    #logo-main { display: none; }
+    #logo-small { display: block; }
+
     #shopping-list { margin: 0;}
 
     #menu-container { width: fit-content; }
@@ -88,11 +101,9 @@ header {
 
 /* For screen size of landscape tablets */
 @media screen and (min-width: 769px) {
-    .nav-link {
-        padding: .2rem;
-    }
 
-    #logo { src: url(../resources/SVG/logo-small.svg); } /* Change the logo to a sqaure one*/
+    .nav-link { padding: .2rem; }
+
 
     #shopping-list { margin: 0 50px; }
     #main-nav { margin: 0 auto; }
@@ -106,6 +117,9 @@ header {
 
 /* Special case */
 @media screen and (min-width: 930px) {
+
+    #logo-main { display: block; }
+    #logo-small { display: none; }
     
     #serving-container { display: flex; }
 }
