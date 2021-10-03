@@ -33,6 +33,19 @@ p {
     width: fit-content;
 }
 
+.h-1 {
+    font-size: 2rem;
+    margin-bottom: .4rem;
+    font-weight: 700;
+}
+
+.h-2 {
+    font-size: 2rem;
+    margin-right: 16px;
+    margin-bottom: .4rem;
+    font-weight: 700
+}
+
 .nonselect {
     user-select: none;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -62,7 +75,7 @@ p {
 
 .dropdown:hover { display: block; }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 .block { display: block !important; }
 

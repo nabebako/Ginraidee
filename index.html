@@ -84,7 +84,6 @@
                 </div>
             </div>
             <div class = "h-center center-content" style = "width: 1000px; height: 300px; box-shadow: 0 0 1px #000 ;"> <!--Questionnaire section-->
-                <img> <!--Find an img?-->
                 <div> <!--The text-->
                     <p class = "h-center" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Not sure what to have?</p>
                     <div id = "Questionnaire-pop-up" class = "h-center clickable button">
@@ -94,16 +93,16 @@
             </div>
             <div id = "pop-up--background" class = "hidden"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
             </div>
-            <div id = "pop-up--foreground" class = "hidden nonselect">
-                <!--Exit icon--> <img id = "window-close" src = "./resources/svg/cross.svg" style = "height: 24px; width: 24px;">
+            <div id = "pop-up--foreground" class = "hidden">
+
+                <!--Exit icon--> <img id = "window-close" class = "clickable nonselect" src = "./resources/svg/cross.svg" style = "height: 24px; width: 24px;">
                 <div class = "h-center">  <!--Picture on the right with text on top-->
-                    <p style = "font-size: 2rem; font-weight: 300; padding: 1.2rem;">What kind of food do you like?</p>
-                    <img>
+                    <p class = "h-1" style = "padding: 1.6rem;">What kind of food do you like?</p>
                 </div>
-                <div>
+                <div class = "nonselect">
                     <div id = "form">
                         <input class = "hidden" type = "checkbox" id = "pork" name = "food--preference" value = "pork">
-                        <label class = "checkbox overlay-container" for = "pork">
+                        <label class = "checkbox overlay-container clickable" for = "pork">
                             <img src = "./resources/pop-up/pork.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Pork</p>
@@ -111,7 +110,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "beef" name = "food--preference" value = "beef">
-                        <label class = "checkbox overlay-container" for = "beef">
+                        <label class = "checkbox overlay-container clickable" for = "beef">
                             <img src = "./resources/pop-up/beef.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Beef</p>
@@ -119,7 +118,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "chicken" name = "food--preference" value = "chicken">
-                        <label class = "checkbox overlay-container" for = "chicken">
+                        <label class = "checkbox overlay-container clickable" for = "chicken">
                             <img src = "./resources/pop-up/chicken.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Chicken</p>
@@ -127,7 +126,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "shrimp" name = "food--preference" value = "shrimp">
-                        <label class = "checkbox overlay-container" for = "shrimp">
+                        <label class = "checkbox overlay-container clickable" for = "shrimp">
                             <img src = "./resources/pop-up/shrimp.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Shrimp</p>
@@ -135,7 +134,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "fish" name = "food--preference" value = "fish">
-                        <label class = "checkbox overlay-container" for = "fish">
+                        <label class = "checkbox overlay-container clickable" for = "fish">
                             <img src = "./resources/pop-up/fish.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Fish</p>
@@ -143,7 +142,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "seafood" name = "food--preference" value = "seafood">
-                        <label class = "checkbox overlay-container" for = "seafood">
+                        <label class = "checkbox overlay-container clickable" for = "seafood">
                             <img src = "./resources/pop-up/seafood.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Seafood</p>
@@ -151,7 +150,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "lamb" name = "food--preference" value = "lamb">          
-                        <label class = "checkbox overlay-container" for = "lamb">
+                        <label class = "checkbox overlay-container clickable" for = "lamb">
                             <img src = "./resources/pop-up/lamb.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Lamb</p>
@@ -159,7 +158,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "vegetarian" name = "food--preference" value = "vegetarian">
-                        <label class = "checkbox overlay-container" for = "vegetarian">
+                        <label class = "checkbox overlay-container clickable" for = "vegetarian">
                             <img src = "./resources/pop-up/vegetarian.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Vegetarian</p>
@@ -167,7 +166,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "fruits" name = "food--preference" value = "fruits">
-                        <label class = "checkbox overlay-container" for = "fruits">
+                        <label class = "checkbox overlay-container clickable" for = "fruits">
                             <img src = "./resources/pop-up/fruits.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Fruits</p>
@@ -175,7 +174,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "healthy" name = "food--preference" value = "healthy">
-                        <label class = "checkbox overlay-container" for = "healthy">
+                        <label class = "checkbox overlay-container clickable" for = "healthy">
                             <img src = "./resources/pop-up/healthy.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Healthy</p>
@@ -183,7 +182,7 @@
                         </label>
                         
                         <input class = "hidden" type = "checkbox" id = "fastfood" name = "food--preference" value = "fastfood">
-                        <label class = "checkbox overlay-container" for = "fastfood">
+                        <label class = "checkbox overlay-container clickable" for = "fastfood">
                             <img src = "./resources/pop-up/fastfood.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Fastfood</p>
@@ -191,7 +190,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "fried" name = "food--preference" value = "fried">
-                        <label class = "checkbox overlay-container" for = "fried">
+                        <label class = "checkbox overlay-container clickable" for = "fried">
                             <img src = "./resources/pop-up/fried.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Fried</p>
@@ -199,7 +198,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "boiled" name = "food--preference" value = "boiled">
-                        <label class = "checkbox overlay-container" for = "boiled">
+                        <label class = "checkbox overlay-container clickable" for = "boiled">
                             <img src = "./resources/pop-up/boiled.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">Boiled</p>
@@ -207,7 +206,7 @@
                         </label>
 
                         <input class = "hidden" type = "checkbox" id = "stemed" name = "food--preference" value = "stemed">
-                        <label class = "checkbox overlay-container" for = "stemed">
+                        <label class = "checkbox overlay-container clickable" for = "stemed">
                             <img src = "./resources/pop-up/stemed.png" class = "checkbox-img">
                             <div class = "overlay center-content">
                                 <p class = "nonselect text-over-img">stemed</p>
@@ -249,4 +248,5 @@
     <script src = "./scripts/main.js"></script>
     <script src = "./scripts/search.js"></script>
     <script src = "./scripts/form.js"></script>
+    <script src = "./scripts/hamburger-nav.js"></script>
 </html>

@@ -25,12 +25,18 @@
                     <a class = "nondeco-link nav-link" href = "">Dessert</a>
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
-                <div id = "shopping-list"> <!--Link to the shopping list page-->
-                    <a href = "../pages/shopping-list.html">
-                        <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/svg/shopping-list.svg">
-                    </a>
-                    <div id = "" class = "hidden"> <!--Shopping list tag-->
-                        <p>Shopping List</p>
+                <div id = "misc-container" class = "center-content">
+                    <div>
+                        <img class = "clickable" src = "../resources/svg/search.svg" width = "40" height = "40">
+                        <input id = "Search-Query" class = "hidden" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                    </div>
+                    <div id = "shopping-list"> <!--Link to the shopping list page-->
+                        <a href = "../pages/shopping-list.html">
+                            <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/svg/shopping-list.svg">
+                        </a>
+                        <div id = "" class = "hidden"> <!--Shopping list tag-->
+                            <p>Shopping List</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,6 +123,171 @@
                     </ul>
                 </div>
             </div>
+            <div class = "h-center" style = "margin-bottom: 6rem;">
+                <!--Top picks section--> <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
+                    <a>
+                        <div class = "overlay-container h-center">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-1" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                        </div>
+                    </a>
+                    <a>
+                        <div class = "overlay-container h-center">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-2" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                        </div>
+                    </a>
+                </div>
+                <!--Top picks section--> <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
+                    <a>
+                        <div class = "overlay-container h-center">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-3" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                        </div>
+                    </a>
+                    <a>
+                        <div class = "overlay-container h-center">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-4" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class = "h-center center-content" style = "width: 1000px; height: 300px; box-shadow: 0 0 1px #000 ;"> <!--Questionnaire section-->
+                <div> <!--The text-->
+                    <p class = "h-center" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Not sure what to have?</p>
+                    <div id = "Questionnaire-pop-up" class = "h-center clickable button">
+                        <p class = "nonselect" style = "font-size: 1.2rem; font-weight: 300;">TELL US WHAT YOU LIKE</p> <!--bring up a window for the questionnaire-->
+                    </div>
+                </div>
+            </div>
+            <div id = "pop-up--background" class = "hidden"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
+            </div>
+            <div id = "pop-up--foreground" class = "hidden">
+                <!--Exit icon--> <img id = "window-close" class = "clickable nonselect" src = "../resources/svg/cross.svg" style = "height: 24px; width: 24px;">
+                <div class = "h-center">  <!--Picture on the right with text on top-->
+                    <p class = "h-1" style = "padding: 1.6rem;">What kind of food do you like?</p>
+                </div>
+                <div class = "nonselect">
+                    <div id = "form">
+                        <input class = "hidden" type = "checkbox" id = "pork" name = "food--preference" value = "pork">
+                        <label class = "checkbox overlay-container clickable" for = "pork">
+                            <img src = "../resources/pop-up/pork.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Pork</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "beef" name = "food--preference" value = "beef">
+                        <label class = "checkbox overlay-container clickable" for = "beef">
+                            <img src = "../resources/pop-up/beef.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Beef</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "chicken" name = "food--preference" value = "chicken">
+                        <label class = "checkbox overlay-container clickable" for = "chicken">
+                            <img src = "../resources/pop-up/chicken.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Chicken</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "shrimp" name = "food--preference" value = "shrimp">
+                        <label class = "checkbox overlay-container clickable" for = "shrimp">
+                            <img src = "../resources/pop-up/shrimp.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Shrimp</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "fish" name = "food--preference" value = "fish">
+                        <label class = "checkbox overlay-container clickable" for = "fish">
+                            <img src = "../resources/pop-up/fish.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Fish</p>
+                                </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "seafood" name = "food--preference" value = "seafood">
+                        <label class = "checkbox overlay-container clickable" for = "seafood">
+                            <img src = "../resources/pop-up/seafood.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Seafood</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "lamb" name = "food--preference" value = "lamb">          
+                        <label class = "checkbox overlay-container clickable" for = "lamb">
+                            <img src = "../resources/pop-up/lamb.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Lamb</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "vegetarian" name = "food--preference" value = "vegetarian">
+                        <label class = "checkbox overlay-container clickable" for = "vegetarian">
+                            <img src = "../resources/pop-up/vegetarian.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Vegetarian</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "fruits" name = "food--preference" value = "fruits">
+                        <label class = "checkbox overlay-container clickable" for = "fruits">
+                            <img src = "../resources/pop-up/fruits.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Fruits</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "healthy" name = "food--preference" value = "healthy">
+                        <label class = "checkbox overlay-container clickable" for = "healthy">
+                            <img src = "../resources/pop-up/healthy.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Healthy</p>
+                            </div>
+                        </label>
+                        
+                        <input class = "hidden" type = "checkbox" id = "fastfood" name = "food--preference" value = "fastfood">
+                        <label class = "checkbox overlay-container clickable" for = "fastfood">
+                            <img src = "../resources/pop-up/fastfood.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Fastfood</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "fried" name = "food--preference" value = "fried">
+                        <label class = "checkbox overlay-container clickable" for = "fried">
+                            <img src = "../resources/pop-up/fried.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Fried</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "boiled" name = "food--preference" value = "boiled">
+                        <label class = "checkbox overlay-container clickable" for = "boiled">
+                            <img src = "../resources/pop-up/boiled.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">Boiled</p>
+                            </div>
+                        </label>
+
+                        <input class = "hidden" type = "checkbox" id = "stemed" name = "food--preference" value = "stemed">
+                        <label class = "checkbox overlay-container clickable" for = "stemed">
+                            <img src = "../resources/pop-up/stemed.png" class = "checkbox-img">
+                            <div class = "overlay center-content">
+                                <p class = "nonselect text-over-img">stemed</p>
+                            </div>
+                        </label>
+
+                        <div id = "submit" class = "button clickable h-center center-content" style = "margin-bottom: 1.2rem;">
+                            <p>Submit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
 
@@ -126,4 +297,6 @@
     <link rel = "stylesheet" href = "../css/menu.css">
     <script src = "../scripts/serving-counter.js"></script>
     <script src = "../scripts/action-button.js"></script>
+    <script src = "../scripts/form.js"></script>
+
 </html>
