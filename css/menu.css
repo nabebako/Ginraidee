@@ -40,7 +40,11 @@ ul { padding-left: 30px; }
     font-weight: 700;
 }
 
-#menu-container { margin-top: 25px; }
+#menu-container { 
+    margin-top: 25px; 
+    padding: 0 50px;
+}
+
 #menu-img { object-fit: cover; }
 
 
@@ -133,14 +137,6 @@ ul { padding-left: 30px; }
     #logo-small { display: none; }
 
     #misc-container { width: 180px; }
-    
-    #menu-container {
-        padding-left: 25px;
-    }
-    #menu-img {
-        width: 450px;
-        height: 300px;
-    }
 
     #top-part-container {
         width: 90%;

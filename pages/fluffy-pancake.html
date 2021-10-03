@@ -27,12 +27,12 @@
                 </nav>
                 <div id = "misc-container" class = "center-content">
                     <div>
-                        <img class = "clickable" src = "../resources/svg/search.svg" width = "40" height = "40">
+                        <img class = "clickable" src = "../resources/svg/search.svg" width = "24" height = "24">
                         <input id = "Search-Query" class = "hidden" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
                     </div>
                     <div id = "shopping-list"> <!--Link to the shopping list page-->
                         <a href = "../pages/shopping-list.html">
-                            <!--Shopping List--> <img class = "" width = "40" height = "40" src="../resources/svg/shopping-list.svg">
+                            <!--Shopping List--> <img class = "" width = "24" height = "24" src="../resources/svg/shopping-list.svg">
                         </a>
                         <div id = "" class = "hidden"> <!--Shopping list tag-->
                             <p>Shopping List</p>
@@ -51,7 +51,9 @@
                     </p>
                 </div>
                 <div id = "top-part-container">
-                    <img id = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
+                    <div class = "center-content" style = "width: inherit; justify-content: left;">
+                        <img id = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
+                    </div>
                     <div id = "side-img-container">
                         <div id = "action-button-container">
                             <div id = "add_to_list" class = "action-button center-content clickable nonselect" onclick = "append_to_list('fluffy-pancake')">
@@ -124,6 +126,7 @@
                 </div>
             </div>
             <div class = "h-center" style = "margin-bottom: 6rem;">
+                <p class = "h-1">Other dishes you might like</p>
                 <!--Top picks section--> <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
                     <a>
                         <div class = "overlay-container h-center">
@@ -155,7 +158,7 @@
             </div>
             <div class = "h-center center-content" style = "width: 1000px; height: 300px; box-shadow: 0 0 1px #000 ;"> <!--Questionnaire section-->
                 <div> <!--The text-->
-                    <p class = "h-center" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Not sure what to have?</p>
+                    <p class = "h-center" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Looking for another dish?</p>
                     <div id = "Questionnaire-pop-up" class = "h-center clickable button">
                         <p class = "nonselect" style = "font-size: 1.2rem; font-weight: 300;">TELL US WHAT YOU LIKE</p> <!--bring up a window for the questionnaire-->
                     </div>
@@ -168,7 +171,7 @@
                 <div class = "h-center">  <!--Picture on the right with text on top-->
                     <p class = "h-1" style = "padding: 1.6rem;">What kind of food do you like?</p>
                 </div>
-                <div class = "nonselect">
+                <div class = "nonselect"> <!-- form -->
                     <div id = "form">
                         <input class = "hidden" type = "checkbox" id = "pork" name = "food--preference" value = "pork">
                         <label class = "checkbox overlay-container clickable" for = "pork">
