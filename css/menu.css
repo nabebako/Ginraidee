@@ -14,9 +14,17 @@ header {
 
 ul { padding-left: 30px; }
 
-#name {
-    font-size: 4.6rem;
+.h-1 {
+    font-size: 2rem;
+    margin-bottom: .4rem;
     font-weight: 700;
+}
+
+.h-2 {
+    font-size: 2rem;
+    margin-right: 16px;
+    margin-bottom: .4rem;
+    font-weight: 700
 }
 
 .backlink:visited { color: inherit; }
@@ -29,11 +37,6 @@ ul { padding-left: 30px; }
 .backlink:hover { color: #00A651; }
 
 .action-button {
-    width: 8.4rem;
-    height: 3rem;
-
-    margin-right: 2rem;
-
     background-color: #00A651;
 
     transition-property: all;
@@ -44,15 +47,14 @@ ul { padding-left: 30px; }
 .button-text { margin-left: .8rem; }
 
 
-#menu-container { margin-top: 25px; }
-
-#top-part-container {
-    display: flex;
-    align-items: flex-start;
-    justify-content: left;
+#menu_name {
+    font-size: 4.6rem;
+    font-weight: 700;
 }
 
-#side-img-container { padding-left: 50px; }
+#menu-container { margin-top: 25px; }
+#menu-img { object-fit: cover; }
+
 
 #ing_ser_container { 
     display: flex;
@@ -90,10 +92,7 @@ ul { padding-left: 30px; }
 #serving-mobile { padding: 2px 0; }
 #serving-minus, #serving-add { height: 24px; }
 
-#ingredient_title {
-    font-size: 2.4rem;
-    margin-bottom: .4rem;
-}
+
 
 /* For screen size of phone */
 @media screen and (min-width: 481px){
@@ -110,7 +109,7 @@ ul { padding-left: 30px; }
     #serving, #serving-minus, #serving-add { display: none; }
 }
 
-/* For screen size of landscape tablets */
+/* landscape tablets */
 @media screen and (min-width: 769px) {
 
     .nav-link { padding: .2rem; }
@@ -121,51 +120,105 @@ ul { padding-left: 30px; }
     #nav-container { width: 90%; }
 
     #menu-img {
-        width: 600px;
-        height: 400px;
-
-        object-fit: cover;
+        width: inherit;
+        height: inherit;
     }
 } 
 
 /* Special case */
 @media screen and (min-width: 930px) {
 
-    #logo-main { display: block; }
-    #logo-small { display: none; }
-    
     #serving_container { 
         display: flex;
         margin-bottom: .8rem;
     }
 }
 
-/* For screen size of laptop/desktop */
+/* laptop/desktop */
 @media screen and (min-width: 1025px) {
-    .nav-link {
-        margin: 0 1rem;
-        padding: 1rem;
+    
+    .nav-link { padding: 1rem .5rem; }
+
+    .action-button {
+        width: 8.4rem;
+        height: 3rem;
     }
+
+    #logo-main { display: block; }
+    #logo-small { display: none; }
     
     #menu-container {
-        width: 1200px;
-        padding-left: 50px;
+        padding-left: 25px;
     }
+    #menu-img {
+        width: 450px;
+        height: 300px;
+    }
+
+    #top-part-container {
+        width: 90%;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }    
+
+    #side-img-container { width: 500px; }
+
     #shopping-list {
         margin-left: 100px;
         margin-right: 0;
     }
     #serving, #serving-minus, #serving-add { display: block; }
     #serving-mobile { display: none; }
+
+    #action-button-container {
+        width: 500px;
+        margin-bottom: 1.2rem;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
-/* For screen size of desktop monitor */
-@media screen and (min-width: 1400px){
+
+
+/* Extra large screens, TV*/
+@media screen and (min-width: 1250px) {
+    .nav-link {
+        margin: 0 1rem;
+        padding: 1rem;
+    }
+
+    #menu-container {
+        width: 1200px;
+        padding-left: 50px;
+    }
+
+    #menu-img {
+        width: 600px;
+        height: 400px;
+    }
+
+    #top-part-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: left;
+    }    
+
+    #side-img-container {
+        width: fit-content;
+        padding-left: 50px;
+    }
+}
+
+
+@media screen and (min-width: 1500px) {
 
     #nav-container { width: fit-content; }
     #main-nav { margin: 0 12rem; }
 }
-
 
 /*
 320px — 480px: Mobile devices

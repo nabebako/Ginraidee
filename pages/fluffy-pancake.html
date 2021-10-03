@@ -38,7 +38,7 @@
         <main>
             <div id = "menu-container" class = "h-center">
                 <div style = "margin-bottom: 1.2rem;"> <!-- title -->
-                    <p id = "name">Fluffy Pancake</p>
+                    <p id = "menu_name">Fluffy Pancake</p>
                     <p class = "nonselect" style = "color: #515151;">
                         <a class = "backlink" href = "">Breakfast</a> / 
                         <a class = "backlink" href = "">Soft</a> /
@@ -47,7 +47,7 @@
                 <div id = "top-part-container">
                     <img id = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
                     <div id = "side-img-container">
-                        <div class = "center-content" style = "margin-bottom: 1.2rem;">
+                        <div id = "action-button-container">
                             <div id = "add_to_list" class = "action-button center-content clickable nonselect" onclick = "append_to_list('fluffy-pancake')">
                                 <img src = "../resources/svg/img-placeholder.svg" height = "20"> <!-- Puls sign -->
                                 <p class = "button-text">Add to list</p>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div id = "ing_ser_container">
-                            <p id = "ingredient_title">Ingredient</p>
+                            <p class = "h-1">Ingredient</p>
                             <div id = "serving_container" class = "center-content">
                                 <p id = "serving-title">Serving</p>
                                 <div id = "serving-option-container" class = "center-content">
@@ -105,8 +105,8 @@
                         </ul>
                     </div>
                 </div>
-                <p>Prepration</p>
                 <div id = "prep">
+                    <p class = "h-1">Prepration</p>
                     <ul>
                         <li><p>Whisk together the flour and baking powder in a large bowl.</p></li>
                         <li><p>In a separate bowl, add the butter, milk, and egg yolks, stirring to combine.</p></li>
