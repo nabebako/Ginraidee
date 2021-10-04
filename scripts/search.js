@@ -18,5 +18,6 @@ SQ.addEventListener('focus', () => {
 
 SQ.addEventListener('blur', () => {
     /* Remove search results */
+    
     SQ_results.classList.add('hidden');
 });
