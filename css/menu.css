@@ -84,6 +84,29 @@ ul { padding-left: 30px; }
 #serving-mobile { padding: 2px 0; }
 #serving-minus, #serving-add { height: 24px; }
 
+#search-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+
+    height: 70px;
+    width: 50%;
+
+    background-color: #fff;
+}
+
+#search-query {
+    width: 30rem;
+    padding: .3rem;
+
+    border-bottom: solid 2px #9f9f9f;
+
+    font-size: 1rem;
+
+    outline: none;
+}
 
 
 /* For screen size of phone */

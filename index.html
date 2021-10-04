@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en"> <!--Change to Thai or jp?-->
+<html lang = "en">
     <head>
         <title>Ginraidee</title>
         <link rel = "icon" href = "./resources/svg/logo-small.svg">
@@ -11,8 +11,10 @@
     </head>
     <body>
         <header class = "nonselect">
-            <div class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
-                <div> <!--Hamburger nav-->
+            <!--Top navigation thingy-->
+            <div class = "center-content h-center" style = "height: 70px;"> 
+                <!--Hamburger nav-->                
+                <div> 
                     <img id = "h-nav" src = "./resources/svg/hamburger--nav.svg" style = "width: 30px; height: 30px; margin-right: 10px;"> <!--Hambuger icon-->
                     <div id = "h-nav-cont" class = "dropdown hidden" style = "z-index: 1; width: 160px; margin-top: 20px;"> <!--Nav under the hamburger menu-->
                         <a class = "block nondeco-link" href = "">1</a>
@@ -21,18 +23,21 @@
                         <a class = "block nondeco-link" href = "">1</a>
                     </div>
                 </div>
-                <nav id = "main-nav" class = "center-content"> <!--Main nav-->
+                <!--Main nav-->
+                <nav id = "main-nav" class = "center-content"> 
                     <a class = "nondeco-link nav-link" href = "">Breakfast</a>
                     <a class = "nondeco-link nav-link" href = "">Lunch</a>
                     <a class = "nondeco-link nav-link" href = "">Dinner</a>
                     <a class = "nondeco-link nav-link" href = "">Dessert</a>
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
-                <div class = ""> <!--Link to the shopping list page-->
+                <!--Link to the shopping list page-->
+                <div> 
                     <a href = "./pages/shopping-list.html">
-                        <!--Shopping List--> <img class = "" width = "40" height = "40" src="./resources/svg/shopping-list.svg">
+                        <img width = "40" height = "40" src="./resources/svg/shopping-list.svg">
                     </a>
-                    <div id = "" class = "hidden"> <!--Shopping list tag-->
+                    <!--Shopping list tag-->
+                    <div id = "" class = "hidden"> 
                         <p>Shopping List</p>
                     </div>
                 </div>
@@ -40,13 +45,12 @@
         </header>
         <main>
             <div class = "overlay-container" style = "margin-bottom: 4rem;">
-                <img src = "./resources/background.jpg" style = "width: 100%; max-height: 800px; object-fit: cover;"> 
-                <!-- ^ Background img ^ -->
+                <img src = "./resources/background.jpg" style = "width: 100%; max-height: 800px; object-fit: cover;">
                 <div class = "overlay" style = "top: 46%">
-                    <a href = ""> <!--Change the href-->
+                    <a href = "./index.html">
                         <img id = "logo" src = "./resources/svg/logo-main-2.svg">
                     </a>
-                    <input id = "Search-Query" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                    <input id = "search-query" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
                     <div id = "search-result" class = "hidden dropdown">
                         <img src = "./resources/svg/img-placeholder.svg" style = "height: 40px; width: 40px;">
                     <!-- ^ Dynamic search results ^ -->
@@ -54,49 +58,60 @@
                 </div>
             </div>
             <div class = "h-center" style = "margin-bottom: 6rem;">
-                <!--Top picks section--> <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
+                <!--Top picks section-->
+                <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                            <p id = "top-menu-1" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                            <!-- Place holder -->
+                            <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-1" class = "overlay">Test</p> 
+                            <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                            <p id = "top-menu-2" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                            <!-- Place holder --> 
+                            <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-2" class = "overlay">Test</p> 
+                            <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
                 </div>
-                <!--Top picks section--> <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
+                <!--Top picks section-->
+                <div class = "center-content" style = "max-width: 600px; justify-content: space-between;">
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                            <p id = "top-menu-3" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                            <!-- Place holder -->
+                            <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-3" class = "overlay">Test</p>
+                            <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
                     <a>
                         <div class = "overlay-container h-center">
-                            <!-- Place holder --> <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                            <p id = "top-menu-4" class = "overlay">Test</p> <!-- Replace with real name pulled from DB-->
+                            <!-- Place holder -->
+                            <img class = "food-img" src = "./resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-4" class = "overlay">Test</p>
+                            <!-- Replace with real name pulled from DB-->
                         </div>
                     </a>
                 </div>
             </div>
-            <div class = "h-center center-content" style = "width: 1000px; height: 300px; box-shadow: 0 0 1px #000 ;"> <!--Questionnaire section-->
-                <div> <!--The text-->
+
+            <!--Questionnaire section-->
+            <div class = "h-center center-content" style = "width: 1000px; height: 300px; box-shadow: 0 0 1px #000 ;"> 
+                <div> 
                     <p class = "h-center" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Not sure what to have?</p>
                     <div id = "Questionnaire-pop-up" class = "h-center clickable button">
                         <p class = "nonselect" style = "font-size: 1.2rem; font-weight: 300;">TELL US WHAT YOU LIKE</p> <!--bring up a window for the questionnaire-->
                     </div>
                 </div>
             </div>
-            <div id = "pop-up--background" class = "hidden"> <!--The pull-up window--> <!--Dont' forget hide it first, only make it appare on click-->
-            </div>
+            <div id = "pop-up--background" class = "hidden"></div>
             <div id = "pop-up--foreground" class = "hidden">
-
-                <!--Exit icon--> <img id = "window-close" class = "clickable nonselect" src = "./resources/svg/cross.svg" style = "height: 24px; width: 24px;">
-                <div class = "h-center">  <!--Picture on the right with text on top-->
+                <img id = "window-close" class = "clickable nonselect" src = "./resources/svg/cross.svg" style = "height: 24px; width: 24px;">
+                <div class = "h-center">  
+                    <!--Picture on the right with text on top-->
                     <p class = "h-1" style = "padding: 1.6rem;">What kind of food do you like?</p>
                 </div>
                 <div class = "nonselect">
@@ -221,7 +236,7 @@
                     <!--Waiting for the desing-->
             </div>
 
-            <div> <!--Weekly picks, on the right-->
+            <div>
                 <div> <!--1st pick-->
                     <img id = "weekly-pick-1-img"> <!--img of dish-->            <!--*PULL FROM DB-->
                     <p id = "weekly-pick-1-name"></p> <!--name of dish-->         <!--*PULL FROM DB-->

@@ -46,10 +46,6 @@ document.getElementById('Questionnaire-pop-up').addEventListener('click', () => 
     console.log('Windown Destroyed');
 });
 
-
-//close_botton.addEventListener('mouseover', () => close_botton.style.fill = '#fff');
-//close_botton.addEventListener('mouseleave', () => close_botton.style.fill = '#000');
-
 document.getElementById('submit').addEventListener('click', () => {
     /* Get the tickboxs status */
     form_ans['types_of_foods'] = Array.from(document.querySelectorAll('#form input')).filter((query) => query.checked).map((query) => query.value);
