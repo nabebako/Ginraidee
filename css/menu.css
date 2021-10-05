@@ -6,22 +6,8 @@ input::-webkit-inner-spin-button {
 
 input[type = number] { -moz-appearance: textfield; }
 
- #top-nav {
-    border-bottom-style: solid;
-    border-width: 1px;
-    border-color: #e0e0e0;
-}
-
 ul { padding-left: 30px; }
 
-.backlink:visited { color: inherit; }
-
-.backlink {
-    transition-property: color;
-    transition-duration: 450ms;
-}
-
-.backlink:hover { color: #00A651; }
 
 .action-button {
     background-color: #00A651;
@@ -33,7 +19,6 @@ ul { padding-left: 30px; }
 
 .button-text { margin-left: .8rem; }
 
-#misc-container { justify-content: space-evenly; }
 
 #main-wrapper { padding: 0 50px; }
 
@@ -49,8 +34,7 @@ ul { padding-left: 30px; }
 
 #menu-img { object-fit: cover; }
 
-
-#ing_ser_container { 
+#ingredient-serving-container { 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -86,36 +70,9 @@ ul { padding-left: 30px; }
 #serving-mobile { padding: 2px 0; }
 #serving-minus, #serving-add { height: 24px; }
 
-#search-field {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-
-    background-color: #fff;
-}
-
-#search-query {
-    width: 30rem;
-    padding: .3rem;
-    margin-top: 1rem;
-    margin-bottom: .4rem;
-
-    border-bottom: solid 2px #9f9f9f;
-
-    font-size: 1rem;
-
-    outline: none;
-}
-
 
 /* For screen size of phone */
-@media screen and (min-width: 481px){
-
-    #logo-main { display: none; }
-    #logo-small { display: block; }
-    #misc-container { width: 180px; }
+@media screen and (min-width: 481px) {
 
     #menu-container { width: fit-content; }
 
@@ -127,15 +84,7 @@ ul { padding-left: 30px; }
 /* landscape tablets */
 @media screen and (min-width: 769px) {
 
-    .nav-link { padding: .2rem; }
-
-    #main-nav { margin: 0 auto; }
-    #nav-container { width: 90%; }
-
-    #menu-img {
-        width: inherit;
-        height: inherit;
-    }
+    #menu-img { width: inherit; }
 
     #top-part-container { margin-bottom: 24px; }
 } 
@@ -151,18 +100,11 @@ ul { padding-left: 30px; }
 
 /* laptop/desktop */
 @media screen and (min-width: 1025px) {
-    
-    .nav-link { padding: 1rem .5rem; }
 
     .action-button {
         width: 8.4rem;
         height: 3rem;
     }
-
-    #logo-main { display: block; }
-    #logo-small { display: none; }
-
-    #misc-container { width: 180px; }
 
     #top-part-container {
         width: 100%;
@@ -194,10 +136,6 @@ ul { padding-left: 30px; }
 
 /* Extra large screens, TV*/
 @media screen and (min-width: 1250px) {
-    .nav-link {
-        margin: 0 1rem;
-        padding: 1rem;
-    }
 
     #menu-container { width: 1200px; }
 
@@ -222,8 +160,6 @@ ul { padding-left: 30px; }
 
 @media screen and (min-width: 1500px) {
 
-    #nav-container { width: fit-content; }
-    #main-nav { margin: 0 12rem; }
 }
 
 /*

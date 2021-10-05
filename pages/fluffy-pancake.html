@@ -5,10 +5,8 @@
         <link rel = "icon" href = "../resources/svg/logo-small.svg">
         <meta charset = "utf-8">
 
-        <!--Fonts--> 
-        <link rel = "preconnect" href="https://fonts.googleapis.com">
-        <link rel = "preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href = "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+        <link rel = "stylesheet" href = "../css/main.css">
+        <link rel = "stylesheet" href = "../css/menu.css">
     </head>
     <body>
         <header class = "nonselect">
@@ -28,6 +26,7 @@
                         <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                     </nav>
                     <div id = "misc-container" class = "center-content">
+                        <img id = "hamburger-nav" class = "clickable hidden" src = "../resources/svg/hamburger--nav.svg" width = "24" height = "24">
                         <img id = "show-search" class = "clickable" src = "../resources/svg/search.svg" width = "24" height = "24">
                         <div id = "shopping-list"> <!--Link to the shopping list page-->
                             <a href = "../pages/shopping-list.html">
@@ -75,7 +74,7 @@
                                     <p class = "button-text">Print</p>
                                 </div>
                             </div>
-                            <div id = "ing_ser_container">
+                            <div id = "ingredient-serving-container">
                                 <p class = "h-1">Ingredient</p>
                                 <div id = "serving_container" class = "center-content"> <!-- serving selector -->
                                     <p id = "serving-title">Serving</p>
@@ -304,8 +303,6 @@
 
         </footer>
     </body>
-    <link rel = "stylesheet" href = "../css/main.css">
-    <link rel = "stylesheet" href = "../css/menu.css">
     <script src = "../scripts/serving-counter.js"></script>
     <script src = "../scripts/action-button.js"></script>
     <script src = "../scripts/search.js"></script>

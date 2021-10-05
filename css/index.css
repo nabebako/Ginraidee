@@ -14,13 +14,14 @@
     width: 30rem;
     height: 2rem;
 
+    border-style: solid;
     border-width: 1px;
     border-radius: 24px;
-    border-color: #000; /*Change the colour of the border*/
+    border-color: #000;
 
     padding: .5rem 1.2rem;
+    margin: 0;
 }
-#search-query:focus { outline: none; }
 
 #search-result {
     width: 30rem;
@@ -35,4 +36,11 @@
     border-style: solid;
     border-width: 2px;
     border-color: #e0e0e0;
+}
+
+#main-nav { margin: 0 12rem; }
+
+.nav-link {
+    margin: 0 1rem;
+    padding: 1rem;
 }

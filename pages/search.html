@@ -1,10 +1,88 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Search</title>
+        <link rel = "icon" href = "../resources/svg/logo-small.svg">
+        <meta charset = "utf-8">
 
+        <link rel = "stylesheet" href = "../css/main.css">
     </head>
     <body>
-
+        <header class = "nonselect">
+            <div id = "top-nav">
+                <div id = "nav-container" class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
+                    <div>
+                        <a href = "../index.html">
+                            <img id = "logo-main" src = "../resources/svg/logo-main-2.svg" height = "44"> <!-- logo -->
+                            <img id = "logo-small" src = "../resources/svg/logo-small.svg" height = "44">
+                        </a>
+                    </div>
+                    <nav id = "main-nav" class = "center-content"> <!--Main nav-->
+                        <a class = "nondeco-link nav-link" href = "">Breakfast</a>
+                        <a class = "nondeco-link nav-link" href = "">Lunch</a>
+                        <a class = "nondeco-link nav-link" href = "">Dinner</a>
+                        <a class = "nondeco-link nav-link" href = "">Dessert</a>
+                        <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
+                    </nav>
+                    <div id = "misc-container" class = "center-content">
+                        <img id = "show-search" class = "clickable" src = "../resources/svg/search.svg" width = "24" height = "24">
+                        <div id = "shopping-list"> <!--Link to the shopping list page-->
+                            <a href = "../pages/shopping-list.html">
+                                <!--Shopping List--> <img class = "" width = "24" height = "24" src="../resources/svg/shopping-list.svg">
+                            </a>
+                            <div id = "" class = "hidden"> <!--Shopping list tag-->
+                                <p>Shopping List</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "search-field" class = "hidden h-center">
+                <input id = "search-query" type = "text" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                <div id = "search-result" class = "dropdown">
+                </div>
+            </div>
+        </header>
+        <main>
+            <div>
+                <div class = "h-center" style = "width: auto; margin-bottom: 6rem;">
+                    <p id = "selection-title" class = "h-1">Other dishes you might like</p>
+                    <!--Top picks section--> 
+                    <div class = "center-content nonselect">
+                        <a class = "selection-link overlay-container nondeco-link" href = "">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-1" class = "overlay h-center">Test</p>
+                        </a>
+                        <a class = "selection-link overlay-container nondeco-link" href = "">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-2" class = "overlay h-center">Test</p>
+                        </a>
+                        <a class = "selection-link overlay-container nondeco-link" href = "">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-3" class = "overlay h-center">Test</p>
+                        </a>
+                    </div>
+                    <!--Top picks section--> 
+                    <div class = "center-content nonselect">
+                        <a class = "selection-link overlay-container nondeco-link" href = "">
+                            <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-4" class = "overlay h-center">Test</p>
+                        </a>
+                        <a class = "selection-link overlay-container nondeco-link" href = "">
+                            <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-5" class = "overlay h-center">Test</p>
+                        </a>
+                        <a class = "selection-link overlay-container nondeco-link" href = "">
+                            <!-- Place holder --> <img class = "food-img" src = "../resources/svg/img-placeholder.svg">
+                            <p id = "top-menu-6" class = "overlay h-center">Test</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
     </body>
-    <script src = ""></script>
+    <script src = "../scripts/search.js"></script>
+    <script src = "../scripts/show-search.js"></script>
+    <script src = "../scripts/form.js"></script>
+    <script src = "../scripts/hamburger-nav.js"></script>
 </html>
