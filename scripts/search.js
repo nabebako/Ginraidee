@@ -4,24 +4,23 @@ var query_result = [];
 const SQ = document.getElementById('search-query');
 const SQ_results = document.getElementById('search-result');
 
-function query_database() {
-    console.log('query: ' + search_qurey);
+function query_database(query) {
+    console.log('query: ' + query);
     return [];
 }
 
 
-window.onload = () => { 
-    // get the query from the url
-    search_qurey = document.URL.split('?')[1].split('&').filter(query => /query/.test(query))[0].split('=')[1].replace('-',' ');
-
-    query_result = query_database();
+// get the query from the url
+if(/search.html/.test(document.URL)) {
+    window.onload = () => { 
+        query_result = query_database(document.URL.split('?')[1].split('&').filter(query => /query/.test(query))[0].split('=')[1].replace('-',' '));
+    }
 }
-
 
 SQ.addEventListener('input', (qurey) => {
     search_qurey = qurey.target.value.replaceAll(/[^0-9a-z ]/ig, '');
     
-    query_result = query_database();
+    query_result = query_database(search_qurey);
 });
 
 // For passing query to another page, when user press enter //

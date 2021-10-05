@@ -107,7 +107,7 @@ p {
 .h-center {
     margin-left: auto;
     margin-right: auto;
-    width: max-content;
+    width: fit-content;
 }
 
 .center-content {
@@ -118,11 +118,26 @@ p {
 
 .inline { display: inline-block; }
 
+#selection-title {
+    margin-bottom: 1.6rem;
+}
+
+.selection-link {
+    width: 100%;
+
+    background-color: #000;
+}
+
 .food-img
 {
-    width: 300px;
+    width: inherit;
     height: 300px;
+
+    object-fit: cover;
+
+    transition-duration: 300ms;
 }
+.food-img:hover { opacity: .8; }
 
 .checkbox {
     margin: .2rem;

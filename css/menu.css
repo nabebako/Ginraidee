@@ -6,7 +6,7 @@ input::-webkit-inner-spin-button {
 
 input[type = number] { -moz-appearance: textfield; }
 
-header {
+ #top-nav {
     border-bottom-style: solid;
     border-width: 1px;
     border-color: #e0e0e0;
@@ -35,14 +35,16 @@ ul { padding-left: 30px; }
 
 #misc-container { justify-content: space-evenly; }
 
+#main-wrapper { padding: 0 50px; }
+
 #menu_name {
     font-size: 4.6rem;
     font-weight: 700;
 }
 
-#menu-container { 
-    margin-top: 25px; 
-    padding: 0 50px;
+#menu-container {
+    width: inherit;
+    margin-bottom: 64px;
 }
 
 #menu-img { object-fit: cover; }
@@ -89,10 +91,7 @@ ul { padding-left: 30px; }
     justify-content: center;
     align-items: center;
 
-    position: absolute;
-
-    height: 70px;
-    width: 50%;
+    width: 100%;
 
     background-color: #fff;
 }
@@ -100,6 +99,8 @@ ul { padding-left: 30px; }
 #search-query {
     width: 30rem;
     padding: .3rem;
+    margin-top: 1rem;
+    margin-bottom: .4rem;
 
     border-bottom: solid 2px #9f9f9f;
 
@@ -135,6 +136,8 @@ ul { padding-left: 30px; }
         width: inherit;
         height: inherit;
     }
+
+    #top-part-container { margin-bottom: 24px; }
 } 
 
 /* Special case */
@@ -162,14 +165,17 @@ ul { padding-left: 30px; }
     #misc-container { width: 180px; }
 
     #top-part-container {
-        width: 90%;
+        width: 100%;
 
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
     }    
 
-    #side-img-container { width: 500px; }
+    #side-img-container {
+        width: 500px;
+        margin-left: 24px;
+    }
 
     #serving, #serving-minus, #serving-add { display: block; }
     #serving-mobile { display: none; }
@@ -193,10 +199,7 @@ ul { padding-left: 30px; }
         padding: 1rem;
     }
 
-    #menu-container {
-        width: 1200px;
-        padding-left: 50px;
-    }
+    #menu-container { width: 1200px; }
 
     #menu-img {
         width: 600px;
@@ -204,6 +207,7 @@ ul { padding-left: 30px; }
     }
 
     #top-part-container {
+        width: fit-content;
         display: flex;
         align-items: flex-start;
         justify-content: left;
