@@ -127,9 +127,7 @@ p {
     border-color: #e0e0e0;
 }
 
-#selection-title {
-    margin-bottom: 1.6rem;
-}
+#selection-title { margin-bottom: 1.6rem; }
 
 .selection-link {
     width: 100%;
