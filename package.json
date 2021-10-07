@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/this-is-just-typical/GInraidee/issues"
   },
-  "homepage": "https://github.com/this-is-just-typical/GInraidee#readme"
+  "homepage": "https://github.com/this-is-just-typical/GInraidee#readme",
+  "dependencies": {
+    "pg": "^8.7.1"
+  }
 }
