@@ -2,23 +2,24 @@ const { Client } = require('pg');
 
 const client = new Client({
     host: 'localhost',
-    user: 'postgres',
+    user: 'public_user',
     port: 5432,
-    password: 'blue_tea',
-    database: 'main'
+    password: 'test',
+    database: 'main',
 });
 
 async function execute() {
     try {
         await client.connect();
-        await client.query("BEGIN");
-        let results = await client.query("SELECT * FROM test");
-        await client.query("COMMIT");
-        console.table(results.rows);
+        console.log(`Connected to database ${client['database']} as ${client['user']}.`);
+        await client.query('BEGIN');
+        var results = await client.query('SELECT name, href, rating FROM MENU ORDER BY rating DESC LIMIT 6');
+        console.log(results.rows);
+        await client.query('COMMIT');
     }
     catch (ex) {
-        console.log(`Failed to excute, ${ex}`);
-        await client.query("ROLLBACK");
+        console.log(`Failed to excute, ${ex}.`);
+        await client.query('ROLLBACK');
     }
 
     finally {
