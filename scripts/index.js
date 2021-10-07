@@ -8,9 +8,22 @@ const client = new Client({
     database: 'main'
 });
 
-client.connect()
-.then(() => console.log('connected'))
-.then(() => client.query("SELECT * FROM test"))
-.then(result => console.table(result.rows))
-.catch(e => console.log(e))
-.finally(() => client.end());
+async function execute() {
+    try {
+        await client.connect();
+        await client.query("BEGIN");
+        let results = await client.query("SELECT * FROM test");
+        await client.query("COMMIT");
+        console.table(results.rows);
+    }
+    catch (ex) {
+        console.log(`Failed to excute, ${ex}`);
+        await client.query("ROLLBACK");
+    }
+
+    finally {
+        await client.end();
+    }
+}
+
+execute();
