@@ -27,4 +27,22 @@ async function execute() {
     }
 }
 
+
+async function query_database(search_str) {
+    console.log(`query: ${query}`);
+    var res = [];
+    try {
+        console.log(`Connected to database ${client['database']} as ${client['user']}.`);
+        res = await client.query('SELECT name FROM MENU WHERE name = ($1) ORDER BY rating DESC LIMIT 12', [search_str]);
+        console.log(res.rows);
+    }
+    catch (err) {
+        console.log(`Failed to excute, ${err}.`);
+    }
+
+    finally {
+        return res;
+    }
+}
+
 execute();

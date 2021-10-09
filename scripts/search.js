@@ -1,100 +1,78 @@
-var search_qurey = '';
-var query_result = [];
+{
+    var search_qurey = '';
 
-const SQ = document.getElementById('search-query');
-const SQ_results = document.getElementById('search-result');
+    const SQ = document.getElementById('search-query');
+    const Search_res = document.getElementById('search-result');
 
-const { Client } = require('pg');
+    async function request_query(search_str) {
+        var res = [{name: 'Fluffy Pancake'}];
 
-const client = new Client({
-    host: 'localhost',
-    user: 'public_user',
-    port: 5432,
-    password: 'test',
-    database: 'main',
-});
+        //Send http request to server with the search string.
 
-async function query_database(input) {
-    
-    console.log(`query: ${query}`);
-    var res = [];
-    try {
-        console.log(`Connected to database ${client['database']} as ${client['user']}.`);
-        res = await client.query('SELECT name FROM MENU WHERE name = ($1) ORDER BY rating DESC LIMIT 12', [input]);
-        console.log(res.rows);
-    }
-    catch (err) {
-        console.log(`Failed to excute, ${err}.`);
-    }
-
-    finally {
         return res;
     }
-}
 
-function display_result(res) {
-    try {
-        res.map((elem) => {
-            var div = document.createElement('div');
-            var title = document.createElement('p');
-            var discpt = document.createElement('p');
-            var img = document.createElement('img');
+    function update_result(res) {
+        while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }
 
-            title.appendChild(document.createTextNode(elem.name));
-            discpt.appendChild(document.createTextNode(elem.discription));
-            if (/index.html/.test(document.URL)) { img.src = `./resources/menu/${elem.name.toLowerCase().replaceAll(' ', '-')}`; }
-            else { img.src = `../resources/menu/${elem.name.toLowerCase().replaceAll(' ', '-')}`; }
+        try {
+            res.map((elem) => {
+                const div = document.createElement('div');
+                const title = document.createElement('p');
+                const discpt = document.createElement('p');
+                const img = document.createElement('img');
 
-            div.appendChild(title);
-            div.appendChild(discpt);
-            div.appendChild(img);
-            document.getElementById('search-result').appendChild(div);
-        });
-    }
-    catch (err) {
-        console.log(`Something went wrong: ${err}.`)
-    }
-    finally {
-        return;
-    }
-}
+                title.classList.add();
+                img.classList.add();
 
-// get the query from the url
-if(/search.html/.test(document.URL)) {
-    window.onload = () => { 
-        query_result = query_database(document.URL.split('?')[1].split('&').filter(query => /query/.test(query))[0].split('=')[1].replace('-',' '));
+                title.appendChild(document.createTextNode(elem.name));
+                discpt.appendChild(document.createTextNode(elem.discription));
+                img.src = document.URL.replace(/(?<=ginraidee).*/, `/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`);
 
-
-    }
-}
-
-SQ.addEventListener('input', (qurey) => {
-    search_qurey = qurey.target.value.replaceAll(/[^0-9a-z ]/ig, '');
-    query_result = query_database(search_qurey);
-});
-
-// For passing query to another page, when user press enter //
-SQ.addEventListener('keypress', (event) => {
-    if(event.key === 'Enter') {
-        search_qurey = search_qurey.replace(/\s/g,'-');
-        if(/index.html/.test(window.location.href)) {
-            window.location.assign('./pages/search.html?query=' + search_qurey); 
-        } 
-        else {
-            window.location.assign('./search.html?query=' + search_qurey);
+                div.appendChild(title);
+                div.appendChild(discpt);
+                div.appendChild(img);
+                Search_res.appendChild(div);
+            });
+        }
+        catch (err) {
+            while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }
+            console.log(err);
         }
     }
-});
 
+    // get the query from the url
+    window.onload = () => {
+        if(/search.html/.test(document.URL)) {
+            request_query(document.URL.split('?')[1].split('&').filter(elem => /query/.test(elem))[0].split('=')[1].replace(/\+/g,' '))
+            .then(res => update_result(res));
+        }
+    };
 
-SQ.addEventListener('focus', () => {
-    /* Add the search results */
+    SQ.addEventListener('input', (event) => {
+        // Add a timer to wait for input before updaing the results.
 
-    SQ_results.classList.remove('hidden');
-});
+        request_query(event.target.value.replace(/[^0-9a-z ]/ig, ''))
+        .then(res => update_result(res));
+    });
 
-SQ.addEventListener('blur', () => {
-    /* Remove search results */
-    
-    SQ_results.classList.add('hidden');
-});
+    // For passing query to another page, when user press enter //
+    SQ.addEventListener('keypress', (event) => {
+        if(event.key === 'Enter') {
+            var search_str = SQ.value.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+');
+            window.location.assign(document.URL.replace(/(?<=ginraidee).*/, `/pages/search.html?query=${search_str}`));  // change it later.
+        }
+    });
+
+    SQ.addEventListener('focus', () => {
+        /* Add the search results */
+
+        Search_res.classList.remove('hidden');
+    });
+
+    SQ.addEventListener('blur', () => {
+        /* Remove search results */
+
+        Search_res.classList.add('hidden');
+    });
+}
