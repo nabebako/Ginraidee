@@ -1,11 +1,9 @@
 1. Impliment the database.
-    1.1. Simulate server side using Node.js.
-    1.2. Create a user for public access.
-    1.3. Prevent SQL injection.
-    1.4. Find a way to send data from client side to server side using js.
-    1.5. Make it SQL injection proof: user.query('QUERY ($1)', [$1_val]).
-    1.6. Add a short discription to the database.
-    1.7 Is it possible to send additional data when there is a request for index.html.
+    1.1. Find a way to send data from client side to server side using js.
+    1.2. Make it SQL injection proof: user.query('QUERY ($1)', [$1_val]).
+    1.3. Add a short discription to the database.
+    1.4. Is it possible to send additional data when there is a request for index.html.
+    1.5. Find a way to send json back from server to client.
 2. Create food categories.
 3. shopping-lsit.html.
     3.1. Desing
