@@ -7,6 +7,8 @@
         
         <link rel = "stylesheet" href = "./css/main.css">
         <link rel = "stylesheet" href = "./css/index.css">
+
+        <script src = "./scripts/top-picks-menu.js"></script>
     </head>
     <body>
         <header class = "nonselect">
@@ -49,13 +51,15 @@
                     <a href = "./index.html">
                         <img id = "logo" src = "./resources/svg/logo-main-2.svg">
                     </a>
-                    <input id = "search-query" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
-                    <div id = "search-result" class = "hidden dropdown">
-                        <div>
-                            <p>Title</p>
-                            <img src = "./resources/svg/img-placeholder.svg" style = "height: 40px; width: 40px;">
-                        </div>
+                    <div id = "search-container">
+                        <input id = "search-query" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                        <div id = "search-result" class = "hidden dropdown">
+                            <div>
+                                <p>Title</p>
+                                <img src = "./resources/svg/img-placeholder.svg" style = "height: 40px; width: 40px;">
+                            </div>
                     <!-- ^ Dynamic search results ^ -->
+                        </div>
                     </div>
                 </div>
             </div>

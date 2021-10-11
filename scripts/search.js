@@ -1,27 +1,15 @@
 const SQ = document.getElementById('search-query');
 const Search_res = document.getElementById('search-result');
 
-async function request_query(search_str) {
-
-    const XHR = new XMLHttpRequest();
-    
-    XHR.addEventListener('load', (event) => {
-        console.log(event.currentTarget.response);
-    });
-
-    XHR.open('POST', `/search?s=${search_str.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+')}&n=6`);
-    XHR.send();
-
-    //Send http request to server with the search string.
-    return;
-}
 
 function update_result(res) {
+
     while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }
 
     try {
         res.map((elem) => {
-            const div = document.createElement('div');
+            const link = document.createElement('a');
+            const container = document.createElement('div');
             const title = document.createElement('p');
             const discpt = document.createElement('p');
             const img = document.createElement('img');
@@ -31,12 +19,15 @@ function update_result(res) {
 
             title.appendChild(document.createTextNode(elem.name));
             discpt.appendChild(document.createTextNode(elem.discription));
-            img.src = document.URL.replace(/(?<=ginraidee).*/, `/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`);
 
-            div.appendChild(title);
-            div.appendChild(discpt);
-            div.appendChild(img);
-            Search_res.appendChild(div);
+            link.href = document.URL.replace(/index.html|\/pages\/.*/, `/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`);
+            img.src = document.URL.replace(/index.html|\/pages\/.*/, `/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`);
+
+            container.appendChild(title);
+            container.appendChild(discpt);
+            container.appendChild(img);
+            link.appendChild(container);
+            Search_res.appendChild(link);
         });
     }
     catch (err) {
@@ -45,11 +36,22 @@ function update_result(res) {
     }
 }
 
+async function handle_search(search_str) {
+
+    const XHR = new XMLHttpRequest();
+    
+    XHR.addEventListener('load', (event) => {
+        update_result(JSON.parse(XHR.response));
+    });
+
+    XHR.open('POST', `/search?s=${search_str.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+')}&n=6`);
+    XHR.send();
+}
+
 // get the query from the url
 window.onload = () => {
     if(/search.html/.test(document.URL)) {
-        request_query(document.URL.split('?')[1].split('&').filter(elem => /query/.test(elem))[0].split('=')[1].replace(/\+/g,' '))
-        .then(res => update_result(res));
+        handle_search(document.URL.split('?')[1].split('&').filter(elem => /query/.test(elem))[0].split('=')[1].replace(/\+/g,' '));
     };
 }
 
@@ -62,11 +64,10 @@ SQ.addEventListener('input', (event) => {
     if (result_updated) {
         input_timeout = setInterval(() => {
             console.log(`It's running`);
-            if (Date.now() - time_start >= 1200 && !result_updated) {
-                console.log('updated search result');
+            if (Date.now() - time_start >= 400 && !result_updated) {
                 if(SQ.value != '') {
-                    request_query(SQ.value.replace(/[^0-9a-z ]/ig, ''))
-                    .then(res => update_result(res));
+                    handle_search(SQ.value.replace(/[^0-9a-z ]/ig, ''));
+                    console.log('updated search result');
                 }
                 clearInterval(input_timeout);
                 result_updated = true;
@@ -76,17 +77,40 @@ SQ.addEventListener('input', (event) => {
     result_updated = false;
 });
 
-SQ.addEventListener('focus', () => {
-    Search_res.classList.remove('hidden');
-});
-
-SQ.addEventListener('blur', () => {
-    Search_res.classList.add('hidden');
-});
-
 SQ.addEventListener('keypress', (event) => {
     if(event.key === 'Enter' && SQ.value != '') {
         var search_str = SQ.value.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+');
         window.location.assign(document.URL.replace(/\/pages\/.*|index.html/, `/pages/search.html?query=${search_str}`));  // change it later.
     }
 });
+
+if(/index.html/.test(document.URL)) {
+    var mouse_on = false;
+
+    document.getElementById('search-container').addEventListener('mouseenter', () => {
+        mouse_on = true;
+    });
+    
+    document.getElementById('search-container').addEventListener('mouseleave', () => {
+        if(document.activeElement !== SQ) {
+            Search_res.classList.add('hidden');
+        }
+        mouse_on = false;
+    });
+
+    SQ.addEventListener('focus', () => {
+        Search_res.classList.remove('hidden');
+    });
+    
+    SQ.addEventListener('blur', () => {
+        if(!mouse_on) {
+            Search_res.classList.add('hidden');
+        }
+    });
+}
+else {
+    document.getElementById('show-search').addEventListener('click', () => {
+        document.getElementById('search-field').classList.toggle('hidden');
+        document.getElementById('search-query').focus();
+    });
+}

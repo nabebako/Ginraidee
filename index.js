@@ -35,45 +35,28 @@ const host = app.listen(3000, () => {
 
 app.post('/search', async (req, res) => {
 
-    var args = req.url.split('?')[1];
+    var result = await search_database(req.query.s, req.query.n);
 
-    var search_str = args
-    .match(/(?<=s=).*(?=\&)|(?<=s=).*/g)
-    .reduce((res, elem) => `${res}${elem}`, '')
-    .replace(/\+/g, ' ')
-    .toLocaleLowerCase();
-
-    var res_quan = args.match(/(?<=n=).*(?=\&)|(?<=n=).*/)[0];
-
-    var result = await search_database(search_str, res_quan);
-
-    console.log(`Search argument: ${search_str}`);
+    console.log(`Search argument: ${req.query.s}`);
     console.log('Result form query:');
     console.log(result);
 
-    res.send();
+    res.send(result);
 });
 
+app.post('/topmenus', async (req, res) => {
 
+    const client = new Client({
+        host: 'localhost',
+        user: 'public_user',
+        port: 5432,
+        password: 'test',
+        database: 'main',
+    });
 
-
-/*
-async function execute() {
-    try {
-        await client.connect();
-        console.log(`Connected to database ${client['database']} as ${client['user']}.`);
-        await client.query('BEGIN');
-        var results = await client.query('SELECT name, href, rating FROM MENU ORDER BY rating DESC LIMIT 6');
-        console.log(results.rows);
-        await client.query('COMMIT');
-    }
-    catch (ex) {
-        console.log(`Failed to excute, ${ex}.`);
-        await client.query('ROLLBACK');
-    }
-
-    finally {
-        await client.end();
-    }
-}
-*/
+    await client.connect();
+    var top_menu = await client.query('SELECT name, rating FROM menu ORDER BY rating DESC LIMIT 6');
+    await client.end();
+    
+    res.send(top_menu.rows);
+});
