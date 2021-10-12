@@ -1,4 +1,5 @@
 const { Client } = require('pg');
+const express = require('express');
 
 async function search_database(search_str, res_quantity) {
 
@@ -22,15 +23,17 @@ async function search_database(search_str, res_quantity) {
     }
 }
 
-
-const express = require('express');
-
 const app = express();
+
+app.get('/index.html', (req, res) => {
+    res.send('<script>window.location.assign(`${document.location.origin}`);</script>');
+});
 
 app.use(express.static('./'));
 
-const host = app.listen(3000, () => {
-    console.log('server started!\nListening on port 3000');
+
+app.get('*', (req, res) => {
+   res.send('<script>window.location.assign(`${document.location.origin}/404.html`);</script>');
 });
 
 app.post('/search', async (req, res) => {
@@ -57,6 +60,10 @@ app.post('/topmenus', async (req, res) => {
     await client.connect();
     var top_menu = await client.query('SELECT name, rating FROM menu ORDER BY rating DESC LIMIT 6');
     await client.end();
-    
+
     res.send(top_menu.rows);
+});
+
+const host = app.listen(3000, () => {
+    console.log('server started!\nListening on port 3000');
 });

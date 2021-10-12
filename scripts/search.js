@@ -20,8 +20,8 @@ function update_result(res) {
             title.appendChild(document.createTextNode(elem.name));
             discpt.appendChild(document.createTextNode(elem.discription));
 
-            link.href = document.URL.replace(/index.html|\/pages\/.*/, `/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`);
-            img.src = document.URL.replace(/index.html|\/pages\/.*/, `/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`);
+            link.href = `${document.location.origin}/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`;
+            img.src = `${document.location.origin}/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`;
 
             container.appendChild(title);
             container.appendChild(discpt);
@@ -36,7 +36,8 @@ function update_result(res) {
     }
 }
 
-async function handle_search(search_str) {
+
+async function handle_search(search_str, return_amount) {
 
     const XHR = new XMLHttpRequest();
     
@@ -44,14 +45,14 @@ async function handle_search(search_str) {
         update_result(JSON.parse(XHR.response));
     });
 
-    XHR.open('POST', `/search?s=${search_str.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+')}&n=6`);
+    XHR.open('POST', `/search?s=${search_str.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+')}&n=${return_amount}`, false);
     XHR.send();
 }
 
 // get the query from the url
 window.onload = () => {
     if(/search.html/.test(document.URL)) {
-        handle_search(document.URL.split('?')[1].split('&').filter(elem => /query/.test(elem))[0].split('=')[1].replace(/\+/g,' '));
+        handle_search(document.URL.split('?')[1].split('&').filter(elem => /query/.test(elem))[0].split('=')[1].replace(/\+/g,' '), 20);
     };
 }
 
@@ -66,7 +67,7 @@ SQ.addEventListener('input', (event) => {
             console.log(`It's running`);
             if (Date.now() - time_start >= 400 && !result_updated) {
                 if(SQ.value != '') {
-                    handle_search(SQ.value.replace(/[^0-9a-z ]/ig, ''));
+                    handle_search(SQ.value.replace(/[^0-9a-z ]/ig, ''), 6);
                     console.log('updated search result');
                 }
                 clearInterval(input_timeout);
@@ -84,7 +85,13 @@ SQ.addEventListener('keypress', (event) => {
     }
 });
 
-if(/index.html/.test(document.URL)) {
+if(/pages/.test(document.URL)) {
+    document.getElementById('show-search').addEventListener('click', () => {
+        document.getElementById('search-field').classList.toggle('hidden');
+        document.getElementById('search-query').focus();
+    });
+}
+else {
     var mouse_on = false;
 
     document.getElementById('search-container').addEventListener('mouseenter', () => {
@@ -106,11 +113,5 @@ if(/index.html/.test(document.URL)) {
         if(!mouse_on) {
             Search_res.classList.add('hidden');
         }
-    });
-}
-else {
-    document.getElementById('show-search').addEventListener('click', () => {
-        document.getElementById('search-field').classList.toggle('hidden');
-        document.getElementById('search-query').focus();
     });
 }

@@ -126,8 +126,6 @@ ul { padding-left: 30px; }
     }
 }
 
-
-
 /* Extra large screens, TV*/
 @media screen and (min-width: 1250px) {
 
@@ -147,6 +145,5 @@ ul { padding-left: 30px; }
         padding-left: 50px;
     }
 }
-
 
 @media screen and (min-width: 1500px) { }

@@ -8,8 +8,8 @@ function top_picks_init() {
         window.addEventListener('load', () => {
             res.map((elem, i) => {
                 document.getElementById(`top-picks-menu-${i}-name`).innerText = elem.name;
-                document.getElementById(`top-picks-menu-${i}-img`).src = document.URL.replace(/index.html|\/pages\/.*/, `/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`);
-                document.getElementById(`top-picks-menu-${i}-link`).href = document.URL.replace(/index.html|\/pages\/.*/, `/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`);
+                document.getElementById(`top-picks-menu-${i}-img`).src = `${document.location.origin}/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`;
+                document.getElementById(`top-picks-menu-${i}-link`).href = `${document.location.origin}/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`;
             });
         });
     });
