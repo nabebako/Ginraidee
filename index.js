@@ -31,7 +31,6 @@ app.get('/index.html', (req, res) => {
 
 app.use(express.static('./'));
 
-
 app.get('*', (req, res) => {
    res.send('<script>window.location.assign(`${document.location.origin}/404.html`);</script>');
 });
