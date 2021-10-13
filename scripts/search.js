@@ -1,37 +1,45 @@
 const SQ = document.getElementById('search-query');
 const Search_res = document.getElementById('search-result');
 
+function clear_res() {
+    while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }
+}
 
 function update_result(res) {
 
-    while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }
+    clear_res();
 
     try {
         res.map((elem) => {
             const link = document.createElement('a');
-            const container = document.createElement('div');
-            const title = document.createElement('p');
+            const text_wrapper = document.createElement('div');
+            const name = document.createElement('p');
             const discpt = document.createElement('p');
             const img = document.createElement('img');
 
-            title.classList.add();
-            img.classList.add();
-
-            title.appendChild(document.createTextNode(elem.name));
+            link.classList.add('search-res-link');
+            text_wrapper.classList.add('res-text-wrapper');
+            name.classList.add('search-res-name');
+            discpt.classList.add('search-res-discpt');
+            img.classList.add('search-res-img');
+            
+            name.appendChild(document.createTextNode(elem.name));
             discpt.appendChild(document.createTextNode(elem.discription));
 
             link.href = `${document.location.origin}/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`;
             img.src = `${document.location.origin}/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`;
 
-            container.appendChild(title);
-            container.appendChild(discpt);
-            container.appendChild(img);
-            link.appendChild(container);
+            text_wrapper.appendChild(name);
+            text_wrapper.appendChild(discpt);
+            link.appendChild(text_wrapper);
+            link.appendChild(img);
             Search_res.appendChild(link);
+
+            console.log('Search results updated!');
         });
     }
     catch (err) {
-        while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }
+        clear_res();
         console.log(err);
     }
 }
@@ -39,13 +47,18 @@ function update_result(res) {
 
 async function handle_search(search_str, return_amount) {
 
+    if(search_str == '' || !/[^\s]/.test(search_str)) {
+        clear_res();
+        return;
+    }
+
     const XHR = new XMLHttpRequest();
     
     XHR.addEventListener('load', (event) => {
         update_result(JSON.parse(XHR.response));
     });
 
-    XHR.open('POST', `/search?s=${search_str.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+')}&n=${return_amount}`, false);
+    XHR.open('POST', `/search?s=${search_str.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+')}&n=${return_amount}`);
     XHR.send();
 }
 
@@ -66,10 +79,7 @@ SQ.addEventListener('input', (event) => {
         input_timeout = setInterval(() => {
             console.log(`It's running`);
             if (Date.now() - time_start >= 400 && !result_updated) {
-                if(SQ.value != '') {
-                    handle_search(SQ.value.replace(/[^0-9a-z ]/ig, ''), 6);
-                    console.log('updated search result');
-                }
+                handle_search(SQ.value.replace(/[^0-9a-z ]/ig, ''), 6);
                 clearInterval(input_timeout);
                 result_updated = true;
             }

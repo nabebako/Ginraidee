@@ -10,3 +10,4 @@
     3.2. Impliment
 4. Add a README?
 5. Change the way of decting file.
+6. Make the search results z-index higher than others.

@@ -202,13 +202,47 @@ input:checked + label{ border-color: #00A651 !important; }
 }
 
 #search-field {
+    background-color: #fff;
+}
+
+
+.search-res-link {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
-    width: 100%;
+    text-decoration: none;
+    color: #000;
+}
+
+.res-text-wrapper {
+    width: 18rem;
+    height: 9rem;
+
+    margin-left: .2rem;
 
     background-color: #fff;
+}
+
+.search-res-img {
+    width: 12rem;
+    height: 9rem;
+    
+    object-fit: cover;
+}
+
+.search-res-name {
+
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.search-res-link:last-child {
+    border-radius: 0 0 15px 15px;
+}
+
+.search-res-link:last-child > img {
+    border-bottom-right-radius: inherit;
 }
 
 #pop-up--background {
@@ -239,6 +273,11 @@ input:checked + label{ border-color: #00A651 !important; }
     top: 20px;
 }
 
+#form {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 
 
 /* For screen size of phone */
