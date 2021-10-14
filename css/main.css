@@ -34,6 +34,9 @@ img {
 p {
     vertical-align: text-bottom;
     width: fit-content;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .h-1 {

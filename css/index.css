@@ -1,3 +1,9 @@
+#greeting-wrapper {
+    margin-bottom: 6rem;
+    z-index: 2;
+}
+
+
 #logo {
     display: block;
 
@@ -24,18 +30,24 @@
 }
 
 #search-result {
+    position: absolute;
+
     width: 30rem;
     min-height: 2rem;
+    max-height: 36rem;
     
     left: 50%;
     transform: translateX(-50%);
 
-    z-index: 2;
+    background-color: #fff;
 
     border-style: solid;
     border-width: 2px;
     border-radius: 0 0 15px 15px;
     border-color: #e0e0e0;
+
+    overflow-y: auto;
+    filter: blur(0);
 }
 
 #main-nav { margin: 0 12rem; }

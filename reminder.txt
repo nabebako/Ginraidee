@@ -1,13 +1,11 @@
 1. Impliment the database.
-    1.1. Find a way to send data from client side to server side using js.
-    1.2. Make it SQL injection proof: user.query('QUERY ($1)', [$1_val]).
-    1.3. Add a short discription to the database.
-    1.4. Is it possible to send additional data when there is a request for index.html.
-    1.5. Find a way to send json back from server to client.
+    1.1. Add a short discription to the database.
+    1.2. Is it possible to send additional data when there is a request for index.html.
 2. Create food categories.
 3. shopping-lsit.html.
-    3.1. Desing
+    3.1. Design
     3.2. Impliment
 4. Add a README?
 5. Change the way of decting file.
 6. Make the search results z-index higher than others.
+7. Fix blurry text on chrome.
