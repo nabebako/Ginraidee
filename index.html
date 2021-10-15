@@ -7,12 +7,9 @@
         
         <link rel = "stylesheet" href = "./css/main.css">
         <link rel = "stylesheet" href = "./css/index.css">
-
-        <script src = "./scripts/top-picks-menu.js"></script>
     </head>
     <body>
         <header class = "nonselect">
-            <!--Top navigation thingy-->
             <div class = "center-content h-center" style = "height: 70px;"> 
                 <!--Hamburger nav-->                
                 <div> 
@@ -24,7 +21,6 @@
                         <a class = "block nondeco-link" href = "">1</a>
                     </div>
                 </div>
-                <!--Main nav-->
                 <nav id = "main-nav" class = "center-content"> 
                     <a class = "nondeco-link nav-link" href = "">Breakfast</a>
                     <a class = "nondeco-link nav-link" href = "">Lunch</a>
@@ -32,7 +28,6 @@
                     <a class = "nondeco-link nav-link" href = "">Dessert</a>
                     <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                 </nav>
-                <!--Link to the shopping list page-->
                 <div> 
                     <a href = "./pages/shopping-list.html">
                         <img width = "40" height = "40" src="./resources/svg/shopping-list.svg">
@@ -98,29 +93,29 @@
                 <div class = "center-content nonselect">
                     <a id = "top-picks-menu-0-link" class = "selection-link overlay-container nondeco-link" href = "">
                         <img id = "top-picks-menu-0-img" class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                        <p id = "top-picks-menu-0-name" class = "overlay h-center">Test</p>
+                        <p id = "top-picks-menu-0-name" class = "overlay h-center"></p>
                     </a>
                     <a id = "top-picks-menu-1-link" class = "selection-link overlay-container nondeco-link" href = "">
                         <img id = "top-picks-menu-1-img" class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                        <p id = "top-picks-menu-1-name" class = "overlay h-center">Test</p>
+                        <p id = "top-picks-menu-1-name" class = "overlay h-center"></p>
                     </a>
                     <a id = "top-picks-menu-2-link" class = "selection-link overlay-container nondeco-link" href = "">
                         <img id = "top-picks-menu-2-img" class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                        <p id = "top-picks-menu-2-name" class = "overlay h-center">Test</p>
+                        <p id = "top-picks-menu-2-name" class = "overlay h-center"></p>
                     </a>
                 </div>
                 <div class = "center-content nonselect">
                     <a id = "top-picks-menu-3-link" class = "selection-link overlay-container nondeco-link" href = "">
                         <img id = "top-picks-menu-3-img" class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                        <p id = "top-picks-menu-3-name" class = "overlay h-center">Test</p>
+                        <p id = "top-picks-menu-3-name" class = "overlay h-center"></p>
                     </a>
                     <a id = "top-picks-menu-4-link" class = "selection-link overlay-container nondeco-link" href = "">
                         <img id = "top-picks-menu-4-img" class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                        <p id = "top-picks-menu-4-name" class = "overlay h-center">Test</p>
+                        <p id = "top-picks-menu-4-name" class = "overlay h-center"></p>
                     </a>
                     <a id = "top-picks-menu-5-link" class = "selection-link overlay-container nondeco-link" href = "">
                         <img id = "top-picks-menu-5-img" class = "food-img" src = "./resources/svg/img-placeholder.svg">
-                        <p id = "top-picks-menu-5-name" class = "overlay h-center">Test</p>
+                        <p id = "top-picks-menu-5-name" class = "overlay h-center"></p>
                     </a>
                 </div>
             </div>
@@ -278,12 +273,14 @@
             </div>
         </main>
         <footer>
-            <div>
-                
+            <div id = "back-to-top-bnt" class = "clickable nonselect" shown>
+                <img width = "36" height = "36" src = "./resources/svg/img-placeholder.svg">
             </div>
         </footer>
     </body>
-    <script src = "scripts/search.js"></script>
+    <script src = "./scripts/top-picks-menu.js"></script>
+    <script src = "./scripts/search.js"></script>
     <script src = "./scripts/form.js"></script>
     <script src = "./scripts/hamburger-nav.js"></script>
+    <script src = "./scripts/back-to-top.js"></script>
 </html>

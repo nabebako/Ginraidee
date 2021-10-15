@@ -19,17 +19,12 @@ ul { padding-left: 30px; }
 .button-text { margin-left: .8rem; }
 
 
-#main-wrapper { padding: 0 50px; }
-
 #menu_name {
     font-size: 4.6rem;
     font-weight: 700;
 }
 
-#menu-container {
-    width: inherit;
-    margin-bottom: 64px;
-}
+#menu-container { margin-bottom: 64px; }
 
 #menu-img { object-fit: cover; }
 
@@ -69,11 +64,13 @@ ul { padding-left: 30px; }
 #serving-mobile { padding: 2px 0; }
 #serving-minus, #serving-add { height: 24px; }
 
-
 /* For screen size of phone */
 @media screen and (min-width: 481px) {
 
-    #menu-container { width: fit-content; }
+    #menu-container {
+        width: auto;
+        width: fit-content;
+    }
     #serving_container { display: block; }
     #serving-option-container { justify-content: left; }
     #serving, #serving-minus, #serving-add { display: none; }
@@ -129,7 +126,6 @@ ul { padding-left: 30px; }
 /* Extra large screens, TV*/
 @media screen and (min-width: 1250px) {
 
-    #menu-container { width: 1200px; }
     #menu-img {
         width: 600px;
         height: 400px;

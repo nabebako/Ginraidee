@@ -1,35 +1,95 @@
 <!DOCTYPE html>
 <html lang = "en">
     <head>
-        <title>shopping-list</title>
+        <title>Shopping List</title>
         <link rel = "icon" href = "../resources/svg/logo-small.svg">
         <meta charset = "utf-8">
 
         <link rel = "stylesheet" href = "../css/main.css">
     </head>
     <body>
-        <header>
-            <div id = "nav-container" class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
-                <div>
-                    <a href = "../">
-                        <img id = "logo-main" src = "../resources/svg/logo-main-2.svg" height = "44"> <!-- logo -->
-                        <img id = "logo-small" src = "../resources/svg/logo-small.svg" height = "44">
-                    </a>
+        <header class = "nonselect">
+            <div id = "top-nav">
+                <div id = "nav-container" class = "center-content h-center" style = "height: 70px;">
+                    <div>
+                        <a href = "../">
+                            <img id = "logo-main" src = "../resources/svg/logo-main-2.svg" height = "44">
+                            <img id = "logo-small" src = "../resources/svg/logo-small.svg" height = "44">
+                        </a>
+                    </div>
+                    <nav id = "main-nav" class = "center-content">
+                        <a class = "nondeco-link nav-link" href = "">Breakfast</a>
+                        <a class = "nondeco-link nav-link" href = "">Lunch</a>
+                        <a class = "nondeco-link nav-link" href = "">Dinner</a>
+                        <a class = "nondeco-link nav-link" href = "">Dessert</a>
+                        <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
+                    </nav>
+                    <div id = "misc-container" class = "center-content">
+                        <img id = "hamburger-nav" class = "clickable hidden" src = "../resources/svg/hamburger--nav.svg" width = "24" height = "24">
+                        <img id = "show-search" class = "clickable" src = "../resources/svg/search.svg" width = "24" height = "24">
+                        <div id = "shopping-list">
+                            <a href = "../pages/shopping-list.html">
+                                <img class = "" width = "24" height = "24" src="../resources/svg/shopping-list.svg">
+                            </a>
+                            <!--Shopping list tag-->
+                            <div id = "" class = "hidden">
+                                <p>Shopping List</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <nav id = "main-nav" class = "center-content"> <!--Main nav-->
-                    <a class = "nondeco-link nav-link" href = "">Breakfast</a>
-                    <a class = "nondeco-link nav-link" href = "">Lunch</a>
-                    <a class = "nondeco-link nav-link" href = "">Dinner</a>
-                    <a class = "nondeco-link nav-link" href = "">Dessert</a>
-                    <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
-                </nav>
+            </div>
+            <div id = "search-field" class = "hidden h-center">
+                <input id = "search-query" type = "text" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                <div id = "search-result">
+                </div>
             </div>
         </header>
         <main>
-
+            <div id = "main-wrapper" class = "h-center" style = "height: 2000px;">
+                <div id = "shopping-list-wrapper">
+                    <!-- temporary frame work -->
+                    <div class = "menu-wrapper">
+                        <input class = "tickbox" type = "checkbox" value = "first" id = "first">
+                        <label for = "first" class = "">
+                            <div class = "menu-content-wrapper">
+                                <div class = "menu-main-content-wrapper">
+                                    <img width = "250" height = "125" src = "../resources/svg/img-placeholder.svg" style = "object-fit: cover;  flex-shrink: 0;">
+                                    <div>
+                                        <a class = "menu-name" href = "../index.html">Lorem ipsum</a>
+                                        <ul class = "ingredients-list">
+                                            <li><a href = "">Lorem ipsum<a></li>
+                                            <li><a href = "">Lorem ipsum<a></li>
+                                            <li><a href = "">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                            <li><a href = "#">Lorem ipsum<a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class = "discpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic nulla debitis consectetur placeat reiciendis vel quos dolorum possimus facilis? Accusamus fugiat consectetur nihil culpa commodi natus quod, aliquid est.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <p style = "position: sticky; top: 10px;">Sticky</p>
+            </div>
         </main>
         <footer>
-
+            <div id = "back-to-top-bnt" class = "clickable nonselect" shown>
+                <img width = "36" height = "36" src = "../resources/svg/img-placeholder.svg">
+            </div>
         </footer>
     </body>
+    <script src = "../scripts/back-to-top.js"></script>
 </html>
