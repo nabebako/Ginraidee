@@ -17,23 +17,23 @@ function search_init()
             const link = document.createElement('a');
             const text_wrapper = document.createElement('div');
             const name = document.createElement('p');
-            const discpt = document.createElement('p');
+            const desc = document.createElement('p');
             const img = document.createElement('img');
 
             link.classList.add('search-res-link');
             text_wrapper.classList.add('res-text-wrapper');
             name.classList.add('search-res-name');
-            discpt.classList.add('search-res-discpt');
+            desc.classList.add('search-res-desc');
             img.classList.add('search-res-img');
 
             name.appendChild(document.createTextNode(elem.name));
-            discpt.appendChild(document.createTextNode(elem.discription));
+            desc.appendChild(document.createTextNode(elem.discription));
 
             link.href = `${document.location.origin}/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`;
             img.src = `${document.location.origin}/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`;
 
             text_wrapper.appendChild(name);
-            text_wrapper.appendChild(discpt);
+            text_wrapper.appendChild(desc);
             link.appendChild(text_wrapper);
             link.appendChild(img);
             Search_res.appendChild(link);

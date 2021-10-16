@@ -306,43 +306,6 @@ input:checked + label{ border-color: #00A651 !important; }
     opacity: 1;
 }
 
-#shopping-list-wrapper {
-    width: 1200px;
-}
-.tickbox {
-    width: max-content;
-    height: max-content;
-    width: fit-content;
-    height: fit-content;
-}
-.menu-wrapper {
-    display: flex;
-    align-items: center;
-}
-.menu-content-wrapper {
-    margin-left: 2rem;
-}
-.menu-main-content-wrapper {
-    display: flex;
-}
-.menu-main-content-wrapper > * + * {
-    margin-left: 1rem;
-}
-.menu-name {
-    font-size: 1.6rem;
-    font-weight: 700;
-}
-.ingredients-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-
-    max-width: 100%;
-}
-.ingredients-list > li {
-    padding: 0 .5rem;
-}
-
 /* For screen size of phone */
 @media screen and (min-width: 481px) {
 

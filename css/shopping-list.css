@@ -1,0 +1,90 @@
+#main-wrapper {
+    width: 1200px;
+    display: flex;
+}
+#shopping-list-wrapper {
+    width: auto;
+}
+.menu-wrapper {
+    display: flex;
+    align-items: center;
+}
+.menu-content-wrapper {
+    margin: 0 1rem;
+}
+.menu-main-content-wrapper {
+    display: flex;
+}
+.menu-main-content-wrapper > * + * {
+    margin-left: 1rem;
+}
+.menu-img {
+    width: 250px;
+    height: 125px;
+    object-fit: cover;
+    
+    flex-shrink: 0;
+}
+.menu-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #00A651;
+    text-decoration: none;
+    transition-duration: 300ms;
+}
+.menu-name:hover { text-decoration: underline; }
+
+.ingredients-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.ingredients-list > li {
+    padding: 0 .5rem;
+}
+.ingredients-link {
+    color: #5c5c5c;
+    transition-duration: 300ms;
+    text-decoration: none;
+}
+.ingredients-link:hover { text-decoration: underline; }
+
+label {
+    position: relative;
+    padding: 10px 0;
+    margin-left: 1rem;
+    transition-duration: 300ms;
+}
+.desc {
+    margin-top: .4rem;
+}
+.sticky {
+    position: sticky;
+    top: 10px;
+
+    flex-shrink: 0;
+
+    width: 400px;
+    height: max-content;
+    height: fit-content;
+}
+label::after {
+    content: '';
+
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    width: 100%;
+    z-index: -1;
+
+    background-color: #00A651;
+    transition-duration: 300ms;
+}
+label:hover::after { height: 6px; }
+input:checked + label { color: #fff; }
+input:checked + label .menu-name { color: #000; }
+input:checked + label .ingredients-link { color: #fff; }
+
+input:checked + label::after { height: 100%; }
