@@ -7,13 +7,13 @@ function hamburger_nav_init()
         if(!hamburger_nav_is_open)
         {  
             hamburger_nav.src = hamburger_nav.src.replace(/(.*)\/.*$/, '$1/triangle--nav.svg');
-            document.getElementById('h-nav-cont').classList.remove('hidden');
+            document.getElementById('h-nav-cont').classList.remove('nondisplay');
             hamburger_nav_is_open = true;
         } 
         else 
         {
             hamburger_nav.src = hamburger_nav.src.replace(/(.*)\/.*$/, '$1/hamburger--nav.svg');
-            document.getElementById('h-nav-cont').classList.add('hidden');
+            document.getElementById('h-nav-cont').classList.add('nondisplay');
             hamburger_nav_is_open = false;
         }
     });

@@ -70,7 +70,7 @@ function search_init()
     {
         document.getElementById('show-search').addEventListener('click', () => 
         {
-            document.getElementById('search-field').classList.toggle('hidden');
+            document.getElementById('search-field').classList.toggle('nondisplay');
             document.getElementById('search-query').focus();
         });
     }
@@ -83,15 +83,15 @@ function search_init()
 
         Search_div.addEventListener('mouseleave', () => 
         {
-            if(document.activeElement !== SQ) { Search_res.classList.add('hidden'); }
+            if(document.activeElement !== SQ) { Search_res.classList.add('nondisplay'); }
             mouse_on = false;
         });
 
-        SQ.addEventListener('focus', () => { Search_res.classList.remove('hidden'); });
+        SQ.addEventListener('focus', () => { Search_res.classList.remove('nondisplay'); });
 
         SQ.addEventListener('blur', () =>
         {
-            if(!mouse_on) { Search_res.classList.add('hidden'); }
+            if(!mouse_on) { Search_res.classList.add('nondisplay'); }
         });
     }
 
