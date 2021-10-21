@@ -23,7 +23,7 @@ function get_shopping_list_init()
             const down_arrow = document.createElement('img');
 
             wrapper.classList.add('menu-wrapper');
-            label.classList.add('menu-label', 'nonselect', 'center-content');
+            label.classList.add('menu-label', 'center-content');
             content_wrapper.classList.add('menu-content-wrapper');
             main_content_wrapper.classList.add('menu-main-content-wrapper');
             img.classList.add('menu-img');

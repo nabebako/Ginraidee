@@ -1,12 +1,9 @@
 1. Impliment the database.
     1.1. Add a short discription to the database.
-    1.2. Is it possible to send additional data when there is a request for index.html.
 2. Create food categories.
 3. shopping-lsit.html.
     3.1. Design
-    3.2. Impliment 
+    3.2. Impliment
 4. Add a README?
 5. Change the way of decting file.
-6. Make the search results z-index higher than others.
-7. Fix blurry text on chrome.
-8. Check the get-shopping-list.js
+6. Check the get-shopping-list.js

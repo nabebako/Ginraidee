@@ -130,9 +130,11 @@ p {
 .inline { display: inline-block; }
 
 .cls-wrapper { fill: #fff; }
+.cls-changing-arrow { fill: #00A651; }
 .cls-green { fill: #00A651; }
 @media (prefers-color-scheme: dark) {
     .cls-wrapper { fill: #000; }
+    .cls-changing-arrow { fill: #000; }
 }
 
 #top-nav {
