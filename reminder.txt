@@ -7,3 +7,4 @@
 4. Add a README?
 5. Change the way of decting file.
 6. Check the get-shopping-list.js
+7. Add cookies
