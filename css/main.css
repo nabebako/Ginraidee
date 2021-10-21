@@ -19,8 +19,6 @@
     border-width: 0;
 }
 
-body { margin: 0; }
-
 img {
     display: block;
 
@@ -61,6 +59,8 @@ p {
     -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
+.no-mouse { cursor: not-allowed; }
+
 .backlink {
     color: #515151;
     transition-property: color;
@@ -91,10 +91,9 @@ p {
 
 .nondisplay { display: none !important; }
 .hidden {
-    visibility: hidden;
-    opacity: 0;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
-
 
 .block { display: block; }
 
@@ -129,6 +128,12 @@ p {
 }
 
 .inline { display: inline-block; }
+
+.cls-wrapper { fill: #fff; }
+.cls-green { fill: #00A651; }
+@media (prefers-color-scheme: dark) {
+    .cls-wrapper { fill: #000; }
+}
 
 #top-nav {
     border-bottom-style: solid;
@@ -172,7 +177,6 @@ p {
     border-radius: 50%;
     transition-duration: 240ms;
     transition-property: all;
-    
 }
 .checkbox:hover { border-color: #e0e0e0; }
 
@@ -189,19 +193,6 @@ input:checked + label{ border-color: #00A651 !important; }
     color: #fff;
     font-size: 1.2rem;
     font-weight: 500;
-}
-
-#shopping-list-icon::after {
-    content: "Shopping list";
-    position: absolute;
-    visibility: hidden;
-    color: #000;
-    background-color: #fff;
-    transition-delay: 100ms;
-    z-index: 3;
-}
-#shopping-list-icon:hover::after {
-    visibility: visible;
 }
 
 
@@ -230,6 +221,12 @@ input:checked + label{ border-color: #00A651 !important; }
 
 #search-field {
     background-color: #fff;
+}
+
+#top-picks-wrapper {
+    width: auto;
+    width: -moz-available;
+    margin-bottom: 6rem;
 }
 
 
@@ -272,43 +269,36 @@ input:checked + label{ border-color: #00A651 !important; }
     border-bottom-right-radius: inherit;
 }
 
-
 #pop-up--background {
     position: fixed;
+    display: block;
+
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
 
     background-color: #000;
+    visibility: visible;
     opacity: .3;
 
-    transition-duration: 600ms;
     z-index: 2;
+    transition-duration: 600ms;
 }
-#pop-up--background.hidden {
-    visibility: hidden;
-    opacity: 0;
-    display: block !important;
-}
-
 #pop-up--foreground {
     position: fixed;
+    display: block;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
     width: 800px; /*Change it later*/
     background-color: #fff;
-
-    transition-duration: 600ms;
+    visibility: visible;
     opacity: 1;
+
     z-index: 3;
-}
-#pop-up--foreground.hidden {
-    visibility: hidden;
-    opacity: 0;
-    display: block !important;
+    transition-duration: 600ms;
 }
 
 #window-close {
@@ -327,18 +317,19 @@ input:checked + label{ border-color: #00A651 !important; }
     position: fixed;
     display: block;
 
-    visibility: hidden;
-    opacity: 0;
-
     right: 2rem;
     bottom: 2rem;
 
+    opacity: .8;
+
     transition-duration: 200ms;
 }
-#back-to-top-bnt[shown = true] {
-    visibility: visible;
-    opacity: 1;
+
+#print-bnt {
+    background-color: #00A651;
+    padding: .5rem 1rem;
 }
+
 
 /* For screen size of phone */
 @media screen and (min-width: 481px) {

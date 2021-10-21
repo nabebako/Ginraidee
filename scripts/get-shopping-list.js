@@ -6,8 +6,9 @@ function get_shopping_list_init()
         res.map((elem) => 
         {
             const wrapper = document.createElement('div');
+
             const input = document.createElement('input');
-            const label = document.createElement('label');
+            const label = document.createElement('div');
             const content_wrapper = document.createElement('div');
             const main_content_wrapper = document.createElement('div');
             const img = document.createElement('img');
@@ -16,8 +17,13 @@ function get_shopping_list_init()
             const ingredients_list = document.createElement('ul');
             const desc = document.createElement('p');
 
+            const serving_wrapper = document.createElement('div');
+            const up_arrow = document.createElement('img');
+            const serving_input = document.createElement('input');
+            const down_arrow = document.createElement('img');
+
             wrapper.classList.add('menu-wrapper');
-            label.classList.add('nonselect');
+            label.classList.add('menu-label', 'nonselect', 'center-content');
             content_wrapper.classList.add('menu-content-wrapper');
             main_content_wrapper.classList.add('menu-main-content-wrapper');
             img.classList.add('menu-img');
@@ -28,6 +34,7 @@ function get_shopping_list_init()
             input.id = elem.name;
             input.type = 'checkbox';
             input.value = elem.name;
+            input.checked = true;
             label.setAttribute('for', input.id);
             img.src = elem.name; // chnage it later.
             item_name.href = elem.name; // Change it later.
@@ -45,6 +52,19 @@ function get_shopping_list_init()
                 link_wrapper.appendChild(ingredient_link);
                 ingredients_list.appendChild(link_wrapper);
             });
+
+
+            serving_input.classList.add('serving-input');
+            serving_input.type = 'number';
+            serving_input.value = '1'; // Chnage it later.
+            serving_input.min = '1';
+            serving_input.max = '20';
+            serving_input.placeholder = '1'; // Chnage it later.
+            serving_input.setAttribute('onchange', ' chnage_count(this, null)');
+
+            up_arrow.src = '../arrow-up.svg';
+            up_arrow.setAttribute('onclick', 'chnage_count(this.parentElement.children["1"], "add");');
+
 
             main_text_content_wrapper.appendChild(item_name);
             main_text_content_wrapper.appendChild(ingredients_list);

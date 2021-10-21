@@ -2,22 +2,22 @@ function form_init()
 {
     var form_ans = {};
 
-    const close_botton = document.getElementById('window-close');
+    const Close_Button = document.getElementById('window-close');
+    const Background = document.getElementById('pop-up--background');
+    const Foreground = document.getElementById('pop-up--foreground');
 
     document.getElementById('Questionnaire-pop-up').addEventListener('click', () => 
     {
         document.body.classList.add('stop--scroll');
-        document.getElementById('pop-up--background').classList.remove('hidden');
-        document.getElementById('pop-up--foreground').classList.remove('hidden');
-        console.log('Window Created');
+        Background.classList.remove('hidden');
+        Foreground.classList.remove('hidden');
     });
 
-      close_botton.addEventListener('click', () =>
+      Close_Button.addEventListener('click', () =>
       {
-        document.getElementById('pop-up--foreground').classList.add('hidden');
-        document.getElementById('pop-up--background').classList.add('hidden');
+        Background.classList.add('hidden');
+        Foreground.classList.add('hidden');
         document.body.classList.remove('stop--scroll');
-        console.log('Windown Destroyed');
     });
 
     document.getElementById('submit').addEventListener('click', () =>

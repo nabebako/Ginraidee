@@ -1,3 +1,8 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
 #main-wrapper {
     width: 1200px;
     display: flex;
@@ -49,9 +54,10 @@
 }
 .ingredients-link:hover { text-decoration: underline; }
 
-label {
+.menu-label {
     position: relative;
     padding: 10px 0;
+    padding-right: 1rem;
     margin-left: 1rem;
     transition-duration: 300ms;
 }
@@ -68,7 +74,7 @@ label {
     height: max-content;
     height: fit-content;
 }
-label::after {
+.menu-label::after {
     content: '';
 
     display: block;
@@ -82,9 +88,49 @@ label::after {
     background-color: #00A651;
     transition-duration: 300ms;
 }
-label:hover::after { height: 6px; }
-input:checked + label { color: #fff; }
-input:checked + label .menu-name { color: #000; }
-input:checked + label .ingredients-link { color: #fff; }
+.menu-tickbox:checked + .menu-label::after { height: 6px; }
 
-input:checked + label::after { height: 100%; }
+/*
+.menu-tickbox:checked + .menu-label { color: #fff; }
+.menu-tickbox:checked + .menu-label .menu-name { color: #000; }
+.menu-tickbox:checked + .menu-label .ingredients-link { color: #fff; }
+.menu-tickbox:checked + .menu-label::after { height: 100% !important; }
+*/
+
+.serving-input {
+    width: 2rem;
+    margin: .6rem auto;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(158, 158, 158);
+
+    font-size: 1rem;
+    text-align: center;
+    flex-shrink: 0;
+
+    outline: none;
+    transition-duration: 150ms;
+}
+.serving-input:focus {
+    border-color: #00A651;
+    box-shadow: 0 0 0 1px #00A651;
+}
+.serving-input-arrow {
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
+/* Phone */
+@media screen and (min-width: 481px) {
+    .serving-input { display: none; }
+    .serving-input-arrow { display: none; }
+    .serving-input-mobile { display: block; }
+}
+
+/* Laptop & Desktop */
+@media screen and (min-width: 1025px) {
+    .serving-input { display: block; }
+    .serving-input-arrow { display: block; }
+    .serving-input-mobile { display: none; }
+}

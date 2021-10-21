@@ -1,7 +1,7 @@
 function serving_counter_init()
 {
-    const Serving = document.getElementById('serving');
-    const Serving_mobile = document.getElementById('serving-mobile');
+    const Serving = document.getElementById('serving-input');
+    const Serving_mobile = document.getElementById('serving-input-mobile');
 
     function ingrident_count(serving_count) 
     {

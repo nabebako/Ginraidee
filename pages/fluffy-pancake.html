@@ -80,9 +80,9 @@
                                     <p id = "serving-title">Serving</p>
                                     <div id = "serving-option-container" class = "center-content">
                                         <img id = "serving-minus" class = "clickable" src = "../resources/svg/minus.svg">
-                                        <input id = "serving" type = "number" value = "1" min = "1" max = "99">
+                                        <input id = "serving-input" type = "number" value = "1" min = "1" max = "99">
                                         <img id = "serving-add" class = "clickable" src = "../resources/svg/add.svg">
-                                        <select id = "serving-mobile">
+                                        <select id = "serving-input-mobile">
                                             <option value = "1">1</option>
                                             <option value = "2">2</option>
                                             <option value = "3">3</option>
@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <!--Top picks section--> 
-                <div class = "h-center" style = "width: auto; margin-bottom: 6rem;">
+                <div id = "top-picks-wrapper" class = "h-center">
                     <p id = "selection-title" class = "h-1">Other dishes you might like</p>
                     <div class = "center-content nonselect">
                         <a id = "top-picks-menu-0-link" class = "selection-link overlay-container nondeco-link" href = "">
@@ -298,8 +298,12 @@
             </div>
         </main>
         <footer>
-            <div id = "back-to-top-bnt" class = "clickable nonselect" shown>
-                <img width = "36" height = "36" src = "../resources/svg/img-placeholder.svg">
+            <div id = "back-to-top-bnt" class = "clickable hidden">
+                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" height = "36" width = "36">
+                    <circle class="cls-wrapper" cx="18" cy="18" r="18"/>
+                    <rect class="cls-green" x="11.33" y="8.28" width="4.35" height="17.08" rx="2.18" transform="translate(11.16 38.26) rotate(-135)"/>
+                    <rect class="cls-green" x="20.32" y="8.18" width="4.35" height="17.08" rx="2.18" transform="translate(50.22 12.63) rotate(135)"/>
+                </svg>
             </div>
         </footer>
     </body>

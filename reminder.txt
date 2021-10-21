@@ -9,3 +9,4 @@
 5. Change the way of decting file.
 6. Make the search results z-index higher than others.
 7. Fix blurry text on chrome.
+8. Check the get-shopping-list.js

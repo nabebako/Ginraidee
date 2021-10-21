@@ -3,10 +3,7 @@ function search_init()
     const SQ = document.getElementById('search-query');
     const Search_res = document.getElementById('search-result');
 
-    function clear_res() 
-    {
-        while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }
-    }
+    function clear_res() { while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }}
 
     function update_result(res) 
     {
@@ -42,7 +39,6 @@ function search_init()
         });
     }
 
-
     async function handle_search(search_str, return_amount) 
     {
         if(search_str == '' || !/[^\s]/.test(search_str)) 
@@ -52,7 +48,7 @@ function search_init()
 
         XHR.addEventListener('load', (event) => { update_result(JSON.parse(XHR.response)); });
 
-        XHR.open('POST', `/search?s=${search_str.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+')}&n=${return_amount}`);
+        XHR.open('POST', `/search?s=${search_str.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+')}&n=${return_amount}`);
         XHR.send();
     }
 
@@ -63,6 +59,8 @@ function search_init()
             .split('&')
             .filter(elem => /query/.test(elem))[0]
             .split('=')[1]
+            .toLowerCase()
+            .replace(/[^0-9a-z\+]/g, '')
             .replace(/\+/g,' '), 20);
     }
 
@@ -109,7 +107,7 @@ function search_init()
                 console.log(`It's running`);
                 if(Date.now() - time_start >= 400 && !result_updated) 
                 {
-                    handle_search(SQ.value.replace(/[^0-9a-z ]/ig, ''), 6);
+                    handle_search(SQ.value.toLowerCase().replace(/[^0-9a-z ]/g, ''), 6);
                     clearInterval(input_timeout);
                     result_updated = true;
                 }
@@ -122,7 +120,7 @@ function search_init()
     {
         if(event.key === 'Enter' && SQ.value != '') 
         {
-            var search_str = SQ.value.replace(/[^0-9a-z ]/ig, '').replace(/\s/g, '+');
+            var search_str = SQ.value.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+');
             window.location.assign(document.URL.replace(/\/pages\/.*|index.html/, `/pages/search.html?query=${search_str}`));  // change it later.
         }
     });

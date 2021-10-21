@@ -7,6 +7,9 @@
 
         <link rel = "stylesheet" href = "../css/main.css">
         <link rel = "stylesheet" href = "../css/shopping-list.css">
+
+        <script src = "../scripts/shiopping-list-serving-counter.js"></script>
+        <script src = "../scripts/get-shopping-list.js"></script>
     </head>
     <body>
         <header class = "nonselect">
@@ -47,8 +50,8 @@
                 <div id = "shopping-list-wrapper">
                     <!-- temporary frame work -->
                     <div class = "menu-wrapper">
-                        <input type = "checkbox" value = "first" id = "first">
-                        <label for = "first" class ="nonselect">
+                        <input class = "menu-tickbox" type = "checkbox" value = "first" id = "first" checked = 'true'>
+                        <div class ="menu-label nonselect center-content">
                             <div class = "menu-content-wrapper">
                                 <div class = "menu-main-content-wrapper">
                                     <img class = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
@@ -69,15 +72,103 @@
                                 </div>
                                 <p class = "desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic nulla debitis consectetur placeat reiciendis vel quos dolorum possimus facilis? Accusamus fugiat consectetur nihil culpa commodi natus quod, aliquid est.</p>
                             </div>
-                        </label>
+                            <div>
+                                <img class = "serving-input-arrow nonselect clickable" src = "../resources/svg/arrow-up.svg" onclick = "chnage_count(this.parentElement.children['1'], 'add');">
+                                <input class = "serving-input" type = "text" value = "1" oninput = "chnage_count(this, 'user_input');">
+                                <img class = "serving-input-arrow nonselect clickable" src = "../resources/svg/arrow-down.svg" onclick = "chnage_count(this.parentElement.children['1'], 'minus');">
+                                <select class = "serving-input-mobile" onchange = "console.log(typeof this.value);">
+                                    <option value = "1">1</option>
+                                    <option value = "2">2</option>
+                                    <option value = "3">3</option>
+                                    <option value = "4">4</option>
+                                    <option value = "5">5</option>
+                                    <option value = "6">6</option>
+                                    <option value = "7">7</option>
+                                    <option value = "8">8</option>
+                                    <option value = "9">9</option>
+                                    <option value = "10">10</option>
+                                    <option value = "11">11</option>
+                                    <option value = "12">12</option>
+                                    <option value = "13">13</option>
+                                    <option value = "14">14</option>
+                                    <option value = "15">15</option>
+                                    <option value = "16">16</option>
+                                    <option value = "17">17</option>
+                                    <option value = "18">18</option>
+                                    <option value = "19">19</option>
+                                    <option value = "20">20</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "menu-wrapper">
+                        <input class = "menu-tickbox" type = "checkbox" value = "second" id = "second" checked = 'true'>
+                        <div class ="menu-label nonselect center-content">
+                            <div class = "menu-content-wrapper">
+                                <div class = "menu-main-content-wrapper">
+                                    <img class = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
+                                    <div>
+                                        <a class = "menu-name" href = "../index.html">Lorem ipsum</a>
+                                        <ul class = "ingredients-list">
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                            <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class = "desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic nulla debitis consectetur placeat reiciendis vel quos dolorum possimus facilis? Accusamus fugiat consectetur nihil culpa commodi natus quod, aliquid est.</p>
+                            </div>
+                            <div>
+                                <img class = "serving-input-arrow nonselect clickable" src = "../resources/svg/arrow-up.svg" onclick = "chnage_count(this.parentElement.children['1'], 'add');">
+                                <input class = "serving-input" type = "text" value = "1" oninput = "chnage_count(this, 'user_input');">
+                                <img class = "serving-input-arrow nonselect clickable" src = "../resources/svg/arrow-down.svg" onclick = "chnage_count(this.parentElement.children['1'], 'minus');">
+                                <select class = "serving-input-mobile" onchange = "console.log(typeof this.value);">
+                                    <option value = "1">1</option>
+                                    <option value = "2">2</option>
+                                    <option value = "3">3</option>
+                                    <option value = "4">4</option>
+                                    <option value = "5">5</option>
+                                    <option value = "6">6</option>
+                                    <option value = "7">7</option>
+                                    <option value = "8">8</option>
+                                    <option value = "9">9</option>
+                                    <option value = "10">10</option>
+                                    <option value = "11">11</option>
+                                    <option value = "12">12</option>
+                                    <option value = "13">13</option>
+                                    <option value = "14">14</option>
+                                    <option value = "15">15</option>
+                                    <option value = "16">16</option>
+                                    <option value = "17">17</option>
+                                    <option value = "18">18</option>
+                                    <option value = "19">19</option>
+                                    <option value = "20">20</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p class = "sticky">Sticky</p>
+                <div class = "sticky">
+                    <p>Sticky</p>
+                    <div>
+                        <button id = "print-bnt" class = "clickable" title = "Print" onclick = "x(this)">Print</button>
+                    </div>
+                </div>
             </div>
         </main>
         <footer>
-            <div id = "back-to-top-bnt" class = "clickable nonselect" shown>
-                <img width = "36" height = "36" src = "../resources/svg/img-placeholder.svg">
+            <div id = "back-to-top-bnt" class = "clickable hidden">
+                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" height = "36" width = "36">
+                    <circle class="cls-wrapper" cx="18" cy="18" r="18"/>
+                    <rect class="cls-green" x="11.33" y="8.28" width="4.35" height="17.08" rx="2.18" transform="translate(11.16 38.26) rotate(-135)"/>
+                    <rect class="cls-green" x="20.32" y="8.18" width="4.35" height="17.08" rx="2.18" transform="translate(50.22 12.63) rotate(135)"/>
+                </svg>
             </div>
         </footer>
     </body>
