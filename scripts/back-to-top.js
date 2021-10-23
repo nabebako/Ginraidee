@@ -11,8 +11,11 @@ function back_to_top_init()
 
     to_top_bnt.onclick = () => 
     {
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 }
 
