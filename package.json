@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/this-is-just-typical/GInraidee#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "jspdf": "^2.4.0",
     "pg": "^8.7.1"
   }
 }

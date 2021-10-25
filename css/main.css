@@ -132,7 +132,9 @@ p {
 .cls-wrapper { fill: #fff; }
 .cls-changing-arrow { fill: #00A651; }
 .cls-green { fill: #00A651; }
+
 @media (prefers-color-scheme: dark) {
+    
     .cls-wrapper { fill: #000; }
     .cls-changing-arrow { fill: #000; }
 }
@@ -145,14 +147,14 @@ p {
 
 #selection-title { margin-bottom: 1.6rem; }
 
+
 .selection-link {
     width: 100%;
 
     background-color: #000;
 }
 
-.food-img
-{
+.food-img {
     width: inherit;
     height: 300px;
 
@@ -182,7 +184,7 @@ p {
 }
 .checkbox:hover { border-color: #e0e0e0; }
 
-input:checked + label{ border-color: #00A651 !important; }
+#form > input:checked + label { border-color: #00A651 !important; }
 
 .checkbox-img {
     width: inherit;
@@ -221,9 +223,7 @@ input:checked + label{ border-color: #00A651 !important; }
 }
 #search-query:focus { border-color: #00A651; }
 
-#search-field {
-    background-color: #fff;
-}
+#search-field { background-color: #fff; }
 
 #top-picks-wrapper {
     width: auto;
@@ -258,18 +258,13 @@ input:checked + label{ border-color: #00A651 !important; }
 }
 
 .search-res-name {
-
     font-size: 1.6rem;
     font-weight: 700;
 }
 
-.search-res-link:last-child {
-    border-radius: 0 0 15px 15px;
-}
+.search-res-link:last-child { border-radius: 0 0 15px 15px; }
 
-.search-res-link:last-child > img {
-    border-bottom-right-radius: inherit;
-}
+.search-res-link:last-child > img { border-bottom-right-radius: inherit; }
 
 #pop-up--background {
     position: fixed;
@@ -345,21 +340,21 @@ input:checked + label{ border-color: #00A651 !important; }
 /* landscape tablets */
 @media screen and (min-width: 769px) {
 
-    .nav-link { padding: .2rem; }
-
     #main-nav { margin: 0 auto; }
     #nav-container { width: 90%; }
+
+    .nav-link { padding: .2rem; }
 }
 
 /* laptop/desktop */
 @media screen and (min-width: 1025px) {
 
-    .nav-link { padding: 1rem .5rem; }
-
     #logo-main { display: block; }
     #logo-small { display: none; }
     #hamburger-nav { display: none; }
     #misc-container { width: 180px; }
+
+    .nav-link { padding: 1rem .5rem; }
 }
 
 /* Extra large screens, TV*/

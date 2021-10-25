@@ -1,13 +1,27 @@
 function action_button_init()
 {
-    function append_to_list(input) 
+    function append_to_list(input)
     {
+
+        // Get user cookies.
         // Add input to the customer list
         console.log(input);
     }
 
-    document.getElementById('download').addEventListener('click', () => {}); // Dowload the page in print format
-    document.getElementById('print').addEventListener('click', () => {}); // Print the page
+    document.getElementById('download').addEventListener('click', () =>
+    {
+        var a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = '../reminder.txt';
+        a.download = '';
+        a.click();
+        a.remove();
+    }); // Dowload the page in print format
+
+    document.getElementById('print').addEventListener('click', () =>
+    {
+        window.print();
+    }); // Print the page
 }
 
 action_button_init();

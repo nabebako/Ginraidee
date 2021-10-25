@@ -51,4 +51,3 @@ function chnage_count(elem, type)
     elem.value = val.toString(10);
     return;
 }
-
