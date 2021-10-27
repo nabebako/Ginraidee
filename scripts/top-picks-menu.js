@@ -1,4 +1,4 @@
-function top_picks_menu_init()
+function TOP_PICKS_MENU_INIT()
 {
     const XHR = new XMLHttpRequest();
 
@@ -16,4 +16,4 @@ function top_picks_menu_init()
     XHR.send();
 }
 
-top_picks_menu_init();
+TOP_PICKS_MENU_INIT();

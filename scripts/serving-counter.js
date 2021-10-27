@@ -1,4 +1,4 @@
-function serving_counter_init()
+function SERVING_COUNTER_INIT()
 {
     const Serving = document.getElementById('serving-input');
     const Serving_mobile = document.getElementById('serving-input-mobile');
@@ -43,4 +43,4 @@ function serving_counter_init()
     });
 }
 
-serving_counter_init();
+SERVING_COUNTER_INIT();

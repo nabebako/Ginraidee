@@ -1,4 +1,4 @@
-function action_button_init()
+function ACTION_BUTTON_INIT()
 {
     function append_to_list(input)
     {
@@ -24,4 +24,4 @@ function action_button_init()
     }); // Print the page
 }
 
-action_button_init();
+ACTION_BUTTON_INIT();

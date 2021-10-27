@@ -56,3 +56,37 @@
     margin: 0 1rem;
     padding: 1rem;
 }
+
+.search-res-link {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    text-decoration: none;
+    color: #000;
+}
+
+.search-res-text-wrapper {
+    width: 18rem;
+    height: 9rem;
+
+    margin-left: .2rem;
+
+    background-color: #fff;
+}
+
+.search-res-img {
+    width: 12rem;
+    height: 9rem;
+    
+    object-fit: cover;
+}
+
+.search-res-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.search-res-link:last-child { border-radius: 0 0 15px 15px; }
+
+.search-res-link:last-child > img { border-bottom-right-radius: inherit; }

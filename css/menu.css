@@ -14,7 +14,6 @@ ul { padding-left: 30px; }
     transition-property: all;
     transition-duration: 200ms;
 }
-.action-button:hover { background-color: #FEBD40; }
 
 .button-text { margin-left: .8rem; }
 

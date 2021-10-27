@@ -10,6 +10,7 @@ input[type=number]::-webkit-outer-spin-button {
 #shopping-list-wrapper {
     width: auto;
 }
+
 .menu-wrapper {
     display: flex;
     align-items: center;
@@ -119,6 +120,16 @@ input[type=number]::-webkit-outer-spin-button {
 .serving-input-arrow {
     height: 2.2rem;
     width: 2.2rem;
+}
+
+.action-button {
+    width: max-content;
+    width: fit-content;
+    height: max-content;
+    height: fit-content;
+
+    background-color: #00A651;
+    padding: .5rem 1rem;
 }
 
 /* Phone */

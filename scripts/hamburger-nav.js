@@ -1,4 +1,4 @@
-function hamburger_nav_init()
+function HAMBURGER_NAV_INIT()
 {
     var hamburger_nav = document.getElementById('h-nav');
 
@@ -19,4 +19,4 @@ function hamburger_nav_init()
     });
 }
 
-hamburger_nav_init();
+HAMBURGER_NAV_INIT();

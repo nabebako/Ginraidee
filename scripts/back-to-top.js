@@ -1,4 +1,4 @@
-function back_to_top_init()
+function TO_TOP_INIT()
 {
     const to_top_bnt = document.getElementById('back-to-top-bnt');
 
@@ -19,4 +19,4 @@ function back_to_top_init()
     }
 }
 
-back_to_top_init();
+TO_TOP_INIT();

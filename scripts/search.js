@@ -1,4 +1,4 @@
-function search_init()
+function SEARCH_INIT()
 {
     const SQ = document.getElementById('search-query');
     const Search_res = document.getElementById('search-result');
@@ -97,7 +97,7 @@ function search_init()
         input_timeout,
         result_updated = true;
 
-    SQ.addEventListener('input', (event) => 
+    SQ.addEventListener('input', (event) =>
     {
         time_start = Date.now();
         if(result_updated) 
@@ -121,9 +121,10 @@ function search_init()
         if(event.key === 'Enter' && SQ.value != '') 
         {
             var search_str = SQ.value.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+');
-            window.location.assign(document.URL.replace(/\/pages\/.*|index.html/, `/pages/search.html?query=${search_str}`));  // change it later.
+            var rel = document.URL.replace(/\/pages\/.*|\/$/, `/pages/search.html?query=${search_str}`);
+            window.location.assign(rel);  // change it later.
         }
     });
 }
 
-search_init();
+SEARCH_INIT();

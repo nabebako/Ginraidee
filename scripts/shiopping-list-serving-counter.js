@@ -1,10 +1,3 @@
-function shiopping_list_serving_counter()
-{
-
-}
-
-shiopping_list_serving_counter();
-
 function chnage_count(elem, type)
 {
     elem.value = elem.value.replace(/[^0-9]/g , '')
@@ -15,6 +8,7 @@ function chnage_count(elem, type)
     }
 
     var val = parseInt(elem.value, 10);
+    
     if(type == '') { return; }
     if(type == 'user_input')
     {

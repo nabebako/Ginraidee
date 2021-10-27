@@ -1,4 +1,4 @@
-function form_init()
+function FORM_INIT()
 {
     var form_ans = {};
 
@@ -31,4 +31,4 @@ function form_init()
     });
 }
 
-form_init();
+FORM_INIT();
