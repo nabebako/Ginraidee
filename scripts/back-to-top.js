@@ -1,15 +1,15 @@
 function TO_TOP_INIT()
 {
-    const to_top_bnt = document.getElementById('back-to-top-bnt');
+    const TO_TOP_BUTTON = document.getElementById('back-to-top-bnt');
 
     window.onscroll = () =>
     {
         if(document.documentElement.scrollTop > 175 || document.body.scrollTop > 175)  
-        { to_top_bnt.classList.remove('hidden'); }
-        else { to_top_bnt.classList.add('hidden'); }
+        { TO_TOP_BUTTON.classList.remove('hidden'); }
+        else { TO_TOP_BUTTON.classList.add('hidden'); }
     }
 
-    to_top_bnt.onclick = () => 
+    TO_TOP_BUTTON.onclick = () => 
     {
         window.scrollTo({
             top: 0,

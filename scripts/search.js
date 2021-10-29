@@ -1,72 +1,60 @@
 function SEARCH_INIT()
 {
-    const SQ = document.getElementById('search-query');
-    const Search_res = document.getElementById('search-result');
+    const SEARCH_QUERY  = document.getElementById('search-query');
+    const SEARCH_RESULT = document.getElementById('search-result');
 
-    function clear_res() { while (Search_res.firstChild) { Search_res.removeChild(Search_res.lastChild); }}
+    function clearResult() { while (SEARCH_RESULT.firstChild) { SEARCH_RESULT.removeChild(SEARCH_RESULT.lastChild); }}
 
-    function update_result(res) 
+    function updateResult(res)
     {
-        clear_res();
+        clearResult();
 
-        res.map((elem) => 
+        res.map((elem) =>
         {
-            const link = document.createElement('a');
-            const text_wrapper = document.createElement('div');
-            const name = document.createElement('p');
-            const desc = document.createElement('p');
-            const img = document.createElement('img');
+            const Link          = document.createElement('a');
+            const TextWrapper   = document.createElement('div');
+            const Name          = document.createElement('p');
+            const Description   = document.createElement('p');
+            const Image         = document.createElement('img');
 
-            link.classList.add('search-res-link');
-            text_wrapper.classList.add('res-text-wrapper');
-            name.classList.add('search-res-name');
-            desc.classList.add('search-res-desc');
-            img.classList.add('search-res-img');
+            Link                .classList.add('search-res-link');
+            TextWrapper         .classList.add('res-text-wrapper');
+            Name                .classList.add('search-res-name');
+            Description         .classList.add('search-res-desc');
+            Image               .classList.add('search-res-img');
 
-            name.appendChild(document.createTextNode(elem.name));
-            desc.appendChild(document.createTextNode(elem.discription));
+            Link                .href = `${document.location.origin}/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`;
+            Image               .src = `${document.location.origin}/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`;
 
-            link.href = `${document.location.origin}/pages/${elem.name.toLowerCase().replace(/\s/g, '-')}.html`;
-            img.src = `${document.location.origin}/resources/menu/${elem.name.toLowerCase().replace(/\s/g, '-')}.jpg`;
-
-            text_wrapper.appendChild(name);
-            text_wrapper.appendChild(desc);
-            link.appendChild(text_wrapper);
-            link.appendChild(img);
-            Search_res.appendChild(link);
+            Name                .appendChild(document.createTextNode(elem.name));
+            Description         .appendChild(document.createTextNode(elem.discription));
+            TextWrapper         .appendChild(Name);
+            TextWrapper         .appendChild(Description);
+            Link                .appendChild(TextWrapper);
+            Link                .appendChild(Image);
+            SEARCH_RESULT       .appendChild(Link);
 
             console.log('Search results updated!');
         });
     }
 
-    async function handle_search(search_str, return_amount) 
+    async function handleSearch(searchStr, returnAmount) 
     {
-        if(search_str == '' || !/[^\s]/.test(search_str)) 
-        { clear_res();  return; }
+        if(searchStr == '' || !/[^\s]/.test(searchStr))
+        {
+            clearResult();
+            return;
+        }
         
         const XHR = new XMLHttpRequest();
-
-        XHR.addEventListener('load', (event) => { update_result(JSON.parse(XHR.response)); });
-
-        XHR.open('POST', `/search?s=${search_str.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+')}&n=${return_amount}`);
+        XHR.onload = () => { updateResult(JSON.parse(XHR.response)); };
+        XHR.open('POST', `/search?s=${searchStr.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+')}&n=${returnAmount}`);
         XHR.send();
-    }
-
-    if(/search.html/.test(document.URL))
-    {
-        handle_search(document.URL
-            .split('?')[1]
-            .split('&')
-            .filter(elem => /query/.test(elem))[0]
-            .split('=')[1]
-            .toLowerCase()
-            .replace(/[^0-9a-z\+]/g, '')
-            .replace(/\+/g,' '), 20);
     }
 
     if(/pages/.test(document.URL))
     {
-        document.getElementById('show-search').addEventListener('click', () => 
+        document.getElementById('show-search').addEventListener('click', () =>
         {
             document.getElementById('search-field').classList.toggle('nondisplay');
             document.getElementById('search-query').focus();
@@ -74,54 +62,52 @@ function SEARCH_INIT()
     }
     else
     {
-        var mouse_on = false;
-        const Search_div = document.getElementById('search-container');
+        const SEARCH_WRAPPER = document.getElementById('search-container');
+        var mouseOn = false;
 
-        Search_div.addEventListener('mouseenter', () => { mouse_on = true; });
-
-        Search_div.addEventListener('mouseleave', () => 
+        SEARCH_WRAPPER.addEventListener('mouseenter', () => { mouseOn = true; });
+        SEARCH_WRAPPER.addEventListener('mouseleave', () =>
         {
-            if(document.activeElement !== SQ) { Search_res.classList.add('nondisplay'); }
-            mouse_on = false;
+            if(document.activeElement !== SEARCH_QUERY) { SEARCH_RESULT.classList.add('nondisplay'); }
+            mouseOn = false;
         });
 
-        SQ.addEventListener('focus', () => { Search_res.classList.remove('nondisplay'); });
-
-        SQ.addEventListener('blur', () =>
+        SEARCH_QUERY.addEventListener('focus', () => { SEARCH_RESULT.classList.remove('nondisplay'); });
+        SEARCH_QUERY.addEventListener('blur', () =>
         {
-            if(!mouse_on) { Search_res.classList.add('nondisplay'); }
+            if(!mouseOn) { SEARCH_RESULT.classList.add('nondisplay'); }
         });
     }
 
-    let time_start, 
-        input_timeout,
-        result_updated = true;
+    let timeStart, 
+        inputTimeout,
+        resultUpdated = true;
 
-    SQ.addEventListener('input', (event) =>
+    SEARCH_QUERY.addEventListener('input', (event) =>
     {
-        time_start = Date.now();
-        if(result_updated) 
+        timeStart = Date.now();
+        if(resultUpdated)
         {
-            input_timeout = setInterval(() => 
+            inputTimeout = setInterval(() => 
             {
                 console.log(`It's running`);
-                if(Date.now() - time_start >= 400 && !result_updated) 
+                if(Date.now() - timeStart >= 400 && !resultUpdated) 
                 {
-                    handle_search(SQ.value.toLowerCase().replace(/[^0-9a-z ]/g, ''), 6);
-                    clearInterval(input_timeout);
-                    result_updated = true;
+                    handleSearch(SEARCH_QUERY.value.toLowerCase().replace(/[^0-9a-z ]/g, ''), 6);
+                    clearInterval(inputTimeout);
+                    resultUpdated = true;
                 }
             }, 100);
         }
-        result_updated = false;
+        resultUpdated = false;
     });
 
-    SQ.addEventListener('keypress', (event) => 
+    SEARCH_QUERY.addEventListener('keypress', (event) => 
     {
-        if(event.key === 'Enter' && SQ.value != '') 
+        if(event.key === 'Enter' && SEARCH_QUERY.value != '') 
         {
-            var search_str = SQ.value.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+');
-            var rel = document.URL.replace(/\/pages\/.*|\/$/, `/pages/search.html?query=${search_str}`);
+            var searchStr = SEARCH_QUERY.value.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+');
+            var rel = document.URL.replace(/\/pages\/.*|\/$/, `/pages/search.html?query=${searchStr}`);
             window.location.assign(rel);  // change it later.
         }
     });

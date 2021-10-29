@@ -1,11 +1,11 @@
 function SERVING_COUNTER_INIT()
 {
-    const Serving = document.getElementById('serving-input');
-    const Serving_mobile = document.getElementById('serving-input-mobile');
+    const SERVING_INPUT         = document.getElementById('serving-input');
+    const SERVING_INPUT_MOBILE  = document.getElementById('serving-input-mobile');
 
-    function ingrident_count(serving_count) 
+    function ingridentCount(servingCount) 
     {
-        console.log(serving_count);
+        console.log(servingCount);
 
         /* Chnage the value of ingridents*/
         document.getElementById('ingredients');
@@ -14,32 +14,32 @@ function SERVING_COUNTER_INIT()
 
     document.getElementById('serving-minus').addEventListener('click', () => 
     {
-        if(Serving.value > 1)
+        if(SERVING_INPUT.value > 1)
         {
-            Serving.value--;
-            ingrident_count(Serving.value);
+            SERVING_INPUT.value--;
+            ingridentCount(SERVING_INPUT.value);
         }
     });
 
     document.getElementById('serving-add').addEventListener('click', () => 
     {
-        if(Serving.value < 20)
+        if(SERVING_INPUT.value < 20)
         {
-            Serving.value++;
-            ingrident_count(Serving.value);
+            SERVING_INPUT.value++;
+            ingridentCount(SERVING_INPUT.value);
         }
     });
 
-    Serving.addEventListener('input', () => 
+    SERVING_INPUT.addEventListener('input', () => 
     {
-        if(Serving.value < 0) { Serving.value = 1; }
-        else if(Serving.value > 20) { Serving.value = 20; }
-        ingrident_count(Serving.value);
+        if(SERVING_INPUT.value < 0) { SERVING_INPUT.value = 1; }
+        else if(SERVING_INPUT.value > 20) { SERVING_INPUT.value = 20; }
+        ingridentCount(SERVING_INPUT.value);
     });
 
-    Serving_mobile.addEventListener('change', () => 
+    SERVING_INPUT_MOBILE.addEventListener('change', () => 
     {
-        ingrident_count(Serving_mobile.value);
+        ingridentCount(SERVING_INPUT_MOBILE.value);
     });
 }
 

@@ -1,107 +1,99 @@
 function GET_SHOPPINT_LIST_INIT()
 {
-    const Shopping_List = document.getElementById('shopping-list-wrapper');
+    const SHOPPING_LIST = document.getElementById('shopping-list-wrapper');
 
-    function display_cart(res)
+    function displayCart(res)
     {
         res.map((elem) =>
         {
-            const menu_wrapper = document.createElement('div');
+            const MenuWrapper                   = document.createElement('div');
+            const MenuTickBox                   = document.createElement('input');
+            const MenuLabel                     = document.createElement('div');
+            const MenuContentWrapper            = document.createElement('div');
+            const MainContentWrapper            = document.createElement('div');
+            const MenuImg                       = document.createElement('img');
+            const MenuNameIngredientsWrapper    = document.createElement('div');
+            const MenuName                      = document.createElement('a');
+            const IngredientsList               = document.createElement('ul');
+            const Description                   = document.createElement('p');
+            const ServingWrapper                = document.createElement('div');
+            const UpArrow                       = document.createElement('img');
+            const ServingInput                  = document.createElement('input');
+            const DownArrow                     = document.createElement('img');
+            const ServingInputMobile            = document.createElement('select');
 
-            const menu_tickBox = document.createElement('input');
-            const menu_label = document.createElement('div');
+            MenuTickBox                         .classList.add('menu-tickbox');
+            MenuWrapper                         .classList.add('menu-wrapper');
+            MenuLabel                           .classList.add('menu-label', 'center-content');
+            MenuContentWrapper                  .classList.add('menu-content-wrapper');
+            MainContentWrapper                  .classList.add('menu-main-content-wrapper');
+            MenuImg                             .classList.add('menu-img');
+            MenuName                            .classList.add('menu-name');
+            IngredientsList                     .classList.add('ingredients-list');
+            Description                         .classList.add('desc');
+            ServingInput                        .classList.add('serving-input');
+            UpArrow                             .classList.add('serving-input-arrow', 'nonselect', 'clickable');
+            DownArrow                           .classList.add('serving-input-arrow', 'nonselect', 'clickable');
+            ServingInputMobile                  .classList.add('serving-input-mobile');
 
-            const menu_content_wrapper = document.createElement('div');
-            const main_content_wrapper = document.createElement('div');
-            const menu_img = document.createElement('img');
-            const menu_name_ingredients_wrapper = document.createElement('div');
-            const menu_name = document.createElement('a');
-            const ingredients_list = document.createElement('ul');
-            const desc = document.createElement('p');
+            MenuTickBox                         .id = elem.name; // chnage it later.
+            MenuTickBox                         .type = 'checkbox';
+            MenuTickBox                         .value = elem.name; // chnage it later.
+            MenuTickBox                         .checked = true;
 
-            const serving_wrapper = document.createElement('div');
-            const up_arrow = document.createElement('img');
-            const serving_input = document.createElement('input');
-            const down_arrow = document.createElement('img');
+            MenuImg                             .src = elem.name; // chnage it later.
+            MenuName                            .href = elem.name; // Change it later.
 
-            const serving_input_mobile = document.createElement('select');
+            ServingInput                        .type = 'text';
+            ServingInput                        .value = '1'; // Chnage it later. Try to pull it from the user db.
+            ServingInput                        .setAttribute('onchange', "chnageCount(this, 'userInput')");
+            UpArrow                             .src = '../arrow-up.svg'; // Chnage the src to be absolute.
+            UpArrow                             .setAttribute('onclick', "chnageCount(this.parentElement.children['1'], 'add');");
+            DownArrow                           .src = '../arrow-down.svg'; // Chnage the src to be absolute.
+            DownArrow                           .setAttribute('onclick', "chnageCount(this.parentElement.children['1'], 'minus');");
 
-            menu_tickBox.classList.add('menu-tickbox');
-            menu_wrapper.classList.add('menu-wrapper');
-            menu_label.classList.add('menu-label', 'center-content');
-            menu_content_wrapper.classList.add('menu-content-wrapper');
-            main_content_wrapper.classList.add('menu-main-content-wrapper');
-            menu_img.classList.add('menu-img');
-            menu_name.classList.add('menu-name');
-            ingredients_list.classList.add('ingredients-list');
-            desc.classList.add('desc');
-
-            menu_tickBox.id = elem.name; // chnage it later.
-            menu_tickBox.type = 'checkbox';
-            menu_tickBox.value = elem.name; // chnage it later.
-            menu_tickBox.checked = true;
-            menu_img.src = elem.name; // chnage it later.
-            menu_name.href = elem.name; // Change it later.
-            menu_name.appendChild(document.createTextNode(elem.name)); // Chnage it later
-            desc.appendChild(document.createTextNode(elem.description)); // Change it later
 
             res.ingredients.map((ingredient) => // add a ingrdiesnts column in db
             {
-                const link_wrapper = document.createElement('li');
-                const ingredient_link = document.createElement('a');
+                const link_wrapper              = document.createElement('li');
+                const ingredient_link           = document.createElement('a');
 
-                ingredient_link.classList.add('ingredients-link');
+                ingredient_link                 .classList.add('ingredients-link');
 
-                ingredient_link.appendChild(document.createTextNode(ingredient));
-                link_wrapper.appendChild(ingredient_link);
-                ingredients_list.appendChild(link_wrapper);
+                ingredient_link                 .appendChild(document.createTextNode(ingredient));
+                link_wrapper                    .appendChild(ingredient_link);
+                IngredientsList                 .appendChild(link_wrapper);
             });
 
-            serving_input.classList.add('serving-input');
-            serving_input.type = 'text';
-            serving_input.value = '1'; // Chnage it later. Try to pull it from the user db.
-            serving_input.setAttribute('onchange', "chnage_count(this, 'user_input')");
-
-            up_arrow.classList.add('serving-input-arrow', 'nonselect', 'clickable');
-            up_arrow.src = '../arrow-up.svg'; // Chnage the src to be absolute.
-            up_arrow.setAttribute('onclick', "chnage_count(this.parentElement.children['1'], 'add');");
-
-            down_arrow.classList.add('serving-input-arrow', 'nonselect', 'clickable');
-            down_arrow.src = '../arrow-down.svg'; // Chnage the src to be absolute.
-            down_arrow.setAttribute('onclick', "chnage_count(this.parentElement.children['1'], 'minus');");
-
-            serving_input_mobile.classList.add('serving-input-mobile');
-            for(var i = 1; i <= 20; i++)
+            for(let i = 1; i <= 20; i++)
             {
-                const option = document.createElement('option');
-                option.value = `${i}`
-                option.appendChild(document.createTextNode(`${i}`));
-                serving_input_mobile.appendChild(option);
+                const option                    = document.createElement('option');
+                option                          .value = `${i}`
+                option                          .appendChild(document.createTextNode(`${i}`));
+                ServingInputMobile              .appendChild(option);
             }
 
-            menu_name_ingredients_wrapper.appendChild(menu_name);
-            menu_name_ingredients_wrapper.appendChild(ingredients_list);
-            main_content_wrapper.appendChild(menu_img);
-            main_content_wrapper.appendChild(menu_name_ingredients_wrapper);
-            menu_content_wrapper.appendChild(main_content_wrapper);
-            menu_content_wrapper.appendChild(desc);
-            menu_label.appendChild(menu_content_wrapper);
-            menu_wrapper.appendChild(menu_tickBox);
-            menu_wrapper.appendChild(menu_label);
-            Shopping_List.appendChild(menu_wrapper);
-
-            serving_wrapper.appendChild(up_arrow);
-            serving_wrapper.appendChild(serving_input);
-            serving_wrapper.appendChild(down_arrow);
-            serving_wrapper.appendChild(serving_input_mobile);
+            MenuName                            .appendChild(document.createTextNode(elem.name)); // Chnage it later
+            Description                         .appendChild(document.createTextNode(elem.description)); // Change it later
+            MenuNameIngredientsWrapper          .appendChild(MenuName);
+            MenuNameIngredientsWrapper          .appendChild(IngredientsList);
+            MainContentWrapper                  .appendChild(MenuImg);
+            MainContentWrapper                  .appendChild(MenuNameIngredientsWrapper);
+            MenuContentWrapper                  .appendChild(MainContentWrapper);
+            MenuContentWrapper                  .appendChild(Description);
+            MenuLabel                           .appendChild(MenuContentWrapper);
+            MenuWrapper                         .appendChild(MenuTickBox);
+            MenuWrapper                         .appendChild(MenuLabel);
+            ServingWrapper                      .appendChild(UpArrow);
+            ServingWrapper                      .appendChild(ServingInput);
+            ServingWrapper                      .appendChild(DownArrow);
+            ServingWrapper                      .appendChild(ServingInputMobile);
+            SHOPPING_LIST                       .appendChild(MenuWrapper);
         }); 
     }
 
     const XHR = new XMLHttpRequest();
-    XHR.onload = () =>
-    {
-        display_cart(XHR.response);
-    }
+    XHR.onload = () => { displayCart(JSON.parse(XHR.response)); };
     XHR.open('POST', '../getcart');
     XHR.send();
 }

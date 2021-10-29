@@ -1,6 +1,6 @@
 function ACTION_BUTTON_INIT()
 {
-    function append_to_list(input)
+    function appendToList(input)
     {
 
         // Get user cookies.

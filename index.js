@@ -2,14 +2,14 @@ const express = require('express');
 const { Client } = require('pg');
 const { jsPDF } = require("jspdf");
 
-async function search_database(search_str, res_quantity)
+async function searchDatabase(search_str, res_quantity)
 {
     const client = new Client({
-        host: 'localhost',
-        user: 'public_user',
-        port: 5432,
-        password: 'test',
-        database: 'main',
+        host:       'localhost',
+        user:       'public_user',
+        port:       5432,
+        password:   'test',
+        database:   'main',
     });
     
     var res = [];
@@ -50,6 +50,7 @@ app.post('/test', (req, res) =>
     res.send();
 });
 
+
 app.get('*', (req, res) =>
 {
    res.send('<script>window.location.assign(`${document.location.origin}/404.html`);</script>');
@@ -57,7 +58,7 @@ app.get('*', (req, res) =>
 
 app.post('/search', async (req, res) =>
 {
-    var result = await search_database(req.query.s, req.query.n);
+    var result = await searchDatabase(req.query.s, req.query.n);
 
     console.log(`Search argument: ${req.query.s}`);
     console.log('Result form query:');

@@ -2,17 +2,18 @@
     margin: 2rem auto;
 }
 
-
 .search-res-link {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 2rem;
 
     text-decoration: none;
     color: #000;
 }
 .search-res-name {
     width: max-content;
+    margin-bottom: .5rem;
 }
 .tag-list {
     width: 275px;
@@ -30,4 +31,15 @@
     
     object-fit: cover;
     flex-shrink: 0;
+}
+.raiting-and-desc-wrapper {
+    width: 100%;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    padding: 0 2rem;
+    margin-top: .8rem;
+}
+
+.raiting {
+    margin-bottom: .2rem;
 }

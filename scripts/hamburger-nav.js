@@ -1,20 +1,21 @@
 function HAMBURGER_NAV_INIT()
 {
-    var hamburger_nav = document.getElementById('h-nav');
+    const HAMBURGER_NAV = document.getElementById('h-nav');
+    let isOpen = false;
 
-    hamburger_nav.addEventListener('click', () => 
+    HAMBURGER_NAV.addEventListener('click', () => 
     {
-        if(!hamburger_nav_is_open)
+        if(!isOpen)
         {  
-            hamburger_nav.src = hamburger_nav.src.replace(/(.*)\/.*$/, '$1/triangle--nav.svg');
+            HAMBURGER_NAV.src = HAMBURGER_NAV.src.replace(/(.*)\/.*$/, '$1/triangle--nav.svg');
             document.getElementById('h-nav-cont').classList.remove('nondisplay');
-            hamburger_nav_is_open = true;
+            isOpen = true;
         } 
         else 
         {
-            hamburger_nav.src = hamburger_nav.src.replace(/(.*)\/.*$/, '$1/hamburger--nav.svg');
+            HAMBURGER_NAV.src = HAMBURGER_NAV.src.replace(/(.*)\/.*$/, '$1/hamburger--nav.svg');
             document.getElementById('h-nav-cont').classList.add('nondisplay');
-            hamburger_nav_is_open = false;
+            isOpen = false;
         }
     });
 }
