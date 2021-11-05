@@ -17,7 +17,7 @@ ul { padding-left: 30px; }
 
 .button-text { margin-left: .8rem; }
 
-
+#menu-headder-wrapper { margin-bottom: 1.2rem; }
 #menu_name {
     font-size: 4.6rem;
     font-weight: 700;
@@ -25,6 +25,10 @@ ul { padding-left: 30px; }
 
 #menu-container { margin-bottom: 64px; }
 
+#menu-img-wrapper {
+    width: inherit;
+    justify-content: left;
+}
 #menu-img { object-fit: cover; }
 
 #ingredient-serving-container { 
@@ -45,6 +49,7 @@ ul { padding-left: 30px; }
 #serving-minus, #serving-add {
     height: 24px;
     width: auto;
+    opacity: .8;
 }
 
 #serving-input, #serving-input-mobile {

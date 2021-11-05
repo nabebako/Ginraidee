@@ -127,7 +127,14 @@ p {
     align-items: center;
 }
 
+.space-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .inline { display: inline-block; }
+
 
 #top-nav {
     border-bottom-style: solid;
@@ -135,8 +142,9 @@ p {
     border-color: #e0e0e0;
 }
 
-#selection-title { margin-bottom: 1.6rem; }
+#nav-container { height: 70px; }
 
+#selection-title { margin-bottom: 1.6rem; }
 
 .selection-link {
     width: 100%;
@@ -174,7 +182,6 @@ p {
 }
 .checkbox:hover { border-color: #e0e0e0; }
 
-#form > input:checked + label { border-color: #00A651 !important; }
 
 .checkbox-img {
     width: inherit;
@@ -189,14 +196,18 @@ p {
     font-weight: 500;
 }
 
-
 #main-nav { margin: 0 12rem; }
 #misc-container { justify-content: space-evenly; }
 
-
 #main-wrapper { padding: 0 50px; }
 
-
+#greeting-background {
+    width: 100%;
+    max-height: 800px;
+    object-fit: cover;
+    position: relative;
+}
+#logo-wrapper { top: 45%; }
 #search-query {
     width: 30rem;
     padding: .3rem;
@@ -237,11 +248,25 @@ p {
     font-weight: 700;
 }
 
-
 #top-picks-wrapper {
     width: auto;
     width: -moz-available;
     margin-bottom: 6rem;
+}
+
+#questionnaire-promp-wrapper {
+    width: inherit;
+    height: 300px;
+    box-shadow: 0 0 1px #000 ;
+}
+#questionnaire-promp-title {
+    font-weight: 500;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+#Questionnaire-pop-up > p {
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 #pop-up--background {
@@ -282,11 +307,22 @@ p {
     top: 20px;
 }
 
-#form {
+.cls-cross {
+    fill:#231f20;
+    stroke:#231f20;
+    stroke-miterlimit:10;
+}
+
+#questionnaire-title { padding: 1.6rem; }
+
+.form {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+.form > input:checked + label { border-color: #00A651 !important; }
+
+#submit { margin-bottom: 1,2rem; }
 
 #back-to-top-bnt {
     position: fixed;

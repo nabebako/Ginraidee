@@ -14,7 +14,7 @@
     <body>
         <header class = "nonselect">
             <div id = "top-nav">
-                <div id = "nav-container" class = "center-content h-center" style = "height: 70px;">
+                <div id = "nav-container" class = "center-content h-center">
                     <div>
                         <a href = "../">
                             <img id = "logo-main" src = "../resources/svg/logo-main-2.svg" height = "44">
@@ -48,7 +48,7 @@
         <main>
             <div id = "main-wrapper" class = "h-center">
                 <div id = "menu-container">
-                    <div style = "margin-bottom: 1.2rem;">
+                    <div id = "menu-headder-wrapper">
                         <!-- Change name for each page -->
                         <p id = "menu_name">Lorem ipsum</p>
                         <p class = "nonselect">
@@ -58,7 +58,7 @@
                         </p>
                     </div>
                     <div id = "top-part-container">
-                        <div class = "center-content" style = "width: inherit; justify-content: left;">
+                        <div id = "menu-img-wrapper" class = "center-content">
                             <!-- change menu image src for each page -->
                             <img id = "menu-img" src = "../resources/svg/img-placeholder.svg">
                         </div>
@@ -83,12 +83,12 @@
                                 <div id = "serving_container" class = "center-content">
                                     <p id = "serving-title">Serving</p>
                                     <div id = "serving-option-container" class = "center-content">
-                                        <svg id = "serving-minus" class = "clickable" data-name = "serving-minus" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 36 36" style = "opacity: .8;">
+                                        <svg id = "serving-minus" class = "clickable" data-name = "serving-minus" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 36 36">
                                             <rect class="cls-green" x="14.64" y="13.96" width="4.35" height="17" rx="2.18" transform="translate(44.62 26.51) rotate(135)"/>
                                             <rect class="cls-green" x="14.54" y="4.96" width="4.35" height="17" rx="2.18" transform="translate(14.44 -7.87) rotate(45)"/>
                                         </svg>
                                         <input id = "serving-input" type = "number" value = "1" min = "1" max = "99">
-                                        <svg id = "serving-add" class = "clickable" data-name = "serving-add" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" style = "opacity: .8;">
+                                        <svg id = "serving-add" class = "clickable" data-name = "serving-add" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
                                             <rect class="cls-green" x="17.01" y="4.96" width="4.35" height="17" rx="2.18" transform="translate(-3.93 17.52) rotate(-45)"/>
                                             <rect class="cls-green" x="17.11" y="13.96" width="4.35" height="17" rx="2.18" transform="translate(17.01 52.04) rotate(-135)"/>
                                         </svg>
@@ -135,7 +135,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class = "h-center" style = "width: auto; margin-bottom: 6rem;">
+                <div id = "top-picks-wrapper" class = "h-center">
                     <p id = "selection-title" class = "h-1">Other dishes you might like</p>
                     <div class = "center-content nonselect">
                         <a id = "top-picks-menu-0-link" class = "selection-link overlay-container nondeco-link" href = "">
@@ -166,22 +166,27 @@
                         </a>
                     </div>
                 </div>
-                <div class = "h-center center-content" style = "width: 1000px; height: 300px; box-shadow: 0 0 1px #000 ;">
+                <div id = "questionnaire-promp-wrapper" class = "h-center center-content">
                     <div>
-                        <p class = "h-center" style = "font-weight: 500; font-size: 3rem; margin-bottom: 1rem;">Looking for another dish?</p>
+                        <p id = "questionnaire-promp-title" class = "h-center">Looking for another dish?</p>
                         <div id = "Questionnaire-pop-up" class = "h-center clickable round-button">
-                            <p class = "nonselect" style = "font-size: 1.2rem; font-weight: 300;">TELL US WHAT YOU LIKE</p>
+                            <p class = "nonselect">TELL US WHAT YOU LIKE</p>
                         </div>
                     </div>
                 </div>
                 <span id = "pop-up--background" class = "hidden"></span>
                 <div id = "pop-up--foreground" class = "hidden">
-                    <img id = "window-close" class = "clickable nonselect" src = "../resources/svg/cross.svg" style = "height: 24px; width: 24px;">
+                    <div id = "window-close">
+                        <svg class = "clickable nonselect" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 63.81 63.81" width = "24" height = "24">
+                            <rect class="cls-cross" x="-7.6" y="25.9" width="79" height="12" rx="1.86" transform="translate(-13.22 31.9) rotate(-45)"/>
+                            <rect class="cls-cross" x="-7.6" y="25.9" width="79" height="12" rx="1.86" transform="translate(31.9 77.02) rotate(-135)"/>
+                        </svg>
+                    </div>
                     <div class = "h-center">
-                        <p class = "h-1" style = "padding: 1.6rem;">What kind of food do you like?</p>
+                        <p id = "questionnaire-title" class = "h-1">What kind of food do you like?</p>
                     </div>
                     <div class = "nonselect">
-                        <div id = "form">
+                        <div id = "form" class = "form">
                             <input class = "nondisplay" type = "checkbox" id = "pork" name = "food--preference" value = "pork">
                             <label class = "checkbox overlay-container clickable" for = "pork">
                                 <img src = "../resources/pop-up/pork.png" class = "checkbox-img">
@@ -292,7 +297,7 @@
                                 </div>
                             </label>
                         </div>
-                        <div id = "submit" class = "round-button clickable h-center center-content" style = "margin-bottom: 1.2rem;">
+                        <div id = "submit" class = "round-button clickable h-center center-content">
                             <p>Submit</p>
                         </div>
                     </div>

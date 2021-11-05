@@ -47,8 +47,8 @@ function SEARCH_INIT()
         }
         
         const XHR = new XMLHttpRequest();
-        XHR.onload = () => { updateResult(JSON.parse(XHR.response)); };
-        XHR.open('POST', `/search?s=${searchStr.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+')}&n=${returnAmount}`);
+        XHR.onload = updateResult(JSON.parse(XHR.response));
+        XHR.open('POST', `/search?s=${searchStr.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+')}&n=${returnAmount}`, true);
         XHR.send();
     }
 

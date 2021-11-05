@@ -11,6 +11,22 @@
     padding: 12px;
 }
 
+#top-nav {
+    height: 70px;
+    border: none;
+}
+
+#h-nav {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+#h-nav-cont {
+    z-index: 1;
+    width: 160px;
+    margin-top: 20px;
+}
+
 #search-query {
     display: block;
 

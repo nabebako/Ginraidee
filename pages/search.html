@@ -11,9 +11,10 @@
     <body>
         <header class = "nonselect">
             <div id = "top-nav">
-                <div id = "nav-container" class = "center-content h-center" style = "height: 70px;"> <!--Top navigation thingy-->
+                <div id = "nav-container" class = "center-content h-center">
+                    <!--Top navigation thingy-->
                     <div>
-                        <a href = "../resources/menu/fluffy-pancake.jpg">
+                        <a href = "../">
                             <img id = "logo-main" src = "../resources/svg/logo-main-2.svg" height = "44"> <!-- logo -->
                             <img id = "logo-small" src = "../resources/svg/logo-small.svg" height = "44">
                         </a>
@@ -37,8 +38,6 @@
             </div>
             <div id = "search-field" class = "nondisplay h-center">
                 <input id = "search-query" type = "text" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
-                <div id = "search-result">
-                </div>
             </div>
         </header>
         <main>
@@ -73,7 +72,16 @@
                             </ul>
                         </div>
                         <div class = "raiting-and-desc-wrapper">
-                            <p class="raiting">0.0</p>
+                            <div class = "space-content">
+                                <p class="raiting">0.0</p>
+                                <div class = "cooking-skill-time-wrapper">
+                                    <p class="cooking-skill">Cooking Skill: Novice</p>
+                                    <div class="cooking-time-wrapper">
+                                        <p class = "cooking-time"></p>
+                                        <img class = "cooking-time-icon" src="">
+                                    </div>
+                                </div>
+                            </div>
                             <p class = "search-res-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                         <img class="search-res-img" src = "../resources/menu/fluffy-pancake.jpg">
@@ -176,7 +184,7 @@
                     </a>
                 </div>
                 <!--Top picks section--> 
-                <div class = "h-center" style = "width: auto; margin-bottom: 6rem;">
+                <div id = "top-picks-wrapper" class = "h-center">
                     <p id = "selection-title" class = "h-1">Other dishes you might like</p>
                     <div class = "center-content nonselect">
                         <a id = "top-picks-menu-0-link" class = "selection-link overlay-container nondeco-link" href = "">
@@ -219,6 +227,7 @@
             </div>
         </footer>
     </body>
+    <script src = "../scripts/search-page.js"></script>
     <script src = "../scripts/search.js"></script>
     <script src = "../scripts/form.js"></script>
     <script src = "../scripts/hamburger-nav.js"></script>
