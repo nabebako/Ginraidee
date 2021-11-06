@@ -13,23 +13,7 @@ const ClientInfo = {
     database:   'main',
 }
 
-async function searchDatabase(search_str, res_quantity)
-{
-    const client = new Client(ClientInfo);
-    
-    var res;
-    try
-    {
-        await client.connect();
-        res = await client.query('SELECT name FROM menu WHERE LOWER(name) LIKE ($1) ORDER BY rating DESC LIMIT ($2)', [`%${search_str}%`, res_quantity]);
-    }
-    catch (err) { console.log(`Failed to excute, ${err}.`); }
-    finally 
-    {
-        client.end();
-        return res.rows;
-    }
-}
+function logError(err) { fs.appendFile('./log.txt', `${err}. Time: ${Date()}\n`, 'utf-8', () => {}); }
 
 const app = express();
 
@@ -40,13 +24,14 @@ app.use(cookies());
 app.all('*', async (req, res, next) =>
 {
     // Setting Session ID
-    var { SessionID } = req.cookies;
-    console.log(SessionID);
+    const { SessionID } = req.cookies;
     if(SessionID === undefined || SessionID === '')
     {
-        SessionID = crypto.randomUUID();
-        fs.appendFile('./cookie.txt', `${SessionID}\n`, 'utf-8', () => {});
-        res.cookie('SessionID', SessionID, {
+        const client = new Client(ClientInfo);
+        const NewSessionID = crypto.randomUUID();
+
+        fs.appendFile('./cookie.txt', `${NewSessionID}\n`, 'utf-8', () => {});
+        res.cookie('SessionID', NewSessionID, {
             maxAge: 2 * 24 * 60 * 60 * 1000,
             httpOnly: true,
             path: '/',
@@ -54,74 +39,103 @@ app.all('*', async (req, res, next) =>
         });
         try
         {
-            const client = new Client(ClientInfo);
             await client.connect();
-            await client.query('INSERT INTO Session_Cookies VALUES(($1))', [SessionID]);
-            await client.end();
+            await client.query('INSERT INTO Session_Cookies VALUES(($1))', [NewSessionID]);
         }
-        catch(err)
-        {
-            console.log(err);
-        }
+        catch(err) { logError(err); }
+        finally { await client.end(); }
     }
     next();
 });
 
-
-app.get('/index.html', (req, res) => { res.send('<script>window.location.assign(`${document.location.origin}`);</script>'); });
-
+app.get('/index.html', async (req, res) => { res.send('<script>window.location.assign(`${document.location.origin}`);</script>'); });
 app.use(express.static('./'));
+app.get('*', async (req, res) =>  { res.status(404).sendFile('/Users/ken/Documents/GitHub/ginraidee/404.html'); });
 
-app.get('*', (req, res) =>  { res.status(404).sendFile('/Users/ken/Documents/GitHub/ginraidee/404.html'); });
-
-app.post('/search', async (req, res) => { res.send(await searchDatabase(req.query.s, req.query.n)); });
-
-app.post('/topmenus', async (req, res) =>
-{
-    const client = new Client(ClientInfo);
-
-    await client.connect();
-    var top_menu = await client.query('SELECT name, rating FROM menu ORDER BY rating DESC LIMIT 6');
-    res.send(top_menu.rows);
-    await client.end();
-});
-
-app.post('/login', async (req, res) =>
-{
-
-});
-
-app.post('/initform', async (req, res, next) =>
+app.post('/search', async (req, res) =>
 {
     const client = new Client(ClientInfo);
     try
     {
-    await client.connect();
-    const checkPoint = await client.query('SELECT Current_Stage, Response_Data FROM Form_Responses WHERE client = ($1) LIMIT 1', [req.cookies.SessionID]);
-    console.log(checkPoint);
-    if(checkPoint.rowCount === 0) { res.sendStatus(404); }
-    else
+        await client.connect();
+        res.send((await client.query('SELECT name FROM menu WHERE LOWER(name) LIKE ($1) ORDER BY rating DESC LIMIT ($2)', [`%${req.query.s}%`, req.query.n])).rows);
+    }
+    catch (err) { res.sendStatus(500); logError(err); }
+    finally { client.end(); }
+});
+
+app.post('/topmenus', async (req, res) =>
+{
+    const client = new Client(ClientInfo);
+    try
+    {
+        await client.connect();
+        res.send((await client.query('SELECT name, rating FROM menu ORDER BY rating DESC LIMIT 6')).rows);
+    }
+    catch(err) { res.sendStatus(500); logError(err); }
+    finally { await client.end(); }
+});
+
+app.post('/login', async (req, res) =>
+{
+    const client = new Client(ClientInfo);
+    const { SessionID } = req.cookies;
+    const { Email } = req.body; // Encrypt Email?
+    try
+    {
+        await client.connect();
+        const AccountID = await client.query('SELECT ID FROM User_Accounts WHERE Email = ($1) LIMIT 1', [Email]);
+        if(AccountID.rowCount === 0) { res.sendStatus(404); }
+        else
         {
-            res.send(checkPoint); // Find a way to package it.
+            await client.query('UPDATE User_Accounts SET Session_Cookie = ($1) WHERE ID = ($2) AND Email = ($3)', [SessionID, AccountID, Email]);
+            res.send(); // Figure out what to send
         }
     }
-    catch(err)
+    catch(err) { res.sendStatus(500); logError(err); }
+    finally{ await client.end(); }
+});
+
+app.post('signup', async (req, res) =>
+{
+    const client = new Client(ClientInfo);
+    const { SessionID } = req.cookies;
+    const { Email } = req.body;
+    try
     {
-        res.sendStatus(500);
-        fs.appendFile('./log.txt', `${err}. Time: ${Date()}\n`, 'utf-8', (err) => {});
+        await client.connect();
+        if((await client.query('SELECT * FROM User_Accounts WHERE Email = ($1)', [Email])).rowCount === 0)
+        {
+            const NewAccountID = `UA-${crypto.randomUUID()}`;
+            await client.query('INSERT INTO User_Accounts(ID, Email, Session_Cookie) VALUES(($1), ($2), ($3))', [NewAccountID, Email, SessionID]);
+            res.send(); // Figure out what to send
+        }
+        else { res.sendStatus(400); }
     }
-    finally
+    catch(err) { res.sendStatus(500); logError(err); }
+    finally { await client.end(); }
+});
+
+app.post('/initform', async (req, res) =>
+{
+    const client = new Client(ClientInfo);
+    try
     {
-        await client.end();
+        await client.connect();
+        const checkPoint = await client.query('SELECT Current_Stage, Response_Data FROM Form_Responses WHERE client = ($1) LIMIT 1', [req.cookies.SessionID]);
+        if(checkPoint.rowCount === 0) { res.sendStatus(404); }
+        else { res.send(checkPoint); }
     }
+    catch(err) { res.sendStatus(500); logError(err); }
+    finally { await client.end(); }
 });
 
 app.post('/submitform', async (req, res) =>
 {
     const { SessionID } = req.cookies;
+    const client = new Client(ClientInfo);
     try
     {
-        const client = new Client(ClientInfo);
         await client.connect();
         if((await client.query('SELECT * FROM Form_Responses WHERE Client = ($1)', [SessionID])).rowCount === 0)
         {
@@ -132,33 +146,24 @@ app.post('/submitform', async (req, res) =>
         {
             await client.query(`UPDATE Form_Responses SET ${req.body.CurrentForm}_Data = ($1) WHERE client = ($2)`, [req.body.Data, SessionID]);
         }
-        //await client.query('INSER INTO form($1) VALUES (($2))', []);
-        await client.end();
+        res.sendStatus(200);
     }
-    catch(err) {
-        res.sendStatus(500);
-        console.log(err);
-    }
-    //console.log(req.body);
-    res.sendStatus(200);
+    catch(err) { res.sendStatus(500); logError(err);}
+    finally { await client.end(); }
 });
 
-app.post('/error', (req, res) =>
+app.post('/error', async (req, res) =>
 {
-    const body = req.body;
-    Object.keys(body).map((key) =>
-    {
-        fs.appendFile('./log.txt', `${key}: ${body[key]}. Time: ${Date()}\n`, 'utf-8', (err) => {});
-    });
     res.sendStatus(200);
+    const { body } = req;
+    Object.keys(body).map((key) => { fs.appendFile('./log.txt', `${key}: ${body[key]}. Time: ${Date()}\n`, 'utf-8', () => {}); });
 });
 
-app.all('*', (req, res) =>
+app.all('*', async (req, res) =>
 {
-    fs.appendFile('./log.txt', `Path ${req.baseUrl} not found. Time: ${Date()}\n`, 'utf-8', (err) => {});
     res.sendStatus(404);
+    fs.appendFile('./log.txt', `Path ${req.baseUrl} not found. Time: ${Date()}\n`, 'utf-8', () => {});
 });
 
-var port = 3000;
-
+const port = 3000;
 app.listen(port, () =>{});
