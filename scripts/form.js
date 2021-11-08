@@ -25,7 +25,7 @@ function FORM_INIT()
                 });
             }
         }
-    }
+    };
     XHR.open('POST', '/initform', true);
     XHR.send();
 
@@ -93,7 +93,7 @@ function FORM_INIT()
             }
             SubmitForm.setRequestHeader('content-type', 'application/json');
             SubmitForm.send(JSON.stringify({'Data': formResponse, 'CurrentForm': CurrentForm.id.replace('-', '_')})); // Change null
-        }
+        };
         XHRCheckCookie.open('POST', '/', true);
         XHRCheckCookie.send();
     });

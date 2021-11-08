@@ -11,7 +11,7 @@ const ClientInfo = {
     port:       5432,
     password:   'test',
     database:   'main',
-}
+};
 
 function logError(err) { fs.appendFile('./log.txt', `${err}. Time: ${Date()}\n`, 'utf-8', () => {}); }
 
