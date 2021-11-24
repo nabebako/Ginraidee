@@ -11,6 +11,7 @@
         <script src = "../scripts/shiopping-list-serving-counter.js"></script>
         <script src = "../scripts/get-shopping-list.js"></script>
         <script src = "../scripts/action-button.js"></script>
+        <script src = "../scripts/general.js"></script>
     </head>
     <body>
         <header class = "nonselect">
@@ -126,9 +127,9 @@
                                 <p class = "desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic nulla debitis consectetur placeat reiciendis vel quos dolorum possimus facilis? Accusamus fugiat consectetur nihil culpa commodi natus quod, aliquid est.</p>
                             </div>
                             <div>
-                                <img class = "serving-input-arrow nonselect clickable" src = "../resources/svg/arrow-up.svg" onclick = "chnageCount(this.parentElement.children['1'], 'add');">
+                                <img class = "serving-input-arrow nonselect clickable" increase = "true" src = "../resources/svg/arrow-up.svg" onclick = "chnageCount(this.nextElementSibling, 'add');">
                                 <input class = "serving-input" type = "text" value = "1" oninput = "chnageCount(this, 'userInput');">
-                                <img class = "serving-input-arrow nonselect clickable" src = "../resources/svg/arrow-down.svg" onclick = "chnageCount(this.parentElement.children['1'], 'minus');">
+                                <img class = "serving-input-arrow nonselect clickable" decrease = "true" src = "../resources/svg/arrow-down.svg" onclick = "chnageCount(this.previousElementSibling, 'minus');">
                                 <select class = "serving-input-mobile" onchange = "console.log(typeof this.value);">
                                     <option value = "1">1</option>
                                     <option value = "2">2</option>

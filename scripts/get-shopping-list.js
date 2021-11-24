@@ -13,51 +13,6 @@ function updateCart() {
     SaveCart.open('POST', '/updateCart');
     SaveCart.send(JSON.stringify(cart));
 }
-function chnageCount(elem, type) {
-    elem.value = elem.value.replace(/[^0-9]/g, '');
-    if (elem.value == '') {
-        elem.value = '';
-        return;
-    }
-    var val = parseInt(elem.value, 10);
-    if (type == '') {
-        return;
-    }
-    if (type == 'userInput') {
-        if (val > 20) {
-            elem.value = val.toString(10).slice(0, -1);
-            // Alert the user.
-        }
-        if (val < 0) {
-            elem.value = '0';
-        }
-    }
-    if (type == 'add' && val < 20) {
-        val++;
-    }
-    if (type == 'minus' && val > 0) {
-        val--;
-    }
-    if (20 > val && val > 0) {
-        console.log('return to middle');
-        elem.parentElement.children['0'].classList.remove('no-mouse');
-        elem.parentElement.children['2'].classList.remove('no-mouse');
-        elem.parentElement.children['0'].classList.add('clickable');
-        elem.parentElement.children['2'].classList.add('clickable');
-    }
-    else if (val >= 20) {
-        console.log('reached the max');
-        elem.parentElement.children['0'].classList.remove('clickable');
-        elem.parentElement.children['0'].classList.add('no-mouse');
-    }
-    else if (val <= 0) {
-        console.log('reached the min');
-        elem.parentElement.children['2'].classList.remove('clickable');
-        elem.parentElement.children['2'].classList.add('no-mouse');
-    }
-    elem.value = val.toString(10);
-    return;
-}
 function removeCartItem(item) {
     while (item.childElementCount > 0) {
         item.firstChild.remove();
@@ -109,12 +64,15 @@ function getShoppingList() {
             MenuImg.src = elem.Name;
             MenuName.href = elem.Name;
             ServingInput.type = 'text';
+            ServingInput.name = '';
             ServingInput.value = String(elem.Serving);
-            ServingInput.onchange = () => chnageCount(this, 'userInput');
-            UpArrow.src = '../arrow-up.svg'; // Chnage the src to be absolute.
-            UpArrow.onclick = () => chnageCount(this.parentElement.children['1'], 'add');
-            DownArrow.src = '../arrow-down.svg'; // Chnage the src to be absolute.
-            DownArrow.onclick = () => chnageCount(this.parentElement.children['1'], 'minus');
+            ServingInput.setAttribute('onchange', 'chnageCount(this, \'userInput\');');
+            UpArrow.setAttribute('increase', 'true');
+            DownArrow.setAttribute('decrease', 'true');
+            UpArrow.src = '../resources/svg/arrow-up.svg'; // Chnage the src to be absolute.
+            DownArrow.src = '../resources/svg/arrow-up.svg'; // Chnage the src to be absolute.
+            UpArrow.setAttribute('onclick', 'chnageCount(this.nextElementSibling, \'add\');');
+            DownArrow.setAttribute('onclick', 'chnageCount(this.previousElementSibling, \'minus\');');
             RemoveButton.onclick = () => removeCartItem(MenuWrapper);
             elem.Ingredients.map((ingredient) => // add a ingrdiesnts column in db
              {
@@ -139,13 +97,14 @@ function getShoppingList() {
             MainContentWrapper.appendChild(MenuNameIngredientsWrapper);
             MenuContentWrapper.appendChild(MainContentWrapper);
             MenuContentWrapper.appendChild(Description);
-            MenuLabel.appendChild(MenuContentWrapper);
-            MenuWrapper.appendChild(MenuTickBox);
-            MenuWrapper.appendChild(MenuLabel);
             ServingWrapper.appendChild(UpArrow);
             ServingWrapper.appendChild(ServingInput);
             ServingWrapper.appendChild(DownArrow);
             ServingWrapper.appendChild(ServingInputMobile);
+            MenuLabel.appendChild(MenuContentWrapper);
+            MenuLabel.appendChild(ServingWrapper);
+            MenuWrapper.appendChild(MenuTickBox);
+            MenuWrapper.appendChild(MenuLabel);
             SHOPPING_LIST.appendChild(MenuWrapper);
         });
     }
@@ -173,5 +132,16 @@ function getShoppingList() {
     };
     XHR.open('POST', '/getcart');
     XHR.send();
+    displayCart([{
+            Name: "string",
+            Checked: false,
+            Serving: 1,
+            Ingredients: [{
+                    Name: "string",
+                    Amount: 0,
+                    Unit: 'grams'
+                }],
+            Description: "string"
+        }]);
 }
 getShoppingList();

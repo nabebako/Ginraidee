@@ -6,5 +6,8 @@
         "module": "CommonJS",
         "moduleResolution": "node",
         "esModuleInterop": false,
+        "rootDir": "Typescript",
+        "outDir": "scripts",
+        "strict": false
     }
 }

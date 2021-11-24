@@ -24,14 +24,14 @@ input[type=number]::-webkit-outer-spin-button {
     align-items: center;
 }
 .menu-content-wrapper {
+    width: 42rem;
+    height: 13rem;
     margin: 0 1rem;
 }
 .menu-main-content-wrapper {
     display: flex;
 }
-.menu-main-content-wrapper > * + * {
-    margin-left: 1rem;
-}
+.menu-main-content-wrapper > * + * { margin-left: 1rem; }
 .menu-img {
     width: 250px;
     height: 125px;
@@ -70,9 +70,8 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 1rem;
     transition-duration: 300ms;
 }
-.desc {
-    margin-top: .4rem;
-}
+.desc { margin-top: .4rem; }
+
 .sticky {
     position: sticky;
     top: 10px;
@@ -106,30 +105,6 @@ input[type=number]::-webkit-outer-spin-button {
 .menu-tickbox:checked + .menu-label::after { height: 100% !important; }
 */
 
-.serving-input {
-    width: 2rem;
-    margin: .6rem auto;
-
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(158, 158, 158);
-
-    font-size: 1rem;
-    text-align: center;
-    flex-shrink: 0;
-
-    outline: none;
-    transition-duration: 150ms;
-}
-.serving-input:focus {
-    border-color: #00A651;
-    box-shadow: 0 0 0 1px #00A651;
-}
-.serving-input-arrow {
-    height: 2.2rem;
-    width: 2.2rem;
-}
-
 .action-button {
     width: max-content;
     width: fit-content;
@@ -142,14 +117,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Phone */
 @media screen and (min-width: 481px) {
-    .serving-input { display: none; }
-    .serving-input-arrow { display: none; }
-    .serving-input-mobile { display: block; }
+
 }
 
 /* Laptop & Desktop */
 @media screen and (min-width: 1025px) {
-    .serving-input { display: block; }
-    .serving-input-arrow { display: block; }
-    .serving-input-mobile { display: none; }
+
 }

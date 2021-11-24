@@ -52,7 +52,7 @@ ul { padding-left: 30px; }
     opacity: .8;
 }
 
-#serving-input, #serving-input-mobile {
+#serving-input-mobile {
     border-style: solid;
     border-color: #9f9f9f;
     border-width: 1px;
@@ -65,11 +65,7 @@ ul { padding-left: 30px; }
     outline-color: #00A651;
     background-color: #fff;
 }
-#serving-input {
-    width: 2rem;
-    height: 1.625rem;
-    margin: 0 .75rem;
-}
+
 #serving-input-mobile {
     width: 2.6rem;
     padding: 2px 0;
@@ -84,7 +80,7 @@ ul { padding-left: 30px; }
     }
     #serving_container { display: block; }
     #serving-option-container { justify-content: left; }
-    #serving-input, #serving-minus, #serving-add { display: none; }
+    #serving-minus, #serving-add { display: none; }
     #serving-input-mobile { display: block; }
 }
 
@@ -123,7 +119,7 @@ ul { padding-left: 30px; }
         width: 500px;
         margin-left: 24px;
     }
-    #serving-input, #serving-minus, #serving-add { display: block; }
+    #serving-minus, #serving-add { display: block; }
     #serving-input-mobile { display: none; }
     #action-button-container {
         width: 500px;

@@ -345,6 +345,31 @@ p {
     transition-duration: 200ms;
 }
 
+.serving-input {
+    width: 2rem;
+    margin: .6rem auto;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(158, 158, 158);
+
+    font-size: 1rem;
+    text-align: center;
+    flex-shrink: 0;
+
+    outline: none;
+    transition-duration: 150ms;
+}
+.serving-input:focus {
+    border-color: #00A651;
+    box-shadow: 0 0 0 1px #00A651;
+}
+.serving-input-arrow {
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
+
 /* For screen size of phone */
 @media screen and (min-width: 481px) {
 
@@ -352,6 +377,10 @@ p {
     #logo-small { display: block; }
     #hamburger-nav { display: block; }
     #misc-container { width: 180px; }
+
+    .serving-input { display: none; }
+    .serving-input-arrow { display: none; }
+    .serving-input-mobile { display: block; }
 }
 
 /* landscape tablets */
@@ -372,6 +401,10 @@ p {
     #misc-container { width: 180px; }
 
     .nav-link { padding: 1rem .5rem; }
+
+    .serving-input { display: block; }
+    .serving-input-arrow { display: block; }
+    .serving-input-mobile { display: none; }
 }
 
 /* Extra large screens, TV*/

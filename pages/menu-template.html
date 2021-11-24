@@ -10,6 +10,7 @@
         <link rel = "stylesheet" href = "../css/menu.css">
 
         <script src = "../scripts/top-picks-menu.js"></script>
+        <script src = "../scripts/general.js"></script>
     </head>
     <body>
         <header class = "nonselect">
@@ -83,12 +84,12 @@
                                 <div id = "serving_container" class = "center-content">
                                     <p id = "serving-title">Serving</p>
                                     <div id = "serving-option-container" class = "center-content">
-                                        <svg id = "serving-minus" class = "clickable" data-name = "serving-minus" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 36 36">
+                                        <svg id = "serving-minus" class = "clickable" onclick = "chnageCount(this.nextElementSibling, 'minus');" decrease = "true" data-name = "serving-minus" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 36 36">
                                             <rect class="cls-green" x="14.64" y="13.96" width="4.35" height="17" rx="2.18" transform="translate(44.62 26.51) rotate(135)"/>
                                             <rect class="cls-green" x="14.54" y="4.96" width="4.35" height="17" rx="2.18" transform="translate(14.44 -7.87) rotate(45)"/>
                                         </svg>
-                                        <input id = "serving-input" type = "number" value = "1" min = "1" max = "99">
-                                        <svg id = "serving-add" class = "clickable" data-name = "serving-add" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+                                        <input class = "serving-input" type = "number" decrease = "true" value = "1" min = "1" max = "99">
+                                        <svg id = "serving-add" class = "clickable" onclick = "chnageCount(this.previousElementSibling, 'add');" increase = "true" data-name = "serving-add" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
                                             <rect class="cls-green" x="17.01" y="4.96" width="4.35" height="17" rx="2.18" transform="translate(-3.93 17.52) rotate(-45)"/>
                                             <rect class="cls-green" x="17.11" y="13.96" width="4.35" height="17" rx="2.18" transform="translate(17.01 52.04) rotate(-135)"/>
                                         </svg>
