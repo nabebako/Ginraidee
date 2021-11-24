@@ -5,6 +5,6 @@ function AUTO_LOGIN_INTI()
     {
 
     }
-    XHR.open('POST', '/login');
+    XHR.open('POST', '/autologin');
     XHR.send();
 }

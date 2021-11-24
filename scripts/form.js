@@ -6,28 +6,31 @@ function FORM_INIT()
     const FORM          = document.getElementById('form-wrapper');
     const SUBMIT        = document.getElementById('submit');
 
-    const XHR = new XMLHttpRequest();
-    XHR.onload = () =>
+    const InitForm = new XMLHttpRequest();
+    InitForm.onload = () =>
     {
-        if(XHR.status === 200)
+        if(InitForm.status === 200)
         {
-            // Init stage
+            const Response = JSON.parse(InitForm.response);
+            console.log(Response);
+            const ResponseKey = Object.values(Response);
+            Object.values(Response).map((formData) => { if(formData) { Object.keys(formData).map((key) =>
+                {
+                    try { document.getElementById(key).checked = formData[key]; }
+                    catch(err) { const Error = new XMLHttpRequest(); Error.open('POST', '/error', true); Error.send(err);
+                }});}});
+
+            var currentFormID;
+            for(let i = 0; i < ResponseKey.length; i++) { if(ResponseKey[i] === undefined || ResponseKey[i] === null) { currentFormID = `form-${i}`; break; } }
+
             FORM.firstElementChild.classList.add('nondisplay');
             FORM.firstElementChild.removeAttribute('current-form');
-            FORM.children[XHR.response.section].classList.remove('nondisplay');
-            FORM.children[XHR.response.section].setAttribute('current-form', 'true');
-    
-            for(let i = 1; i <= FORM.childElementCount; i++)
-            {
-                document.querySelectorAll(`form-${i} > input`).forEach((elem, i) =>
-                {
-                    elem.checked = Boolean(XHR.response.data[`form_${i}`][elem.value]);
-                });
-            }
+            document.getElementById(currentFormID).classList.remove('nondisplay');
+            document.getElementById(currentFormID).setAttribute('current-form', 'true');
         }
     };
-    XHR.open('POST', '/initform', true);
-    XHR.send();
+    InitForm.open('POST', '/initform', true);
+    InitForm.send();
 
     document.getElementById('Questionnaire-pop-up').addEventListener('click', () =>
     {
@@ -47,55 +50,41 @@ function FORM_INIT()
     {
         let formResponse = {};
         const CurrentForm = document.querySelector('div[current-form = true]');
-        
-        // Find the stage somehow
-
         CurrentForm.querySelectorAll('input').forEach((elem) => { formResponse[elem.value] = elem.checked; });
 
         console.log(formResponse);
 
-        const XHRCheckCookie = new XMLHttpRequest();
-        XHRCheckCookie.onload = () =>
+        const SubmitForm = new XMLHttpRequest();
+        SubmitForm.open('POST', '/submitform', true);
+        SubmitForm.onload = () =>
         {
-            const SubmitForm = new XMLHttpRequest();
-            SubmitForm.open('POST', '/submitform', true);
-            SubmitForm.onload = () =>
+            if(SubmitForm.status === 200)
             {
-                if(SubmitForm.status === 200)
+                const NextForm = document.querySelector('div[current-form = true] + div');
+                if(NextForm !== null && NextForm !== undefined)
                 {
-                    const NextForm = document.querySelector('div[current-form = true] + div');
-                    if(NextForm == null)
-                    {
-                        CurrentForm.removeAttribute('current-form');
-                        FORM.firstElementChild.setAttribute('current-form', 'true');
-        
-                        // say that form is complete
-        
-                        CurrentForm.classList.add('nondisplay');
-                        // Redirect user to the suggesiton page.
-                    }
-                    else
-                    {
-                        // Moving on to the next part of the form.
-                        CurrentForm.removeAttribute('current-form');
-                        NextForm.setAttribute('current-form', 'true');
-        
-                        // Find a way to transistion smoothly
-                        CurrentForm.classList.add('nondisplay');
-                        NextForm.classList.remove('nondisplay');
-                    }
+                    // Moving on to the next part of the form.
+                    CurrentForm.removeAttribute('current-form');
+                    NextForm.setAttribute('current-form', 'true');
+
+                    // Find a way to transistion smoothly
+                    CurrentForm.classList.add('nondisplay');
+                    NextForm.classList.remove('nondisplay');
                 }
                 else
                 {
-                    // Do not procede and tell user to try again
-                    window.alert('Someting went wrong. Please try again.');
+                    // say that form is complete
+                    // Redirect user to the suggesiton page.
                 }
             }
-            SubmitForm.setRequestHeader('content-type', 'application/json');
-            SubmitForm.send(JSON.stringify({'Data': formResponse, 'CurrentForm': CurrentForm.id.replace('-', '_')})); // Change null
+            else
+            {
+                // Tell the user to send request again
+                window.alert('Someting went wrong. Please try again.');
+            }
         };
-        XHRCheckCookie.open('POST', '/', true);
-        XHRCheckCookie.send();
+        SubmitForm.setRequestHeader('content-type', 'application/json');
+        SubmitForm.send(JSON.stringify({'Data': formResponse, 'CurrentForm': CurrentForm.id.replace('-', '_')})); // Change null
     });
 }
 

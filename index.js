@@ -10,7 +10,7 @@ const ClientInfo = {
     user:       'public_user',
     port:       5432,
     password:   'test',
-    database:   'main',
+    database:   'main'
 };
 
 function logError(err) { fs.appendFile('./log.txt', `${err}. Time: ${Date()}\n`, 'utf-8', () => {}); }
@@ -43,7 +43,7 @@ app.all('*', async (req, res, next) =>
             await client.query('INSERT INTO Session_Cookies VALUES(($1))', [NewSessionID]);
         }
         catch(err) { logError(err); }
-        finally { await client.end(); }
+        finally { client.end(); }
     }
     next();
 });
@@ -73,10 +73,10 @@ app.post('/topmenus', async (req, res) =>
         res.send((await client.query('SELECT name, rating FROM menu ORDER BY rating DESC LIMIT 6')).rows);
     }
     catch(err) { res.sendStatus(500); logError(err); }
-    finally { await client.end(); }
+    finally { client.end(); }
 });
 
-app.post('/login', async (req, res) =>
+app.post('/signin', async (req, res) =>
 {
     const client = new Client(ClientInfo);
     const { SessionID } = req.cookies;
@@ -93,7 +93,7 @@ app.post('/login', async (req, res) =>
         }
     }
     catch(err) { res.sendStatus(500); logError(err); }
-    finally{ await client.end(); }
+    finally{ client.end(); }
 });
 
 app.post('signup', async (req, res) =>
@@ -104,7 +104,7 @@ app.post('signup', async (req, res) =>
     try
     {
         await client.connect();
-        if((await client.query('SELECT * FROM User_Accounts WHERE Email = ($1)', [Email])).rowCount === 0)
+        if((await client.query('SELECT Email FROM User_Accounts WHERE Email = ($1)', [Email])).rowCount === 0)
         {
             const NewAccountID = `UA-${crypto.randomUUID()}`;
             await client.query('INSERT INTO User_Accounts(ID, Email, Session_Cookie) VALUES(($1), ($2), ($3))', [NewAccountID, Email, SessionID]);
@@ -113,7 +113,7 @@ app.post('signup', async (req, res) =>
         else { res.sendStatus(400); }
     }
     catch(err) { res.sendStatus(500); logError(err); }
-    finally { await client.end(); }
+    finally { client.end(); }
 });
 
 app.post('/initform', async (req, res) =>
@@ -127,7 +127,7 @@ app.post('/initform', async (req, res) =>
         else { res.send(checkPoint); }
     }
     catch(err) { res.sendStatus(500); logError(err); }
-    finally { await client.end(); }
+    finally { client.end(); }
 });
 
 app.post('/submitform', async (req, res) =>
@@ -137,7 +137,7 @@ app.post('/submitform', async (req, res) =>
     try
     {
         await client.connect();
-        if((await client.query('SELECT * FROM Form_Responses WHERE Client = ($1)', [SessionID])).rowCount === 0)
+        if((await client.query('SELECT Client FROM Form_Responses WHERE Client = ($1)', [SessionID])).rowCount === 0)
         {
             await client.query(`INSERT INTO Form_Responses(Client, Current_Form, ${req.body.CurrentForm}_Data) VALUES (($1), ($2), ($3))`, 
             [SessionID, req.body.CurrentForm, req.body.Data]);
@@ -149,7 +149,43 @@ app.post('/submitform', async (req, res) =>
         res.sendStatus(200);
     }
     catch(err) { res.sendStatus(500); logError(err);}
-    finally { await client.end(); }
+    finally { client.end(); }
+});
+
+app.post('/getcart', async (req, res) =>
+{
+    const { SessionID } = req.cookies;
+    const client = new Client(ClientInfo);
+    try
+    {
+        await client.connect();
+        const Cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows;
+        if(Cart.length === 0) { res.sendStatus(404); }
+        else { res.send(Cart[0]); }
+    }
+    catch(err) { res.sendStatus(500); logError(err);}
+    finally { client.end(); }
+});
+
+app.post('/updateCart', async (req, res) =>
+{
+    const { SessionID } = req.cookies;
+    const client = new Client(ClientInfo);
+    console.log(`Request body type: ${typeof req.body}`);
+    console.log(`Request body contents: ${req.body}`);
+    try
+    {
+        await client.connect();
+        await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2)', [req.body, SessionID]);
+        res.sendStatus(200);
+    }
+    catch(err) { res.sendStatus(500); logError(err);}
+    finally { client.end(); }
+});
+
+app.post('/removecartitem', async (req, res) =>
+{
+    
 });
 
 app.post('/error', async (req, res) =>

@@ -3,7 +3,6 @@ function TOP_PICKS_MENU_INIT()
     const XHR = new XMLHttpRequest();
     XHR.onload = () => 
     {
-        console.log(XHR.response);
         var res = JSON.parse(XHR.response);
         res.map((elem, i) =>
         {

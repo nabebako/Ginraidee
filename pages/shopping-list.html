@@ -10,6 +10,7 @@
 
         <script src = "../scripts/shiopping-list-serving-counter.js"></script>
         <script src = "../scripts/get-shopping-list.js"></script>
+        <script src = "../scripts/action-button.js"></script>
     </head>
     <body>
         <header class = "nonselect">
@@ -156,9 +157,10 @@
                 </div>
                 <div class = "sticky">
                     <div>
-                        <div id = "print-bnt" class = "action-button clickable nonselect" title = "Print" onclick = "x(this)">Print</div>
+                        <div id = "print-bnt" class = "action-button clickable nonselect" title = "Print" onclick = "printDish()">Print</div>
                     </div>
-                    <div id = "select-all" class = "action-button clickable nonselect">Select All</div>
+                    <div id = "select-all" class = "action-button clickable nonselect" onclick = "selectAll()">Select All</div>
+                    <div id = "deselect-all" class = "action-button clickable nonselect" onclick = "deselectAll()">Deselect All</div>
                 </div>
             </div>
         </main>
