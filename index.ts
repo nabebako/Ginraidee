@@ -49,7 +49,7 @@ app.all('*', async (req, res, next) =>
 });
 
 app.get('/index.html', async (req, res) => { res.send('<script>window.location.assign(`${document.location.origin}`);</script>'); });
-app.use(express.static('./'));
+app.use(express.static('../'));
 app.get('*', async (req, res) =>  { res.status(404).sendFile('/Users/ken/Documents/GitHub/ginraidee/404.html'); });
 
 app.post('/search', async (req, res) =>
@@ -122,7 +122,7 @@ app.post('/initform', async (req, res) =>
     try
     {
         await client.connect();
-        const checkPoint = await client.query('SELECT Current_Stage, Response_Data FROM Form_Responses WHERE client = ($1) LIMIT 1', [req.cookies.SessionID]);
+        const checkPoint = await client.query('SELECT Current_Form, Response_Data FROM Form_Responses WHERE client = ($1) LIMIT 1', [req.cookies.SessionID]);
         if(checkPoint.rowCount === 0) { res.sendStatus(404); }
         else { res.send(checkPoint); }
     }
@@ -176,10 +176,32 @@ app.post('/updateCart', async (req, res) =>
     try
     {
         await client.connect();
-        await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2)', [req.body, SessionID]);
+        await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2);', [req.body, SessionID]);
         res.sendStatus(200);
     }
     catch(err) { res.sendStatus(500); logError(err);}
+    finally { client.end(); }
+});
+
+app.post('/addcartitem', async (req, res) =>
+{
+    const { SessionID } = req.cookies;
+    const { ItemName } = req.body;
+    const client = new Client(ClientInfo);
+    try
+    {
+        await client.connect();
+        const Item = (await client.query('SELECT * FROM Menu WHERE Name = ($1) LIMIT 1;', [ItemName])).rows[0];
+        let UserCart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1;', [SessionID])).rows[0]['cart_items'];
+        if(UserCart && Item)
+        {
+            UserCart[ItemName] = Item;
+            await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2)', [UserCart, SessionID]);
+            res.sendStatus(200);
+        }
+        else { res.sendStatus(404); }
+    }
+    catch(err) { res.sendStatus(500); logError(err); }
     finally { client.end(); }
 });
 

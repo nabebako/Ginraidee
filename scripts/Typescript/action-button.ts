@@ -1,15 +1,16 @@
-function appendToList(dish: String)
+function addToCart(dish: string)
 {
-        const XHR = new XMLHttpRequest();
-        XHR.onload = () =>
+    const AddItem = new XMLHttpRequest();
+    AddItem.onload = () =>
+    {
+       if(AddItem.status !== 200)
         {
-            // Tell user that the thing been added to cart
+            window.alert('Somethng went wrong. Try again.');
         }
-        XHR.open('POST', '');
-        XHR.send();
-        // Get user cookies.
-        // Add input to the customer list
-        console.log(dish);
+    }
+    AddItem.open('POST', '/addcartitem');
+    AddItem.setRequestHeader('content-type', 'application/json');
+    AddItem.send(JSON.stringify({'ItemName' : dish }));
 }
 
 function selectAll()
