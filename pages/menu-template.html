@@ -11,6 +11,7 @@
 
         <script src = "../scripts/top-picks-menu.js"></script>
         <script src = "../scripts/general.js"></script>
+        <script src = "../scripts/form.js"></script>
     </head>
     <body>
         <header class = "nonselect">
@@ -170,14 +171,14 @@
                 <div id = "questionnaire-promp-wrapper" class = "h-center center-content">
                     <div>
                         <p id = "questionnaire-promp-title" class = "h-center">Looking for another dish?</p>
-                        <div id = "Questionnaire-pop-up" class = "h-center clickable round-button">
+                        <div id = "Questionnaire-pop-up" class = "h-center clickable round-button" onclick = "showForm();">
                             <p class = "nonselect">TELL US WHAT YOU LIKE</p>
                         </div>
                     </div>
                 </div>
                 <span id = "pop-up--background" class = "hidden"></span>
                 <div id = "pop-up--foreground" class = "hidden">
-                    <div id = "window-close">
+                    <div id = "window-close" onclick = "hideForm();">
                         <svg class = "clickable nonselect" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 63.81 63.81" width = "24" height = "24">
                             <rect class="cls-cross" x="-7.6" y="25.9" width="79" height="12" rx="1.86" transform="translate(-13.22 31.9) rotate(-45)"/>
                             <rect class="cls-cross" x="-7.6" y="25.9" width="79" height="12" rx="1.86" transform="translate(31.9 77.02) rotate(-135)"/>
@@ -298,7 +299,7 @@
                                 </div>
                             </label>
                         </div>
-                        <div id = "submit" class = "round-button clickable h-center center-content">
+                        <div id = "submit" class = "round-button clickable h-center center-content" onclick = "submitForm();">
                             <p>Submit</p>
                         </div>
                     </div>
@@ -318,6 +319,5 @@
     <script src = "../scripts/serving-counter.js"></script>
     <script src = "../scripts/action-button.js"></script>
     <script src = "../scripts/search.js"></script>
-    <script src = "../scripts/form.js"></script>
     <script src = "../scripts//back-to-top.js"></script>
 </html>

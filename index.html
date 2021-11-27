@@ -7,6 +7,8 @@
         
         <link rel = "stylesheet" href = "./css/main.css">
         <link rel = "stylesheet" href = "./css/index.css">
+
+        <script src = "/scripts/form.js"></script>
     </head>
     <body>
         <header class = "nonselect">
@@ -120,14 +122,14 @@
                 <div id = "questionnaire-promp-wrapper" class = "h-center center-content"> 
                     <div> 
                         <p id = "questionnaire-promp-title" class = "h-center">Not sure what to have?</p>
-                        <div id = "Questionnaire-pop-up" class = "h-center clickable round-button">
+                        <div id = "Questionnaire-pop-up" class = "h-center clickable round-button" onclick = "showForm();">
                             <p class = "nonselect">TELL US WHAT YOU LIKE</p>
                         </div>
                     </div>
                 </div>
                 <span id = "pop-up--background" class = "hidden"></span>
                 <div id = "pop-up--foreground" class = "hidden">
-                    <img id = "window-close" class = "clickable nonselect" src = "./resources/svg/cross.svg" width="24" height="24">
+                    <img id = "window-close" class = "clickable nonselect" onclick = "hideForm();" src = "./resources/svg/cross.svg" width="24" height="24">
                     <div class = "h-center">  
                         <!--Picture on the right with text on top-->
                         <p id = "questionnaire-title" class = "h-1">What kind of food do you like?</p>
@@ -253,7 +255,7 @@
                             </div>
                             <!-- Waiting for more desing -->
                         </div>
-                        <div id = "submit" class = "round-button clickable h-center center-content">
+                        <div id = "submit" class = "round-button clickable h-center center-content" onclick = "submitForm();">
                             <p>Submit</p>
                         </div>
                     </div>
@@ -293,7 +295,6 @@
     </body>
     <script src = "./scripts/top-picks-menu.js"></script>
     <script src = "./scripts/search.js"></script>
-    <script src = "./scripts/form.js"></script>
     <script src = "./scripts/hamburger-nav.js"></script>
     <script src = "./scripts/back-to-top.js"></script>
 </html>

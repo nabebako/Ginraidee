@@ -15,7 +15,7 @@ function TOP_PICKS_MENU_INIT()
         //WeeklyPicks[1]
         //WeeklyPicks[2]
     };
-    XHR.open('POST', '/topmenus', true);
+    XHR.open('POST', '/topmenus');
     XHR.send();
 }
 

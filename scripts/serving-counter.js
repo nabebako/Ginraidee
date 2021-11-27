@@ -1,3 +1,5 @@
+// NOT IN USE //
+
 function SERVING_COUNTER_INIT()
 {
     const SERVING_INPUT         = document.getElementById('serving-input');

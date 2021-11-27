@@ -145,3 +145,4 @@ function getShoppingList() {
         }]);
 }
 getShoppingList();
+const test = 1;
