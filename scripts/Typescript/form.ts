@@ -83,7 +83,7 @@ function submitForm()
     SubmitForm.send(JSON.stringify({'Data': formResponse, 'CurrentForm': CurrentForm.id.replace('-', '_')})); // Change null
 }
 
-document.addEventListener('load', () => initForm());
+window.addEventListener('load', () => initForm());
 
 
 /*

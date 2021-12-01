@@ -1,4 +1,20 @@
-function loadPage(res)
+function searchPageInit()
+{
+    let searchStr = document.URL
+        .split('?')[1]
+        .split('&')
+        .filter(elem => /query/.test(elem))[0]
+        .split('=')[1]
+        .toLowerCase()
+        .replace(/[^0-9a-z\+]/g, '');
+
+    const Search = new XMLHttpRequest();
+    Search.onload = () => loadPage(JSON.parse(Search.response));
+    Search.open('POST', `/search?s=${searchStr}&n=40`, true);
+    Search.send();
+}
+
+function loadPage(res: menuObject[])
 {
     const SEARCH_RESULT = document.getElementById('search-result');
     try
@@ -54,9 +70,9 @@ function loadPage(res)
                 Tag_wrapper             .appendChild(document.createTextNode(tag));
                 Tags                    .appendChild(Tag_wrapper);
             });
-
+            
             Name                        .appendChild(document.createTextNode(elem.name));
-            Raiting                     .appendChild(document.createTextNode(elem.raiting));
+            Raiting                     .appendChild(document.createTextNode(elem.raiting.toString()));
             CookingSkill                .appendChild(document.createTextNode(elem.skill));
             CookingTime                 .appendChild(document.createTextNode(elem.cooking_time));
             Description                 .appendChild(document.createTextNode(elem.description));
@@ -91,18 +107,4 @@ function loadPage(res)
     }
 }
 
-document.addEventListener('load', () =>
-{
-    var searchStr = document.URL
-        .split('?')[1]
-        .split('&')
-        .filter(elem => /query/.test(elem))[0]
-        .split('=')[1]
-        .toLowerCase()
-        .replace(/[^0-9a-z\+]/g, '');
-
-    const XHR = new XMLHttpRequest();
-    XHR.onload = loadPage(JSON.parse(XHR.response));
-    XHR.open('POST', `/search?s=${searchStr}&n=40`, true);
-    XHR.send();
-});
+window.addEventListener('load', () => searchPageInit());

@@ -49,7 +49,7 @@ app.all('*', async (req, res, next) =>
 });
 
 app.get('/index.html', async (req, res) => { res.send('<script>window.location.assign(`${document.location.origin}`);</script>'); });
-app.use(express.static('../'));
+app.use(express.static('./'));
 app.get('*', async (req, res) =>  { res.status(404).sendFile('/Users/ken/Documents/GitHub/ginraidee/404.html'); });
 
 app.post('/search', async (req, res) =>
@@ -80,7 +80,7 @@ app.post('/signin', async (req, res) =>
 {
     const client = new Client(ClientInfo);
     const { SessionID } = req.cookies;
-    const { Email } = req.body; // Encrypt Email?
+    const { Email } = req.body;
     try
     {
         await client.connect();
@@ -153,37 +153,6 @@ app.post('/submitform', async (req, res) =>
     finally { client.end(); }
 });
 
-app.post('/getcart', async (req, res) =>
-{
-    const { SessionID } = req.cookies;
-    const client = new Client(ClientInfo);
-    try
-    {
-        await client.connect();
-        const Cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows;
-        if(Cart.length > 0) { res.send(Cart[0]); }
-        else { res.sendStatus(404); }
-    }
-    catch(err) { res.sendStatus(500); logError(err);}
-    finally { client.end(); }
-});
-
-app.post('/updateCart', async (req, res) =>
-{
-    const { SessionID } = req.cookies;
-    const client = new Client(ClientInfo);
-    console.log(`Request body type: ${typeof req.body}`);
-    console.log(`Request body contents: ${req.body}`);
-    try
-    {
-        await client.connect();
-        await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2);', [req.body, SessionID]);
-        res.sendStatus(200);
-    }
-    catch(err) { res.sendStatus(500); logError(err);}
-    finally { client.end(); }
-});
-
 app.post('/addcartitem', async (req, res) =>
 {
     const { SessionID } = req.cookies;
@@ -192,7 +161,7 @@ app.post('/addcartitem', async (req, res) =>
     try
     {
         await client.connect();
-        const Item = (await client.query('SELECT * FROM Menu WHERE Name = ($1) LIMIT 1;', [ItemName])).rows[0];
+        const Item = (await client.query('SELECT Name, Rating, Ingrident, level FROM Menu WHERE Name = ($1) LIMIT 1;', [ItemName])).rows[0]; // Change it later
         let cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1;', [SessionID])).rows[0]['cart_items'];
         if(cart && Item)
         {
@@ -224,6 +193,50 @@ app.post('/removecartitem', async (req, res) =>
         else { res.sendStatus(404); }
     }
     catch(err) { res.sendStatus(500); logError(err); }
+    finally { client.end(); }
+});
+
+app.post('/getcart', async (req, res) =>
+{
+    const { SessionID } = req.cookies;
+    const client = new Client(ClientInfo);
+    try
+    {
+        await client.connect();
+        const Cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows[0]['cart_items'];
+        if(Cart) { res.send(Cart); }
+        else { res.sendStatus(404); }
+    }
+    catch(err) { res.sendStatus(500); logError(err);}
+    finally { client.end(); }
+});
+
+app.post('/updateCart', async (req, res) =>
+{
+    const { SessionID } = req.cookies;
+    const NewCart: object[] = req.body;
+    const client = new Client(ClientInfo);
+    try
+    {
+        await client.connect();
+        let cart = (await client.query('SELECT Cart_Items FROM User_Accounts WHERE Session_Cookie = ($1) LIMIT 1;', [SessionID])).rows[0]['cart_items'];
+        if(cart)
+        {
+            NewCart.map((item) =>
+            {
+                try
+                {
+                    cart[item['name']]['serving'] = item['serving'];
+                    cart[item['name']]['checked'] = item['checked'];
+                }
+                catch(err) { logError(err); }
+            });
+            await client.query('UPDATE User_Accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2);', [cart, SessionID]);
+            res.sendStatus(200);
+        }
+        else { res.sendStatus(404); }
+    }
+    catch(err) { res.sendStatus(500); logError(err);}
     finally { client.end(); }
 });
 

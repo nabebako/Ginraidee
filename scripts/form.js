@@ -62,6 +62,7 @@ function submitForm() {
     SubmitForm.setRequestHeader('content-type', 'application/json');
     SubmitForm.send(JSON.stringify({ 'Data': formResponse, 'CurrentForm': CurrentForm.id.replace('-', '_') })); // Change null
 }
+window.addEventListener('load', () => initForm());
 /*
 function FORM_INIT()
 {

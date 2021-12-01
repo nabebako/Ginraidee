@@ -1,19 +1,19 @@
 function updateCart()
 {
     let cart = [];
-    document.querySelectorAll('.menu-wrapper').forEach(elem =>
+    document.querySelectorAll('.menu-wrapper').forEach((elem) =>
     {
         const TickBox: HTMLInputElement = elem.querySelector('input.menu-tickbox');
         const Serving: HTMLInputElement = elem.querySelector('input.serving-input');
         cart.push({
-            'Name': TickBox.id,
-            'Tick': TickBox.checked,
-            'Serving': Serving.value
+            'name': TickBox.value,
+            'checked': TickBox.checked,
+            'serving': parseInt(Serving.value, 10)
         });
     });
-
     const SaveCart = new XMLHttpRequest();
     SaveCart.open('POST', '/updateCart');
+    SaveCart.setRequestHeader('content-type', 'application/json');
     SaveCart.send(JSON.stringify(cart));
 }
 
@@ -29,6 +29,7 @@ function removeCartItem(item: HTMLDivElement)
 
 function displayCart(res: CartItem[])
 {
+    console.log(res);
     const SHOPPING_LIST = document.getElementById('shopping-list-wrapper');
         
     res.map((elem) =>
@@ -63,40 +64,41 @@ function displayCart(res: CartItem[])
         UpArrow                             .classList.add('serving-input-arrow', 'nonselect', 'clickable');
         DownArrow                           .classList.add('serving-input-arrow', 'nonselect', 'clickable');
         ServingInputMobile                  .classList.add('serving-input-mobile');
-        RemoveButton                        .classList.add('');
+        //RemoveButton                        .classList.add('');
 
-        MenuWrapper                         .id = elem.Name;
+        MenuWrapper                         .id = elem.name;
 
         MenuTickBox                         .type = 'checkbox';
-        MenuTickBox                         .value = elem.Name;
-        MenuTickBox                         .checked = elem.Checked;
-        MenuTickBox                         .onclick = () => updateCart();
+        MenuTickBox                         .value = elem.name;
+        MenuTickBox                         .checked = elem.checked;
+        MenuTickBox                         .setAttribute('onclick', 'updateCart()');
 
-        MenuImg                             .src = elem.Name;
-        MenuName                            .href = elem.Name;
+        MenuImg                             .src = `${elem.name.replace(' ', '-').toLowerCase()}.png` // Chnge it later
+        MenuName                            .href = `${elem.name.replace(' ', '-').toLowerCase()}.html`; // Change it to be absolute
 
         ServingInput                        .type = 'text';
-        ServingInput                        .name = '';
-        ServingInput                        .value = String(elem.Serving);
-        ServingInput                        .setAttribute('onchange', 'chnageCount(this, \'userInput\');');
+        ServingInput                        .name = elem.name;
+        ServingInput                        .value = String(elem.serving);
+        ServingInput                        .setAttribute('oninput', 'chnageCount(this, \'userInput\');');
+        ServingInput                        .setAttribute('onchange', 'updateCart();');
 
         UpArrow                             .setAttribute('increase', 'true');
         DownArrow                           .setAttribute('decrease', 'true');
         UpArrow                             .src = '../resources/svg/arrow-up.svg'; // Chnage the src to be absolute.
-        DownArrow                           .src = '../resources/svg/arrow-up.svg'; // Chnage the src to be absolute.
-        UpArrow                             .setAttribute('onclick', 'chnageCount(this.nextElementSibling, \'add\');');
-        DownArrow                           .setAttribute('onclick', 'chnageCount(this.previousElementSibling, \'minus\');');
+        DownArrow                           .src = '../resources/svg/arrow-down.svg'; // Chnage the src to be absolute.
+        UpArrow                             .setAttribute('onclick', 'chnageCount(this.nextElementSibling, \'add\'); updateCart();');
+        DownArrow                           .setAttribute('onclick', 'chnageCount(this.previousElementSibling, \'minus\'); updateCart();');
             
-        RemoveButton                        .onclick = () => removeCartItem(MenuWrapper);
+        RemoveButton                        .setAttribute('onclick', 'removeCartItem(MenuWrapper);')
 
-        elem.Ingredients.map((ingredient) => // add a ingrdiesnts column in db
+        elem.ingredients.map((ingredient) => // add a ingrdiesnts column in db
         {
             const link_wrapper              = document.createElement('li');
             const ingredient_link           = document.createElement('a');
 
             ingredient_link                 .classList.add('ingredients-link');
 
-            ingredient_link                 .appendChild(document.createTextNode(ingredient.Amount + ingredient.Unit + ingredient.Name));
+            ingredient_link                 .appendChild(document.createTextNode(`${ingredient.amount} ${ingredient.unit} of ${ingredient.name}`));
             link_wrapper                    .appendChild(ingredient_link);
             IngredientsList                 .appendChild(link_wrapper);
         });
@@ -109,8 +111,8 @@ function displayCart(res: CartItem[])
             ServingInputMobile              .appendChild(option);
         }
 
-        MenuName                            .appendChild(document.createTextNode(elem.Name)); // Chnage it later
-        Description                         .appendChild(document.createTextNode(elem.Description)); // Change it later
+        MenuName                            .appendChild(document.createTextNode(elem.name)); // Chnage it later
+        Description                         .appendChild(document.createTextNode(elem.description)); // Change it later
         MenuNameIngredientsWrapper          .appendChild(MenuName);
         MenuNameIngredientsWrapper          .appendChild(IngredientsList);
         MainContentWrapper                  .appendChild(MenuImg);
@@ -138,7 +140,10 @@ function getShoppingList()
 
         if(XHR.status === 200)
         {
-            displayCart(JSON.parse(XHR.response));
+            const CartObj = JSON.parse(XHR.response);
+            let CartList = [];
+            Object.keys(CartObj).map((key) => { CartList.push(CartObj[key]); });
+            displayCart(CartList);
         }
         else if(XHR.status === 404)
         {
@@ -165,4 +170,4 @@ function getShoppingList()
     XHR.send();
 }
 
-document.addEventListener('load', () => getShoppingList());
+window.addEventListener('load', () => getShoppingList());

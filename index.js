@@ -45,7 +45,7 @@ app.all('*', async (req, res, next) => {
     next();
 });
 app.get('/index.html', async (req, res) => { res.send('<script>window.location.assign(`${document.location.origin}`);</script>'); });
-app.use(express.static('../'));
+app.use(express.static('./'));
 app.get('*', async (req, res) => { res.status(404).sendFile('/Users/ken/Documents/GitHub/ginraidee/404.html'); });
 app.post('/search', async (req, res) => {
     const client = new pg_1.Client(ClientInfo);
@@ -125,12 +125,13 @@ app.post('/initform', async (req, res) => {
     const client = new pg_1.Client(ClientInfo);
     try {
         await client.connect();
-        const checkPoint = await client.query('SELECT Current_Form, Response_Data FROM Form_Responses WHERE client = ($1) LIMIT 1', [req.cookies.SessionID]);
-        if (checkPoint.rowCount === 0) {
-            res.sendStatus(404);
+        const CurrentForm = (await client.query('SELECT Current_Form FROM Form_Responses WHERE client = ($1) LIMIT 1;')).rows[0];
+        const FormRes = (await client.query('SELECT Form_1_Data, Form_2_Data, Form_3_Data FROM Form_Responses WHERE client = ($1) LIMIT 1;', [req.cookies.SessionID])).rows[0];
+        if (CurrentForm && FormRes) {
+            res.send({ 'CurrentForm': CurrentForm, 'Form': FormRes });
         }
         else {
-            res.send(checkPoint);
+            res.sendStatus(404);
         }
     }
     catch (err) {
@@ -162,56 +163,17 @@ app.post('/submitform', async (req, res) => {
         client.end();
     }
 });
-app.post('/getcart', async (req, res) => {
-    const { SessionID } = req.cookies;
-    const client = new pg_1.Client(ClientInfo);
-    try {
-        await client.connect();
-        const Cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows;
-        if (Cart.length > 0) {
-            res.send(Cart[0]);
-        }
-        else {
-            res.sendStatus(404);
-        }
-    }
-    catch (err) {
-        res.sendStatus(500);
-        logError(err);
-    }
-    finally {
-        client.end();
-    }
-});
-app.post('/updateCart', async (req, res) => {
-    const { SessionID } = req.cookies;
-    const client = new pg_1.Client(ClientInfo);
-    console.log(`Request body type: ${typeof req.body}`);
-    console.log(`Request body contents: ${req.body}`);
-    try {
-        await client.connect();
-        await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2);', [req.body, SessionID]);
-        res.sendStatus(200);
-    }
-    catch (err) {
-        res.sendStatus(500);
-        logError(err);
-    }
-    finally {
-        client.end();
-    }
-});
 app.post('/addcartitem', async (req, res) => {
     const { SessionID } = req.cookies;
     const { ItemName } = req.body;
     const client = new pg_1.Client(ClientInfo);
     try {
         await client.connect();
-        const Item = (await client.query('SELECT * FROM Menu WHERE Name = ($1) LIMIT 1;', [ItemName])).rows[0];
-        let UserCart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1;', [SessionID])).rows[0]['cart_items'];
-        if (UserCart && Item) {
-            UserCart[ItemName] = Item;
-            await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2)', [UserCart, SessionID]);
+        const Item = (await client.query('SELECT Name, Rating, Ingrident, level FROM Menu WHERE Name = ($1) LIMIT 1;', [ItemName])).rows[0]; // Change it later
+        let cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1;', [SessionID])).rows[0]['cart_items'];
+        if (cart && Item) {
+            cart[ItemName] = Item;
+            await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2);', [cart, SessionID]);
             res.sendStatus(200);
         }
         else {
@@ -228,14 +190,68 @@ app.post('/addcartitem', async (req, res) => {
 });
 app.post('/removecartitem', async (req, res) => {
     const { SessionID } = req.cookies;
-    const RemoveItemName = req.body;
+    const { RemoveItemName } = req.body;
     const client = new pg_1.Client(ClientInfo);
     try {
         await client.connect();
-        let cartItems = (await client.query('SELECT * FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows;
-        if (cartItems.length > 0) {
-            delete cartItems[RemoveItemName];
-            await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2)', [cartItems, SessionID]);
+        let Cart = (await client.query('SELECT * FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows;
+        if (Cart.length === 1) {
+            delete Cart[RemoveItemName];
+            await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2)', [Cart, SessionID]);
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(404);
+        }
+    }
+    catch (err) {
+        res.sendStatus(500);
+        logError(err);
+    }
+    finally {
+        client.end();
+    }
+});
+app.post('/getcart', async (req, res) => {
+    const { SessionID } = req.cookies;
+    const client = new pg_1.Client(ClientInfo);
+    try {
+        await client.connect();
+        const Cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows[0]['cart_items'];
+        if (Cart) {
+            res.send(Cart);
+        }
+        else {
+            res.sendStatus(404);
+        }
+    }
+    catch (err) {
+        res.sendStatus(500);
+        logError(err);
+    }
+    finally {
+        client.end();
+    }
+});
+app.post('/updateCart', async (req, res) => {
+    const { SessionID } = req.cookies;
+    const NewCart = req.body;
+    const client = new pg_1.Client(ClientInfo);
+    try {
+        await client.connect();
+        let cart = (await client.query('SELECT Cart_Items FROM User_Accounts WHERE Session_Cookie = ($1) LIMIT 1;', [SessionID])).rows[0]['cart_items'];
+        if (cart) {
+            NewCart.map((item) => {
+                try {
+                    cart[item['name']]['serving'] = item['serving'];
+                    cart[item['name']]['checked'] = item['checked'];
+                }
+                catch (err) {
+                    logError(err);
+                }
+            });
+            await client.query('UPDATE User_Accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2);', [cart, SessionID]);
+            res.sendStatus(200);
         }
         else {
             res.sendStatus(404);
