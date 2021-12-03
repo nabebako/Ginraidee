@@ -33,44 +33,20 @@ function updateResult(res: menuObject[])
     });
 }
 
-let inputStatus = {
-    timeStart: undefined,
-    inputTimeout: undefined
-};
 
-function watchInput(inputElem: HTMLInputElement)
+document.addEventListener('input', (event) => {})
+
+/* Use for when enter is pressed to auto redirect to the search result page. */
+function redirectToSearchPage(inputElem: HTMLInputElement)
 {
-    inputStatus.timeStart = Date.now();
-    if(inputStatus.inputTimeout === undefined)
+    let searchStr = inputElem.value.toLowerCase().replace(/[^0-9a-z ]/g, '');
+    if(searchStr !== '')
     {
-        inputStatus.inputTimeout = setInterval(() =>
-        {
-            if(Date.now() - inputStatus.timeStart >= 400) 
-            {
-                let searchStr = inputElem.value.toLowerCase().replace(/[^0-9a-z\s]/g, '').replace(/\s/g, '+');
-                if(searchStr !== '' && /[0-9a-z]/i.test(searchStr))
-                {
-                    const Search = new XMLHttpRequest();
-                    Search.onload = () => updateResult(JSON.parse(Search.response));
-                    Search.open('POST', '/search');
-                    Search.setRequestHeader('content-type','application/json');
-                    Search.send(JSON.stringify({searchStr: searchStr, returnAmount: 6}));
-                }
-                else { clearElement(document.getElementById('search-result')); }
-                clearInterval(inputStatus.inputTimeout);
-                inputStatus.inputTimeout = undefined;
-            }
-        }, 100);
+        window.location.assign(document.URL.replace(/\/pages\/.*|\/$/,`/pages/search.html?query=${searchStr.replace(/\s/g, '+')}`));
     }
 }
 
 
-
-/* Use for when enter is pressed to auto redirect to the search result page. */
-function redirectToSearchPage(searchStr: string)
-{
-    window.location.assign(document.URL.replace(/\/pages\/.*|\/$/,`/pages/search.html?query=${searchStr.toLowerCase().replace(/[^0-9a-z ]/g, '').replace(/\s/g, '+')}`));
-}
 
 function showSearchBar()
 {
@@ -80,6 +56,49 @@ function showSearchBar()
 
 function showSearchResult() { document.getElementById('search-result').classList.remove('nondisplay'); }
 function hideSearchResult() { document.getElementById('search-result').classList.add('nondisplay'); }
+
+
+let inputStatus = {
+    timeStart:  undefined,
+    inputTimeout: undefined
+};
+
+function addWatchInput(inputElem: HTMLInputElement)
+{
+    inputElem.addEventListener('input', (inputEvent) =>
+    {
+        inputStatus.timeStart = inputEvent.timeStamp;
+        if(inputStatus.inputTimeout === undefined)
+        {
+            inputStatus.inputTimeout = setInterval(() =>
+            {
+                if(Date.now() - inputStatus.timeStart >= 400) 
+                {
+                    let searchStr = inputElem.value.toLowerCase().replace(/[^0-9a-z\s]/g, '').replace(/\s/g, '+');
+                    if(searchStr !== '' && /[0-9a-z]/i.test(searchStr))
+                    {
+                        const Search = new XMLHttpRequest();
+                        Search.onload = () => updateResult(JSON.parse(Search.response));
+                        Search.open('POST', '/search');
+                        Search.setRequestHeader('content-type','application/json');
+                        Search.send(JSON.stringify(
+                            {
+                                'searchStr': searchStr,
+                                'returnAmount': 6
+                            }));
+                    }
+                    else { clearElement(document.getElementById('search-result')); }
+                    clearInterval(inputStatus.inputTimeout);
+                    inputStatus.inputTimeout = undefined;
+                }
+            }, 100);
+        }
+    });
+    inputElem.addEventListener('keypress', (keypress) => 
+    {
+        if(keypress.key === 'Enter') { redirectToSearchPage(inputElem); }
+    });
+}
 
 
 /* Unused */

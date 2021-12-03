@@ -59,6 +59,8 @@ p {
     -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
+.flex { display: flex; }
+
 .no-mouse { cursor: not-allowed; }
 
 .backlink {

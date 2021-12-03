@@ -29,7 +29,6 @@ function removeCartItem(item: HTMLDivElement)
 
 function displayCart(res: CartItem[])
 {
-    console.log(res);
     const SHOPPING_LIST = document.getElementById('shopping-list-wrapper');
         
     res.map((elem) =>
@@ -133,19 +132,19 @@ function displayCart(res: CartItem[])
 
 function getShoppingList()
 {
-    const XHR = new XMLHttpRequest();
-    XHR.onload = () =>
+    const ShoppingList = new XMLHttpRequest();
+    ShoppingList.onload = () =>
     {
         const SHOPPING_LIST = document.getElementById('shopping-list-wrapper');
 
-        if(XHR.status === 200)
+        if(ShoppingList.status === 200)
         {
-            const CartObj = JSON.parse(XHR.response);
+            const CartObj = JSON.parse(ShoppingList.response);
             let CartList = [];
             Object.keys(CartObj).map((key) => { CartList.push(CartObj[key]); });
             displayCart(CartList);
         }
-        else if(XHR.status === 404)
+        else if(ShoppingList.status === 404)
         {
             const ErrorMessage  = document.createElement('p');
             const SignIn        = document.createElement('a');
@@ -166,8 +165,8 @@ function getShoppingList()
             SHOPPING_LIST.appendChild(SignUp);
         }
     };
-    XHR.open('POST', '/getcart');
-    XHR.send();
+    ShoppingList.open('get', '/cart');
+    ShoppingList.send();
 }
 
 window.addEventListener('load', () => getShoppingList());

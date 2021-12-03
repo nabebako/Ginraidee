@@ -48,7 +48,7 @@
                         <img id = "logo" src = "./resources/svg/logo-main-2.svg">
                     </a>
                     <div id = "search-container">
-                        <input id = "search-query" type = "text" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off" onfocus = "showSearchResult();" onblur = "hideSearchResult();">
+                        <input id = "search-query" type = "text" onload="addWatchInput(this)" placeholder = "Know what you want? Look it up." spellcheck = "false" autocapitalize = "false" autocomplete = "off" onfocus = "showSearchResult();" onblur = "hideSearchResult();">
                         <div id = "search-result" class = "nondisplay">
                             <a class = "search-res-link" href = "#">
                                 <div class = "search-res-text-wrapper">

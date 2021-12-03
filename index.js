@@ -45,13 +45,19 @@ app.all('*', async (req, res, next) => {
     next();
 });
 app.get('/index.html', async (req, res) => { res.send('<script>window.location.assign(`${document.location.origin}`);</script>'); });
-app.use(express.static('./'));
-app.get('*', async (req, res) => { res.status(404).sendFile('/Users/ken/Documents/GitHub/ginraidee/404.html'); });
 app.post('/search', async (req, res) => {
     const client = new pg_1.Client(ClientInfo);
+    const { searchStr } = req.body;
+    const { returnAmount } = req.body;
     try {
         await client.connect();
-        res.send((await client.query('SELECT name FROM menu WHERE LOWER(name) LIKE ($1) ORDER BY rating DESC LIMIT ($2)', [`%${req.query.s}%`, req.query.n])).rows);
+        const searchResult = (await client.query('SELECT name FROM menu WHERE LOWER(name) LIKE ($1) ORDER BY rating DESC LIMIT ($2)', [`%${searchStr}%`, returnAmount])).rows;
+        if (searchResult.length > 0) {
+            res.send(searchResult);
+        }
+        else {
+            res.sendStatus(404);
+        }
     }
     catch (err) {
         res.sendStatus(500);
@@ -78,7 +84,7 @@ app.post('/topmenus', async (req, res) => {
 app.post('/signin', async (req, res) => {
     const client = new pg_1.Client(ClientInfo);
     const { SessionID } = req.cookies;
-    const { Email } = req.body; // Encrypt Email?
+    const { Email } = req.body;
     try {
         await client.connect();
         const AccountID = await client.query('SELECT ID FROM User_Accounts WHERE Email = ($1) LIMIT 1', [Email]);
@@ -163,6 +169,27 @@ app.post('/submitform', async (req, res) => {
         client.end();
     }
 });
+app.get('/cart', async (req, res) => {
+    const { SessionID } = req.cookies;
+    const client = new pg_1.Client(ClientInfo);
+    try {
+        await client.connect();
+        const Cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows[0]['cart_items'];
+        if (Cart) {
+            res.send(Cart);
+        }
+        else {
+            res.sendStatus(404);
+        }
+    }
+    catch (err) {
+        res.sendStatus(500);
+        logError(err);
+    }
+    finally {
+        client.end();
+    }
+});
 app.post('/addcartitem', async (req, res) => {
     const { SessionID } = req.cookies;
     const { ItemName } = req.body;
@@ -199,27 +226,6 @@ app.post('/removecartitem', async (req, res) => {
             delete Cart[RemoveItemName];
             await client.query('UPDATE User_accounts SET Cart_Items = ($1) WHERE Session_Cookie = ($2)', [Cart, SessionID]);
             res.sendStatus(200);
-        }
-        else {
-            res.sendStatus(404);
-        }
-    }
-    catch (err) {
-        res.sendStatus(500);
-        logError(err);
-    }
-    finally {
-        client.end();
-    }
-});
-app.post('/getcart', async (req, res) => {
-    const { SessionID } = req.cookies;
-    const client = new pg_1.Client(ClientInfo);
-    try {
-        await client.connect();
-        const Cart = (await client.query('SELECT Cart_Items FROM User_accounts WHERE Session_Cookie = ($1) LIMIT 1', [SessionID])).rows[0]['cart_items'];
-        if (Cart) {
-            res.send(Cart);
         }
         else {
             res.sendStatus(404);
@@ -270,9 +276,14 @@ app.post('/error', async (req, res) => {
     const { body } = req;
     Object.keys(body).map((key) => { fs.appendFile('./log.txt', `${key}: ${body[key]}. Time: ${Date()}\n`, 'utf-8', () => { }); });
 });
+app.use(express.static('./'));
+app.get('*', async (req, res) => { res.status(404).sendFile('/Users/ken/Documents/GitHub/ginraidee/404.html'); });
 app.all('*', async (req, res) => {
     res.sendStatus(404);
     fs.appendFile('./log.txt', `Path ${req.baseUrl} not found. Time: ${Date()}\n`, 'utf-8', () => { });
 });
 const port = 3000;
-app.listen(port);
+app.listen(port, () => console.log(`Live on http://localhost:${port}`));
+for (let i = 0; i < 100; i++) {
+    console.log(crypto.randomUUID());
+}

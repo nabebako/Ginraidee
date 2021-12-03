@@ -8,7 +8,7 @@
         <link rel = "stylesheet" href = "../css/main.css">
         <link rel = "stylesheet" href = "../css/shopping-list.css">
 
-        <script src = "../scripts/get-shopping-list.js"></script>
+        <script src = "../scripts/shopping-list.js"></script>
         <script src = "../scripts/action-button.js"></script>
         <script src = "../scripts/general.js"></script>
         <script src = "../scripts/search.js"></script>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div id = "search-field" class = "nondisplay h-center">
-                <input id = "search-query" type = "text" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                <input id = "search-query" type = "text" onload="addWatchInput(this);" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
                 <div id = "search-result">
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div id = "shopping-list-wrapper">
                     <!-- temporary frame work -->
                     <div class = "menu-wrapper">
-                        <input class = "menu-tickbox" type = "checkbox" value = "first" id = "first" checked = 'true'>
+                        <input class = "menu-tickbox" type = "checkbox" value = "first" id = "first" checked = "true" onclick="updateCart();">
                         <div class ="menu-label center-content">
                             <div class = "menu-content-wrapper">
                                 <div class = "menu-main-content-wrapper">
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class = "menu-wrapper">
-                        <input class = "menu-tickbox" type = "checkbox" value = "second" id = "second" checked = 'true'>
+                        <input class = "menu-tickbox" type = "checkbox" value = "second" id = "second" checked = 'true' onclick="updateCart();">
                         <div class ="menu-label center-content">
                             <div class = "menu-content-wrapper">
                                 <div class = "menu-main-content-wrapper">
@@ -156,12 +156,15 @@
                         </div>
                     </div>
                 </div>
-                <div class = "sticky">
+                <div class = "sticky flex space-content">
+                    <div class="space-content">
+                        <div id = "select-all" class = "action-button clickable nonselect" onclick = "selectAll()">Select All</div>
+                        <div id = "deselect-all" class = "action-button clickable nonselect" onclick = "deselectAll()">Deselect All</div>
+                    </div>
                     <div>
                         <div id = "print-bnt" class = "action-button clickable nonselect" title = "Print" onclick = "printDish()">Print</div>
                     </div>
-                    <div id = "select-all" class = "action-button clickable nonselect" onclick = "selectAll()">Select All</div>
-                    <div id = "deselect-all" class = "action-button clickable nonselect" onclick = "deselectAll()">Deselect All</div>
+
                 </div>
             </div>
         </main>
