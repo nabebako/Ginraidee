@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Fluffy Pancake</title>
+        <link rel = "icon" href = "../src/svg/logo/logo-small.svg">
+        <meta charset = "utf-8">
+
+        <link rel = "stylesheet" href = "../../css/main.css">
+        <link rel = "stylesheet" href = "../../css/menu.css">
+    </head>
+    <body>
+        <header class = "nonselect">
+            <div id = "top-nav">
+                <div id = "nav-container" class = "center-content h-center">
+                    <div>
+                        <a href = "../">
+                            <img id = "logo-main" src = " ../src/svg/logo/logo-main-2.svg" height = "44">
+                            <img id = "logo-small" src = "../src/svg/logo/logo-small.svg" height = "44">
+                        </a>
+                    </div>
+                    <nav id = "main-nav" class = "center-content">
+                        <a class = "nondeco-link nav-link" href = "">Breakfast</a>
+                        <a class = "nondeco-link nav-link" href = "">Lunch</a>
+                        <a class = "nondeco-link nav-link" href = "">Dinner</a>
+                        <a class = "nondeco-link nav-link" href = "">Dessert</a>
+                        <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
+                    </nav>
+                    <div id = "misc-container" class = "center-content">
+                        <img id = "hamburger-nav" class = "clickable nondisplay" src = "../src/svg/hamburger--nav.svg" width = "24" height = "24">
+                        <img id = "show-search" class = "clickable" src = "../src/svg/search.svg" width = "24" height = "24">
+                        <div id = "shopping-list">
+                            <a id = "shopping-list-icon" href = "../pages/shopping-list">
+                                <img width = "24" height = "24" src="../src/svg/shopping-list.svg">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "search-field" class = "nondisplay h-center">
+                <input id = "search-query" type = "text" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                <div id = "search-result">
+                </div>
+            </div>
+        </header>
+        <main>
+            <div id = "main-wrapper" class = "h-center">
+                <!-- Menu section -->
+                <div id = "menu-container">
+                    <div id = "menu-headder-wrapper">
+                        <p id = "menu_name">Fluffy Pancake</p>
+                        <p class = "nonselect">
+                            <a class = "backlink" href = "">Breakfast</a> / 
+                            <a class = "backlink" href = "">Soft</a> /
+                        </p>
+                    </div>
+                    <div id = "top-part-container">
+                        <div id = "menu-img-wrapper" class = "center-content">
+                            <img id = "menu-img" src = "../src/img/menu/fluffy-pancake.jpg">
+                        </div>
+                        <div id = "side-img-container">`
+                            <div id = "action-button-container">
+                                <div id = "add_to_list" class = "action-button center-content clickable nonselect" onclick = "addToCart('Fluffy Pancake')">
+                                    <img src = "../src/svg/img-placeholder.svg" height = "20">
+                                    <p class = "button-text">Add to list</p>
+                                </div>
+                                <div id = "download" class = "action-button center-content clickable nonselect">
+                                    <img src = "../src/svg/img-placeholder.svg" height = "20">
+                                    <p class = "button-text">Download</p>
+                                </div>
+                                <div id = "print" class = "action-button center-content clickable nonselect">
+                                    <img src = "../src/svg/img-placeholder.svg" height = "20">
+                                    <p class = "button-text">Print</p>
+                                </div>
+                            </div>
+                            <div id = "ingredient-serving-container">
+                                <p class = "h-1">Ingredient</p>
+                                <div id = "serving_container" class = "center-content">
+                                    <p id = "serving-title">Serving</p>
+                                    <div id = "serving-option-container" class = "center-content">
+                                        <svg id = "serving-minus" class = "clickable" data-name = "serving-minus" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 36 36">
+                                            <rect class="cls-green" x="14.64" y="13.96" width="4.35" height="17" rx="2.18" transform="translate(44.62 26.51) rotate(135)"/>
+                                            <rect class="cls-green" x="14.54" y="4.96" width="4.35" height="17" rx="2.18" transform="translate(14.44 -7.87) rotate(45)"/>
+                                        </svg>
+                                        <input id = "serving-input" type = "number" value = "1" min = "1" max = "99">
+                                        <svg id = "serving-add" class = "clickable" data-name = "serving-add" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+                                            <rect class="cls-green" x="17.01" y="4.96" width="4.35" height="17" rx="2.18" transform="translate(-3.93 17.52) rotate(-45)"/>
+                                            <rect class="cls-green" x="17.11" y="13.96" width="4.35" height="17" rx="2.18" transform="translate(17.01 52.04) rotate(-135)"/>
+                                        </svg>
+                                        <select id = "serving-input-mobile">
+                                            <option value = "1">1</option>
+                                            <option value = "2">2</option>
+                                            <option value = "3">3</option>
+                                            <option value = "4">4</option>
+                                            <option value = "5">5</option>
+                                            <option value = "6">6</option>
+                                            <option value = "7">7</option>
+                                            <option value = "8">8</option>
+                                            <option value = "9">9</option>
+                                            <option value = "10">10</option>
+                                            <option value = "11">11</option>
+                                            <option value = "12">12</option>
+                                            <option value = "13">13</option>
+                                            <option value = "14">14</option>
+                                            <option value = "15">15</option>
+                                            <option value = "16">16</option>
+                                            <option value = "17">17</option>
+                                            <option value = "18">18</option>
+                                            <option value = "19">19</option>
+                                            <option value = "20">20</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul id = "ingredients">
+                                <li><p>4 cups of sifted flour (500 g)</p></li>
+                                <li><p>4 tablespoons of baking powder</p></li>
+                                <li><p>4 cups of warm-to-touch milk (960 mL)</p></li>
+                                <li><p>3/4 cups of melted butter (170 g)</p></li>
+                                <li><p>3 egg yolks</p></li>
+                                <li><p>4 egg whites</p></li>
+                                <li><p>maple syrup</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id = "prep">
+                        <p class = "h-1">Preparation</p>
+                        <ul>
+                            <li><p>Whisk together the flour and baking powder in a large bowl.</p></li>
+                            <li><p>In a separate bowl, add the butter, milk, and egg yolks, stirring to combine.</p></li>
+                            <li><p>In a third bowl, use a hand mixer to beat the egg whites until soft peaks form.</p></li>
+                            <li><p>Pour the milk mixture into the flour mixture and stir with rubber spatula until just combined. Add the beaten egg whites and gently fold to combine.</p></li>
+                            <li><p>Heat an 8-inch (20cm) nonstick skillet over low heat. Pour 1.5 cups of pancake batter into the skillet, smooth out the top, then cover with a lid. Cook until golden brown on the bottom and a toothpick inserted into the center comes out clean, about 20 minutes. Transfer the pancake to a plate and repeat, making 3 more pancakes with the remaining batter.</p></li>
+                            <li><p>Serve with maple syrup.</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--Top picks section--> 
+                <div id = "top-picks-wrapper" class = "h-center">
+                    <p id = "selection-title" class = "h-1">Other dishes you might like</p>
+                    <div class = "center-content nonselect">
+                        <a id = "top-picks-menu-0-link" class = "selection-link overlay-container nondeco-link" href = "">
+                            <img id = "top-picks-menu-0-img" class = "food-img" src = "../src/svg/img-placeholder.svg">
+                            <p id = "top-picks-menu-0-name" class = "overlay h-center"></p>
+                        </a>
+                        <a id = "top-picks-menu-1-link" class = "selection-link overlay-container nondeco-link" href = "">
+                            <img id = "top-picks-menu-1-img" class = "food-img" src = "../src/svg/img-placeholder.svg">
+                            <p id = "top-picks-menu-1-name" class = "overlay h-center"></p>
+                        </a>
+                        <a id = "top-picks-menu-2-link" class = "selection-link overlay-container nondeco-link" href = "">
+                            <img id = "top-picks-menu-2-img" class = "food-img" src = "../src/svg/img-placeholder.svg">
+                            <p id = "top-picks-menu-2-name" class = "overlay h-center"></p>
+                        </a>
+                    </div>
+                    <div class = "center-content nonselect">
+                        <a id = "top-picks-menu-3-link" class = "selection-link overlay-container nondeco-link" href = "">
+                            <img id = "top-picks-menu-3-img" class = "food-img" src = "../src/svg/img-placeholder.svg">
+                            <p id = "top-picks-menu-3-name" class = "overlay h-center"></p>
+                        </a>
+                        <a id = "top-picks-menu-4-link" class = "selection-link overlay-container nondeco-link" href = "">
+                            <img id = "top-picks-menu-4-img" class = "food-img" src = "../src/svg/img-placeholder.svg">
+                            <p id = "top-picks-menu-4-name" class = "overlay h-center"></p>
+                        </a>
+                        <a id = "top-picks-menu-5-link" class = "selection-link overlay-container nondeco-link" href = "">
+                        <img id = "top-picks-menu-5-img" class = "food-img" src = "../src/svg/img-placeholder.svg">
+                            <p id = "top-picks-menu-5-name" class = "overlay h-center"></p>
+                        </a>
+                    </div>
+                </div>
+                <!--Questionaire section-->
+                <div id = "questionnaire-promp-wrapper" class = "h-center center-content">
+                    <div>
+                        <p id = "questionnaire-promp-title" class = "h-center">Looking for another dish?</p>
+                        <div id = "Questionnaire-pop-up" class = "h-center clickable round-button">
+                            <p class = "nonselect">TELL US WHAT YOU LIKE</p>
+                        </div>
+                    </div>
+                </div>
+                <span id = "pop-up--background" class = "hidden"></span>
+                <div id = "pop-up--foreground" class = "hidden">
+                    <div id="window-close">
+                        <svg class = "clickable nonselect" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 63.81 63.81" width = "24" height = "24">
+                            <rect class="cls-cross" x="-7.6" y="25.9" width="79" height="12" rx="1.86" transform="translate(-13.22 31.9) rotate(-45)"/>
+                            <rect class="cls-cross" x="-7.6" y="25.9" width="79" height="12" rx="1.86" transform="translate(31.9 77.02) rotate(-135)"/>
+                        </svg>
+                    </div>
+                    <!--Picture on the right with text on top-->
+                    <div class = "h-center">
+                        <p id = "questionnaire-title" class = "h-1">What kind of food do you like?</p>
+                    </div>
+                    <div class = "nonselect">
+                        <div id = "form" class = "form">
+                            <input class = "nondisplay" type = "checkbox" id = "pork" name = "food--preference" value = "pork">
+                            <label class = "checkbox overlay-container clickable" for = "pork">
+                                <img src = "../src/pop-up/pork.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Pork</p>
+                                </div>
+                            </label>
+    
+                            <input class = "nondisplay" type = "checkbox" id = "beef" name = "food--preference" value = "beef">
+                            <label class = "checkbox overlay-container clickable" for = "beef">
+                                <img src = "../src/pop-up/beef.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Beef</p>
+                                </div>
+                            </label>
+    
+                            <input class = "nondisplay" type = "checkbox" id = "chicken" name = "food--preference" value = "chicken">
+                            <label class = "checkbox overlay-container clickable" for = "chicken">
+                                <img src = "../src/pop-up/chicken.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Chicken</p>
+                                </div>
+                            </label>
+    
+                            <input class = "nondisplay" type = "checkbox" id = "shrimp" name = "food--preference" value = "shrimp">
+                            <label class = "checkbox overlay-container clickable" for = "shrimp">
+                                <img src = "../src/pop-up/shrimp.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Shrimp</p>
+                                </div>
+                            </label>
+    
+                            <input class = "nondisplay" type = "checkbox" id = "fish" name = "food--preference" value = "fish">
+                            <label class = "checkbox overlay-container clickable" for = "fish">
+                                <img src = "../src/pop-up/fish.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Fish</p>
+                                    </div>
+                            </label>
+
+                            <input class = "nondisplay" type = "checkbox" id = "seafood" name = "food--preference" value = "seafood">
+                            <label class = "checkbox overlay-container clickable" for = "seafood">
+                                <img src = "../src/pop-up/seafood.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Seafood</p>
+                                </div>
+                            </label>
+
+                            <input class = "nondisplay" type = "checkbox" id = "lamb" name = "food--preference" value = "lamb">
+                            <label class = "checkbox overlay-container clickable" for = "lamb">
+                                <img src = "../src/pop-up/lamb.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Lamb</p>
+                                </div>
+                            </label>
+
+                            <input class = "nondisplay" type = "checkbox" id = "vegetarian" name = "food--preference" value = "vegetarian">
+                            <label class = "checkbox overlay-container clickable" for = "vegetarian">
+                                <img src = "../src/pop-up/vegetarian.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Vegetarian</p>
+                                </div>
+                            </label>
+                            <input class = "nondisplay" type = "checkbox" id = "fruits" name = "food--preference" value = "fruits">
+                            <label class = "checkbox overlay-container clickable" for = "fruits">
+                                <img src = "../src/pop-up/fruits.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Fruits</p>
+                                </div>
+                            </label>
+                            <input class = "nondisplay" type = "checkbox" id = "healthy" name = "food--preference" value = "healthy">
+                            <label class = "checkbox overlay-container clickable" for = "healthy">
+                                <img src = "../src/pop-up/healthy.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Healthy</p>
+                                </div>
+                            </label>
+                    
+                            <input class = "nondisplay" type = "checkbox" id = "fastfood" name = "food--preference" value = "fastfood">
+                            <label class = "checkbox overlay-container clickable" for = "fastfood">
+                                <img src = "../src/pop-up/fastfood.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Fastfood</p>
+                                </div>
+                            </label>
+
+                            <input class = "nondisplay" type = "checkbox" id = "fried" name = "food--preference" value = "fried">
+                            <label class = "checkbox overlay-container clickable" for = "fried">
+                                <img src = "../src/pop-up/fried.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">Fried</p>
+                                </div>
+                            </label>
+
+                            <input class = "nondisplay" type = "checkbox" id = "boiled" name = "food--preference" value = "boiled">
+                            <label class = "checkbox overlay-container clickable" for = "boiled">
+                                <img src = "../src/pop-up/boiled.png" class = "checkbox-img">
+                                    <div class = "overlay center-content">
+                                        <p class = "nonselect text-over-img">Boiled</p>
+                                    </div>
+                                </label>
+
+                            <input class = "nondisplay" type = "checkbox" id = "stemed" name = "food--preference" value = "stemed">
+                            <label class = "checkbox overlay-container clickable" for = "stemed">
+                                <img src = "../src/pop-up/stemed.png" class = "checkbox-img">
+                                <div class = "overlay center-content">
+                                    <p class = "nonselect text-over-img">stemed</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div id = "submit" class = "round-button clickable h-center center-content">
+                            <p>Submit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div id = "back-to-top-bnt" class = "clickable hidden">
+                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" height = "36" width = "36">
+                    <circle class="cls-wrapper" cx="18" cy="18" r="18"/>
+                    <rect class="cls-green" x="11.33" y="8.28" width="4.35" height="17.08" rx="2.18" transform="translate(11.16 38.26) rotate(-135)"/>
+                    <rect class="cls-green" x="20.32" y="8.18" width="4.35" height="17.08" rx="2.18" transform="translate(50.22 12.63) rotate(135)"/>
+                </svg>
+            </div>
+        </footer>
+    </body>
+    <script src = "../scripts/top-picks-menu.js"></script>
+    <script src = "../scripts/serving-counter.js"></script>
+    <script src = "../scripts/action-button.js"></script>
+    <script src = "../scripts/search.js"></script>
+    <script src = "../scripts/form.js"></script>
+    <script src = "../scripts/back-to-top.js"></script>
+</html>

@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "watch": false,
+        "lib": ["DOM", "es2017"],
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "esModuleInterop": false,
+        "rootDir": "",
+        "outDir": "../script",
+        "strict": false
+    }
+}

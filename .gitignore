@@ -9,3 +9,6 @@ cookie.txt
 log.txt
 reminder.txt
 summary.txt
+*.sql
+misc
+log
