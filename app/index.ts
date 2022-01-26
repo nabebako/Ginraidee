@@ -797,20 +797,6 @@ app.post('/cart/update', async (req, res) =>
 //     else { res.sendStatus(400); }
 // });
 
-
-app.post('/error', async (req, res) =>
-{
-    // ! might remove
-
-    res.sendStatus(200);
-
-    const body = req.body;
-    Object.keys(body).map((key) =>
-    {
-        logError(`error: ${key}: ${body[key]}`);
-    });
-});
-
 app.get('/', (req, res) => { res.sendFile(`${__dirname.replace(/\/app.*/, '')}/public/pages/index.html`); });
 
 app.get('*', (req, res) =>
