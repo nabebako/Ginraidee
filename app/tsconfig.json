@@ -1,13 +1,15 @@
 {
     "compilerOptions": {
-        "target": "es2017",
+        "target": "ES2021",
         "watch": true,
-        "lib": ["DOM", "es2017"],
+        "lib": ["DOM", "ES2021"],
         "module": "CommonJS",
-        "moduleResolution": "node",
+        "moduleResolution": "Node",
         "esModuleInterop": false,
         "rootDir": "",
         "outDir": "",
-        "strict": false
-    }
+        "strict": false,
+    },
+    "exclude": ["./deprecated.ts"],
+    "include": ["./*.ts"]
 }

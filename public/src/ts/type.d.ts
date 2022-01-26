@@ -1,6 +1,10 @@
 type CookingUnit = 'string' | 'grams';
 type tag = 'string' | '' | '';
 type skill = 'beginer' | 'novice' | 'intermediate' | 'experience' | 'proficient';
+type servingType = 'portion' | 'cup' | 'tart' | 'plate';
+type timeUnit = 'd' | 'day' | 'h' | 'hour' | 'min' | 'minute' | 'sec' | 'second';
+type duration = `${number} ${timeUnit}`;
+type serving = `${number} ${servingType}`;
 
 interface Ingredient
 {
@@ -11,12 +15,23 @@ interface Ingredient
 
 interface Dish
 {
-    name: string,
-    rating: number,
-    ingredients: Ingredient[]
+    name:           string,
+    description:    string,
+    cookingTime:    duration,
+    serving:        serving,
+    rating:         number,
+    level:          string,
+    ingredients:    Ingredient[]
 }
 
-interface CartItem
+interface BackendCartItem
+{
+    name:           string,
+    checked:        boolean,
+    serving:        number,
+}
+
+interface FrontendCartItem
 {
     name:           string,
     checked:        boolean,

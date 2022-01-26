@@ -10,7 +10,7 @@ function addToCart(dish: string)
     }
     AddItem.open('POST', '/addcartitem');
     AddItem.setRequestHeader('content-type', 'application/json');
-    AddItem.send(JSON.stringify({'ItemName' : dish }));
+    AddItem.send(JSON.stringify({'item-name' : dish }));
 }
 
 function selectAll()

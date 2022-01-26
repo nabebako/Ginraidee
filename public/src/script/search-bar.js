@@ -4,7 +4,6 @@ function clearElement(elem) { while (elem.firstChild) {
 function refreshSearchResult(dishList) {
     const SEARCH_RESULT = document.getElementById('search-result');
     clearElement(SEARCH_RESULT);
-    console.log(dishList);
     dishList.map((dish) => {
         const SearchResWrapper = document.createElement('a');
         const ResHeadderWrapper = document.createElement('div');
@@ -38,9 +37,9 @@ function refreshSearchResult(dishList) {
         Image.src = `http://localhost:3000/src/img/menu/${dish.name.toLowerCase().replace(' ', '-')}.png`;
         CookingTimeIcon.src = 'http://localhost:3000/src/img/cooking-time-icon.png'; // Change it...
         dish.tags.map((tag) => {
-            let tagWrapper = document.createElement('li');
-            tagWrapper.appendChild(document.createTextNode(tag));
-            Tags.appendChild(tagWrapper);
+            let Tag_wrapper = document.createElement('li');
+            Tag_wrapper.appendChild(document.createTextNode(tag));
+            Tags.appendChild(Tag_wrapper);
         });
         Name.appendChild(document.createTextNode(dish.name));
         Raiting.appendChild(document.createTextNode(dish.rating.toString()));
@@ -129,38 +128,36 @@ function refreshSearchResult(dishList) {
 window.addEventListener('load', () => {
     const searchInputElem = document.querySelector('input#search-query');
     const searchBarToggle = document.querySelector('#show-search');
-    if (document.URL.search('http://localhost:3000/search') !== null) {
+    if (document.URL.search('http://localhost:3000/search') === 1) {
         const searchString = document.URL.split('?query=')[1];
         if (searchString) {
             searchInputElem.value = searchString;
             const search = new XMLHttpRequest();
-            search.open('post', '/search');
             search.onload = () => {
-                if (search.status === 200) {
-                    refreshSearchResult(JSON.parse(search.response));
-                }
+                refreshSearchResult(search.response);
             };
-            search.setRequestHeader('content-type', 'application/json');
-            search.send(JSON.stringify({ 'searchString': searchString }));
+            search.open('post', '/search');
+            search.setRequestHeader('content-type', 'text/plain');
+            search.send(searchString);
         }
     }
     // add functionality to the search bar.
     // ? might remove the search delay between key stroke.
     if (searchBarToggle) {
-        searchBarToggle.addEventListener('click', function () {
+        searchBarToggle.addEventListener('click', () => {
             let show = this.classList.toggle('nondisplay');
             if (show) {
                 this.focus();
             }
         });
     }
-    searchInputElem.addEventListener('keypress', function (keypressEvent) {
+    searchInputElem.addEventListener('keypress', (keypressEvent) => {
         // ? chnage it to be time baseed?
         if (keypressEvent.key === 'Enter' && this.value !== '') {
             if (document.URL.search('http://localhost:3000/search') === 1) {
                 const search = new XMLHttpRequest();
                 search.onload = () => {
-                    refreshSearchResult(JSON.parse(search.response));
+                    refreshSearchResult(search.response);
                     window.history.pushState({}, '', `?search=${this.value}`);
                 };
                 search.open('post', '/search');

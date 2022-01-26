@@ -1,28 +1,29 @@
-type CookingUnit = 'string' | 'grams';
+type cookingUnit = 'string' | 'grams';
 type tag = 'string' | '' | '';
 type skill = 'beginer' | 'novice' | 'intermediate' | 'experience' | 'proficient';
+type servingType = 'portion' | 'cup' | 'tart' | 'plate';
+type timeUnit = 'd' | 'day' | 'h' | 'hour' | 'min' | 'minute' | 'sec' | 'second';
+type duration = `${number} ${timeUnit}`;
+type serving = `${number} ${servingType}`;
 
-interface Ingredient
+declare namespace General
 {
-    name:       string,
-    amount:     number,
-    unit:       CookingUnit
+    interface Ingredient
+    {
+        'ingredient-name':      string,
+        'amount-per-serving':   serving,
+        'unit':                 cookingUnit,
+    }
 }
 
-interface Dish
-{
-    name: string,
-    rating: number,
-    ingredients: Ingredient[]
-}
 
 interface CartItem
 {
     name:           string,
     checked:        boolean,
     serving:        number,
-    ingredients:    Ingredient[],
-    description:    string
+    ingredients:    General.Ingredient[],
+    description:    string,
 }
 
 interface UpdateCartInfo
@@ -44,24 +45,88 @@ interface MenuObject
 
 interface LoginInfo
 {
-    email: string,
-    password?: string,
+    'email': string,
+    'password': string,
+    'remember-me': boolean,
 }
 
-interface LoginCookie
+
+
+
+
+/**
+    * Interfaces for database tables
+*/
+
+declare namespace Table
 {
-    email: string,
-    accessToken: string,
-}
+    interface Cart
+    {
+        'cart-id'?:             string,
+        'geust-id'?:            string,
+        'user-id'?:             string,
+        'session-id'?:          string,
+        'items'?:               CartItem[],
+    }
 
-interface CookieOptions {
-    maxAge?: number | undefined;
-    signed?: boolean | undefined;
-    expires?: Date | undefined;
-    httpOnly?: boolean | undefined;
-    path?: string | undefined;
-    domain?: string | undefined;
-    secure?: boolean | undefined;
-    encode?: ((val: string) => string) | undefined;
-    sameSite?: boolean | 'lax' | 'strict' | 'none' | undefined;
+    interface CartItem
+    {
+        'dish-id':          number,
+        'serving-amount':   number,
+        'is-checked':       boolean,
+    }
+
+
+    interface Ingredient
+    {
+        'ingredient-id'?:       string,
+        'name'?:                string,
+        'unit'?:                string,
+        'related-menus-id'?:    number[],
+    }
+
+    interface Dish
+    {
+        'dish-id'?:             number,
+        'name'?:                string,
+        'rating'?:              number,
+        'level'?:               string,
+        'tags'?:                string[],
+        'description'?:         string,
+        'cooking-time'?:         duration,
+        'serving'?:             serving,
+        'ingredients'?:         General.Ingredient[],
+    }
+
+    interface Form
+    {
+        'form-id'?:             number,
+        'session-id'?:          string,
+        'current-form'?:        string,
+        'form-1'?:              object,
+        'form-2'?:              object,
+        'form-3'?:              object,
+        'user-id'?:             string,
+        'guest-id'?:            string,
+    }
+
+    interface Guest
+    {
+        'guest-id'?:            string,
+        'session-id'?:          string,
+        'cart-id'?:             string,
+        'form-id'?:             number,
+    }
+
+    interface User
+    {
+        'user-id'?:              string,
+        'email'?:                string,
+        'session-id'?:           string,
+        'access-token'?:         string,
+        'password'?:             string,
+        'salt'?:                 string,
+        'cart-id'?:              string,
+        'form-id'?:              number,
+    }
 }

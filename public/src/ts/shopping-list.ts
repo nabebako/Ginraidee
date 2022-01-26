@@ -14,7 +14,7 @@ function updateCart()
     const SaveCart = new XMLHttpRequest();
     SaveCart.open('POST', '/updateCart');
     SaveCart.setRequestHeader('content-type', 'application/json');
-    SaveCart.send(JSON.stringify(cart));
+    SaveCart.send(JSON.stringify({'cart': cart}));
 }
 
 function removeCartItem(item: HTMLDivElement)
@@ -24,10 +24,10 @@ function removeCartItem(item: HTMLDivElement)
 
     const Remove = new XMLHttpRequest();
     Remove.open('post', '/removecartitem');
-    Remove.send(MenuTickBox.value);
+    Remove.send(JSON.stringify({'dish-id': MenuTickBox.value}));
 }
 
-function displayCart(res: CartItem[])
+function displayCart(res: FrontendCartItem[])
 {
     const SHOPPING_LIST = document.getElementById('shopping-list-wrapper');
         

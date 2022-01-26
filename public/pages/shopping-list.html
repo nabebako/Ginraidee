@@ -2,25 +2,25 @@
 <html lang = "en">
     <head>
         <title>Shopping List</title>
-        <link rel = "icon" href = "../resources/svg/logo-small.svg">
+        <link rel = "icon" href = "http://localhost/src/svg/logo/logo-small.svg">
         <meta charset = "utf-8">
 
-        <link rel = "stylesheet" href = "../css/main.css">
-        <link rel = "stylesheet" href = "../css/shopping-list.css">
+        <link rel = "stylesheet" href = "http://localhost/css/main.css">
+        <link rel = "stylesheet" href = "http://localhost/css/shopping-list.css">
 
-        <script src = "../scripts/shopping-list.js"></script>
-        <script src = "../scripts/action-button.js"></script>
-        <script src = "../scripts/general.js"></script>
-        <script src = "../scripts/search.js"></script>
+        <script src = "http://localhost/src/script/shopping-list.js"></script>
+        <script src = "http://localhost/src/script/action-button.js"></script>
+        <script src = "http://localhost/src/script/general.js"></script>
+        <script src = "http://localhost/src/script/search.js"></script>
     </head>
     <body>
         <header class = "nonselect">
             <div id = "top-nav">
                 <div id = "nav-container" class = "center-content h-center">
                     <div>
-                        <a href = "../">
-                            <img id = "logo-main" src = "../resources/svg/logo-main-2.svg" height = "44">
-                            <img id = "logo-small" src = "../resources/svg/logo-small.svg" height = "44">
+                        <a href = "http://localhost">
+                            <img id = "logo-main" src = "http://localhost/src/svg/logo/logo-main-2.svg" height = "44">
+                            <img id = "logo-small" src = "http://localhost/src/svg/logo/logo-small.svg" height = "44">
                         </a>
                     </div>
                     <nav id = "main-nav" class = "center-content">
@@ -31,18 +31,18 @@
                         <a class = "nondeco-link nav-link" href = "">Easy Recipes</a>
                     </nav>
                     <div id = "misc-container" class = "center-content">
-                        <img id = "hamburger-nav" class = "clickable nondisplay" src = "../resources/svg/hamburger--nav.svg" width = "24" height = "24">
-                        <img id = "show-search" class = "clickable" src = "../resources/svg/search.svg" width = "24" height = "24" onclick = "showSearchBar();">
+                        <img id = "hamburger-nav" class = "clickable nondisplay" src = "http://localhost/src/svg/hamburger--nav.svg" width = "24" height = "24" />
+                        <img id = "show-search" class = "clickable" src = "http://localhost/src/svg/search.svg" width = "24" height = "24" />
                         <div id = "shopping-list">
-                            <a id = "shopping-list-icon" href = "../pages/shopping-list.html">
-                                <img width = "24" height = "24" src="../resources/svg/shopping-list.svg">
+                            <a id = "shopping-list-icon" href = "http://localhost/shopping-list">
+                                <img width = "24" height = "24" src="http://localhost/src/svg/shopping-list.svg">
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div id = "search-field" class = "nondisplay h-center">
-                <input id = "search-query" type = "text" onload="addWatchInput(this);" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
+                <input id = "search-query" type = "text" onkeypress="checkKeyPress();" spellcheck = "false" autocapitalize = "false" autocomplete = "off">
                 <div id = "search-result">
                 </div>
             </div>
@@ -56,9 +56,9 @@
                         <div class ="menu-label center-content">
                             <div class = "menu-content-wrapper">
                                 <div class = "menu-main-content-wrapper">
-                                    <img class = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
+                                    <img class = "menu-img" src = "http://localhost/src/img/menu/fluffy-pancake.jpg">
                                     <div>
-                                        <a class = "menu-name" href = "../index.html">Lorem ipsum</a>
+                                        <a class = "menu-name" href = "/">Lorem ipsum</a>
                                         <ul class = "ingredients-list">
                                             <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
                                             <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
@@ -75,9 +75,9 @@
                                 <p class = "desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic nulla debitis consectetur placeat reiciendis vel quos dolorum possimus facilis? Accusamus fugiat consectetur nihil culpa commodi natus quod, aliquid est.</p>
                             </div>
                             <div>
-                                <img class = "serving-input-arrow nonselect clickable" increase = "true" src = "../resources/svg/arrow-up.svg" onclick = "chnageCount(this.parentElement.children['1'], 'add');">
+                                <img class = "serving-input-arrow nonselect clickable" increase = "true" src = "http://localhost/src/svg/arrow-up.svg" onclick = "chnageCount(this.parentElement.children['1'], 'add');">
                                 <input class = "serving-input" type = "text" placeholder = "1" oninput = "chnageCount(this, 'userInput');">
-                                <img class = "serving-input-arrow nonselect clickable" decrease = "true" src = "../resources/svg/arrow-down.svg" onclick = "chnageCount(this.parentElement.children['1'], 'minus');">
+                                <img class = "serving-input-arrow nonselect clickable" decrease = "true" src = "http://localhost/src/svg/arrow-down.svg" onclick = "chnageCount(this.parentElement.children['1'], 'minus');">
                                 <select class = "serving-input-mobile" onchange = "console.log(typeof this.value);">
                                     <option value = "1">1</option>
                                     <option value = "2">2</option>
@@ -108,9 +108,9 @@
                         <div class ="menu-label center-content">
                             <div class = "menu-content-wrapper">
                                 <div class = "menu-main-content-wrapper">
-                                    <img class = "menu-img" src = "../resources/menu/fluffy-pancake.jpg">
+                                    <img class = "menu-img" src = "http://localhost/src/img/menu/fluffy-pancake.jpg">
                                     <div>
-                                        <a class = "menu-name" href = "../index.html">Lorem ipsum</a>
+                                        <a class = "menu-name" href = "/">Lorem ipsum</a>
                                         <ul class = "ingredients-list">
                                             <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
                                             <li><a class = "ingredients-link" href = "#">Lorem ipsum</a></li>
@@ -127,9 +127,9 @@
                                 <p class = "desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic nulla debitis consectetur placeat reiciendis vel quos dolorum possimus facilis? Accusamus fugiat consectetur nihil culpa commodi natus quod, aliquid est.</p>
                             </div>
                             <div>
-                                <img class = "serving-input-arrow nonselect clickable" increase = "true" src = "../resources/svg/arrow-up.svg" onclick = "chnageCount(this.nextElementSibling, 'add');">
+                                <img class = "serving-input-arrow nonselect clickable" increase = "true" src = "http://localhost/src/svg/arrow-up.svg" onclick = "chnageCount(this.nextElementSibling, 'add');">
                                 <input class = "serving-input" type = "text" placeholder = "1" oninput = "chnageCount(this, 'userInput');">
-                                <img class = "serving-input-arrow nonselect clickable" decrease = "true" src = "../resources/svg/arrow-down.svg" onclick = "chnageCount(this.previousElementSibling, 'minus');">
+                                <img class = "serving-input-arrow nonselect clickable" decrease = "true" src = "http://localhost/src/svg/arrow-down.svg" onclick = "chnageCount(this.previousElementSibling, 'minus');">
                                 <select class = "serving-input-mobile" onchange = "console.log(typeof this.value);">
                                     <option value = "1">1</option>
                                     <option value = "2">2</option>

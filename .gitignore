@@ -1,3 +1,6 @@
+node_modules
+misc
+log
 .DS_Store
 .DS_Store?
 ._*
@@ -10,5 +13,4 @@ log.txt
 reminder.txt
 summary.txt
 *.sql
-misc
-log
+deprecated.*

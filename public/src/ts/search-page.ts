@@ -99,8 +99,8 @@ const searchPageInit = () =>
     Search.open('POST', '/search');
     Search.send(JSON.stringify(
         {
-            'searchStr': searchStr,
-            'returnAmount': 40
+            'search-string': searchStr,
+            'return-amount': 40
         }));
 }
 

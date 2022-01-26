@@ -27,7 +27,7 @@ const initForm = () =>
             document.getElementById(CurrentForm).setAttribute('current-form', 'true');
         }
     };
-    initFormRequest.open('POST', '/initform', true);
+    initFormRequest.open('POST', '/initform');
     initFormRequest.send();
 }
 
@@ -80,76 +80,7 @@ function submitForm()
         }
     };
     SubmitForm.setRequestHeader('content-type', 'application/json');
-    SubmitForm.send(JSON.stringify({'Data': formResponse, 'CurrentForm': CurrentForm.id.replace('-', '_')})); // Change null
+    SubmitForm.send(JSON.stringify({'data': formResponse, 'current-form': CurrentForm.id}));
 }
 
 window.addEventListener('load', initForm);
-
-
-/*
-function FORM_INIT()
-{
-    const CLOSE_BUTTON  = document.getElementById('window-close');
-    const BACKGROUND    = document.getElementById('pop-up--background');
-    const FOREGROUND    = document.getElementById('pop-up--foreground');
-    const FORM          = document.getElementById('form-wrapper');
-    const SUBMIT        = document.getElementById('submit');
-
-    document.getElementById('Questionnaire-pop-up').addEventListener('click', () =>
-    {
-        document.body.classList.add('stop--scroll');
-        BACKGROUND.classList.remove('hidden');
-        FOREGROUND.classList.remove('hidden');
-    });
-
-    CLOSE_BUTTON.addEventListener('click', () =>
-    {
-        BACKGROUND.classList.add('hidden');
-        FOREGROUND.classList.add('hidden');
-        document.body.classList.remove('stop--scroll');
-    });
-
-    SUBMIT.addEventListener('click', () =>
-    {
-        let formResponse = {};
-        const CurrentForm = document.querySelector('div[current-form = true]');
-        CurrentForm.querySelectorAll('input').forEach((elem) => { formResponse[elem.value] = elem.checked; });
-
-        console.log(formResponse);
-
-        const SubmitForm = new XMLHttpRequest();
-        SubmitForm.open('POST', '/submitform', true);
-        SubmitForm.onload = () =>
-        {
-            if(SubmitForm.status === 200)
-            {
-                const NextForm = document.querySelector('div[current-form = true] + div');
-                if(NextForm !== null && NextForm !== undefined)
-                {
-                    // Moving on to the next part of the form.
-                    CurrentForm.removeAttribute('current-form');
-                    NextForm.setAttribute('current-form', 'true');
-
-                    // Find a way to transistion smoothly
-                    CurrentForm.classList.add('nondisplay');
-                    NextForm.classList.remove('nondisplay');
-                }
-                else
-                {
-                    // say that form is complete
-                    // Redirect user to the suggesiton page.
-                }
-            }
-            else
-            {
-                // Tell the user to send request again
-                window.alert('Someting went wrong. Please try again.');
-            }
-        };
-        SubmitForm.setRequestHeader('content-type', 'application/json');
-        SubmitForm.send(JSON.stringify({'Data': formResponse, 'CurrentForm': CurrentForm.id.replace('-', '_')})); // Change null
-    });
-}
-
-FORM_INIT();
-*/
