@@ -1,24 +1,20 @@
+import { Client } from 'pg';
 import * as express from 'express';
-import { Client, QueryResult } from 'pg';
-const { jsPDF } = require('jspdf');
 import * as fs from 'fs';
-const cookies = require('cookie-parser');
+import * as cookies from 'cookie-parser';
 import * as crypto from 'crypto';
-import * as https from 'https';
 import * as http from 'http';
 
-const ClientInfo = {
-    host:       'localhost',
-    user:       'public_user',
-    port:        5432,
-    password:   'test',
-    database:   'main'
-};
+
+const dbConfig = JSON.parse(fs.readFileSync(`${__dirname.replace(/\/app.*/, '')}/app/client-info.json`).toString());
 
 async function logError(err: Error | string)
 {
-    const rootDir = __dirname.replace(/\/app.*/, '');
-    fs.appendFileSync(`${rootDir}/log/log.txt`, `${err}. time: ${Date()}\n`, 'utf-8');
+    return new Promise<void>(() =>
+    {
+        const rootDir = __dirname.replace(/\/app.*/, '');
+        fs.appendFileSync(`${rootDir}/log/log.txt`, `${err}. time: ${Date()}\n`, 'utf-8');
+    });
 }
 
 function validateEmail(email: string): boolean
@@ -73,14 +69,13 @@ function validatePassword(password: string): boolean
 //     }
 // }
 
-const app = express();
+const server = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookies());
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+server.use(cookies());
 
-
-app.all('*', async (req, res, next) =>
+server.all('*', async (req, res, next) =>
 {
     // * sends back a session cookie if there is none.
 
@@ -88,7 +83,7 @@ app.all('*', async (req, res, next) =>
 
     if(sessionId === undefined || sessionId === '')
     {
-        const client = new Client(ClientInfo);
+        const db = new Client(dbConfig);
 
         const newSessionId  = crypto.randomUUID();
         const newGuestId    = `g-${crypto.randomUUID()}`;
@@ -107,27 +102,27 @@ app.all('*', async (req, res, next) =>
             sameSite: 'strict'
         });
 
-        client.connect()
+        db.connect()
         .then(() =>
         {
             return Promise.all([
-                client.query('INSERT INTO "session_id" VALUES(($1))', [newSessionId]),
-                client.query('INSERT INTO "cart"("cart_id", "items", "session_id") VALUES (($1), ($2), ($3))', [newCartId, [], newSessionId]),
-                client.query('INSERT INTO "guest"("guest_id", "session_id", "cart_id") VALUES (($1), ($2), ($3))', [newGuestId, newSessionId, newCartId]),
-                client.query('UPDATE "cart" SET "guest_id" = ($1) WHERE "cart_id" = ($2)', [newGuestId, newCartId]),
-                client.query('INSERT INTO "form"("form_id", "session_id", "current_form", "guest_id") VALUES (($1), ($2), ($3), ($4))', [newFormId, newSessionId, 'form-1', newGuestId]),
+                db.query('INSERT INTO "session_id" VALUES(($1))', [newSessionId]),
+                db.query('INSERT INTO "cart"("cart_id", "items", "session_id") VALUES (($1), ($2), ($3))', [newCartId, [], newSessionId]),
+                db.query('INSERT INTO "guest"("guest_id", "session_id", "cart_id") VALUES (($1), ($2), ($3))', [newGuestId, newSessionId, newCartId]),
+                db.query('UPDATE "cart" SET "guest_id" = ($1) WHERE "cart_id" = ($2)', [newGuestId, newCartId]),
+                db.query('INSERT INTO "form"("form_id", "session_id", "current_form", "guest_id") VALUES (($1), ($2), ($3), ($4))', [newFormId, newSessionId, 'form-1', newGuestId]),
             ]);
         })
         .catch(logError)
-        .finally(() => client.end());
+        .finally(() => db.end());
     }
 
     next();
 });
 
-app.post('/search', async (req, res) =>
+server.post('/search', async (req, res) =>
 {
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
 
     const searchStr: string = req.body['search-string'];
 
@@ -135,33 +130,33 @@ app.post('/search', async (req, res) =>
     {
         try
         {
-            await client.connect();
-            const searchResult = await client.query('SELECT "name", "description", "cooking_time" AS "cooking-time", "serving", "rating", "ingredients", "level", "tags" FROM "dish" WHERE LOWER("name") LIKE ($1) ORDER BY "rating" DESC', [`%${searchStr}%`]);
+            await db.connect();
+            const searchResult = await db.query('SELECT "name", "description", "cooking_time" AS "cooking-time", "serving", "rating", "ingredients", "level", "tags" FROM "dish" WHERE LOWER("name") LIKE ($1) ORDER BY "rating" DESC', [`%${searchStr}%`]);
             if(searchResult.rowCount > 0) { res.send(searchResult.rows); }
             else { res.sendStatus(404); }
         }
         catch (err) { res.sendStatus(500); logError(err); }
-        finally { client.end(); }
+        finally { db.end(); }
     }
     else { res.sendStatus(400); }
 });
 
-app.post('/topmenus', async (req, res) =>
+server.post('/topmenus', async (req, res) =>
 {
     // ? might change the name of the path.
     // todo: change the query;
 
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
     try
     {
-        await client.connect();
-        res.send((await client.query('SELECT "name", "rating" FROM "dish" ORDER BY "rating" DESC')).rows);
+        await db.connect();
+        res.send((await db.query('SELECT "name", "rating" FROM "dish" ORDER BY "rating" DESC')).rows);
     }
     catch(err) { res.sendStatus(500); logError(err); }
-    finally { client.end(); }
+    finally { db.end(); }
 });
 
-app.post('/signup', async (req, res) =>
+server.post('/signup', async (req, res) =>
 {
     //* creates a new account with the email and password provided
     //* upon a successful account creation, sends back a access token and an email cookie
@@ -175,12 +170,12 @@ app.post('/signup', async (req, res) =>
 
     if(validateEmail(email) && validatePassword(password) && typeof isRememberMe === 'boolean')
     {
-        const client = new Client(ClientInfo);
+        const db = new Client(dbConfig);
         try
         {
-            await client.connect();
+            await db.connect();
 
-            if((await client.query('SELECT COUNT(*) FROM "user" WHERE "email" = ($1)', [email])).rows[0]['count'] === 0)
+            if((await db.query('SELECT COUNT(*) FROM "user" WHERE "email" = ($1)', [email])).rows[0]['count'] === 0)
             {
                 // if account doesn't already exists.
 
@@ -212,21 +207,21 @@ app.post('/signup', async (req, res) =>
                 res.send('Account created successfully.');
 
                 await Promise.all([
-                    client.query('INSERT INTO "cart"("cart_id", "items", "session_id") VALUES (($1), ($2), ($3))', [newCartId, [], sessionId]),
-                    client.query('INSERT INTO "user"("user_id", "email", "session_id", "access_token", "password", "salt", "cart_id") VALUES(($1), ($2), ($3), ($4), ($5), ($6), ($7))', [newUserId, email, sessionId, accessToken, hashedPassword, salt, newCartId]),
-                    client.query('UPDATE "cart" SET "user_id" = ($1) WHERE "cart_id" = ($2)', [newUserId, newCartId]),
-                    client.query('INSERT INTO "form"("form_id", "session_id", "current_form", "user_id") VALUES (($1), ($2), ($3), ($4))', [sessionId, newFormId, 'form-1', newUserId])
+                    db.query('INSERT INTO "cart"("cart_id", "items", "session_id") VALUES (($1), ($2), ($3))', [newCartId, [], sessionId]),
+                    db.query('INSERT INTO "user"("user_id", "email", "session_id", "access_token", "password", "salt", "cart_id") VALUES(($1), ($2), ($3), ($4), ($5), ($6), ($7))', [newUserId, email, sessionId, accessToken, hashedPassword, salt, newCartId]),
+                    db.query('UPDATE "cart" SET "user_id" = ($1) WHERE "cart_id" = ($2)', [newUserId, newCartId]),
+                    db.query('INSERT INTO "form"("form_id", "session_id", "current_form", "user_id") VALUES (($1), ($2), ($3), ($4))', [sessionId, newFormId, 'form-1', newUserId])
                 ]);
             }
             else { res.send('Account already exists.'); }
         }
         catch(err) { res.sendStatus(500); logError(err); }
-        finally { client.end(); }
+        finally { db.end(); }
     }
     else { res.sendStatus(400); }
 });
 
-app.post('/signin', async (req, res) =>
+server.post('/signin', async (req, res) =>
 {
     // Account for the cart feature.
 
@@ -236,13 +231,13 @@ app.post('/signin', async (req, res) =>
     const password: string = req.body['password'];
     const isRememberMe: boolean = req.body['remember-me'];
 
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
     if(validateEmail(email) && validatePassword(password) && typeof isRememberMe === 'boolean')
     {
         try
         {
-            await client.connect();
-            const userAccount: Table.User = (await client.query('SELECT "salt", "user_id" as "user-id" FROM "user" WHERE "email" = ($1) LIMIT 1', [email])).rows[0];
+            await db.connect();
+            const userAccount: Table.User = (await db.query('SELECT "salt", "user_id" as "user-id" FROM "user" WHERE "email" = ($1) LIMIT 1', [email])).rows[0];
             if(userAccount)
             {
                 const hashedbuffer = crypto.scryptSync(password, userAccount['salt'], 64);
@@ -251,7 +246,7 @@ app.post('/signin', async (req, res) =>
                 if(crypto.timingSafeEqual(hashedbuffer, keybuffer))
                 {
                     const newAccessToken = crypto.createHash('sha256').update(email).update(Date.now().toString(2)).update(sessionID).digest().toString('hex');
-                    await client.query('UPDATE "user" SET "access_token" = ($1), "session_id" = ($2) WHERE "user_id" = ($3)', [newAccessToken, sessionID, userAccount['user-id']]);
+                    await db.query('UPDATE "user" SET "access_token" = ($1), "session_id" = ($2) WHERE "user_id" = ($3)', [newAccessToken, sessionID, userAccount['user-id']]);
 
                     res.cookie('email', email, {
                         maxAge: isRememberMe? 7 * 24 * 60 * 60 * 1000 : 0,
@@ -275,24 +270,24 @@ app.post('/signin', async (req, res) =>
             else { res.send('No account with this email.'); }
         }
         catch(err) { res.sendStatus(500); logError(err); }
-        finally{ client.end(); }
+        finally{ db.end(); }
     }
     else { res.sendStatus(400); }
 });
 
-app.post('/form/init', async (req, res) =>
+server.post('/form/init', async (req, res) =>
 {
     const sessionId: string         = req.cookies['session-id'];
     const accessToken: string       = req.cookies['access-token'];
     const email: string             = req.cookies['email'];
 
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
     try
     {
-        await client.connect();
-        const userForm: Table.Form = (await client.query('SELECT "form_id" AS "form-id", "current_form" AS "current-form", "form-1", "form-2", "form-3" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
+        await db.connect();
+        const userForm: Table.Form = (await db.query('SELECT "form_id" AS "form-id", "current_form" AS "current-form", "form-1", "form-2", "form-3" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
 
-        const guestForm: Table.Form = (await client.query('SELECT "form_id" AS "form-id", "current_form" AS "current-form", "form-1", "form-2", "form-3" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
+        const guestForm: Table.Form = (await db.query('SELECT "form_id" AS "form-id", "current_form" AS "current-form", "form-1", "form-2", "form-3" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
 
         if(userForm)
         {
@@ -311,10 +306,10 @@ app.post('/form/init', async (req, res) =>
         else { res.sendStatus(404); }
     }
     catch(err) { res.sendStatus(500); logError(err); }
-    finally { client.end(); }
+    finally { db.end(); }
 });
 
-app.post('/form/submit', async (req, res) =>
+server.post('/form/submit', async (req, res) =>
 {
     const sessionId: string         = req.cookies['session-id'];
     const accessToken: string       = req.cookies['access-token'];
@@ -323,33 +318,33 @@ app.post('/form/submit', async (req, res) =>
     const currentFormName: string   = req.body['current-form-id'];
     const formResponese: object     = req.body['form-responese'];
 
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
 
     if(typeof formResponese === 'object' && typeof currentFormName === 'string')
     {
         try
         {
-            await client.connect();
+            await db.connect();
 
-            const userForm: Table.Form  = (await client.query('SELECT "form_id" AS "form-id" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
-            const guestForm: Table.Form = (await client.query('SELECT "form_id" AS "form-id" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
+            const userForm: Table.Form  = (await db.query('SELECT "form_id" AS "form-id" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
+            const guestForm: Table.Form = (await db.query('SELECT "form_id" AS "form-id" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
 
             if(userForm)
             {
                 switch(currentFormName)
                 {
                     case '1':
-                        await client.query('UPDATE "form" SET "current_form" = ($1), "form-1" = ($2)  WHERE "form_id" = ($3)', ['form-2', formResponese, userForm['form-id']]);
+                        await db.query('UPDATE "form" SET "current_form" = ($1), "form-1" = ($2)  WHERE "form_id" = ($3)', ['form-2', formResponese, userForm['form-id']]);
                         res.sendStatus(200);
                         break;
 
                     case '2':
-                        await client.query('UPDATE "form" SET "current_form" = ($1), "form-2" = ($2)  WHERE "form_id" = ($3)', ['form-3', formResponese, userForm['form-id']]);
+                        await db.query('UPDATE "form" SET "current_form" = ($1), "form-2" = ($2)  WHERE "form_id" = ($3)', ['form-3', formResponese, userForm['form-id']]);
                         res.sendStatus(200);
                         break;
                     
                     case '3':
-                        await client.query('UPDATE "form" SET "current_form" = ($1), "form-3" = ($2)  WHERE "form_id" = ($3)', ['form-4', formResponese, userForm['form-id']]);
+                        await db.query('UPDATE "form" SET "current_form" = ($1), "form-3" = ($2)  WHERE "form_id" = ($3)', ['form-4', formResponese, userForm['form-id']]);
                         res.sendStatus(200);
                         break;
 
@@ -362,17 +357,17 @@ app.post('/form/submit', async (req, res) =>
                 switch(currentFormName)
                 {
                     case '1':
-                        await client.query('UPDATE "form" SET "current_form" = ($1), "form-1" = ($2)  WHERE "form_id" = ($3)', ['form-2', formResponese, guestForm['form-id']]);
+                        await db.query('UPDATE "form" SET "current_form" = ($1), "form-1" = ($2)  WHERE "form_id" = ($3)', ['form-2', formResponese, guestForm['form-id']]);
                         res.sendStatus(200);
                         break;
 
                     case '2':
-                        await client.query('UPDATE "form" SET "current_form" = ($1), "form-2" = ($2)  WHERE "form_id" = ($3)', ['form-3', formResponese, guestForm['form-id']]);
+                        await db.query('UPDATE "form" SET "current_form" = ($1), "form-2" = ($2)  WHERE "form_id" = ($3)', ['form-3', formResponese, guestForm['form-id']]);
                         res.sendStatus(200);
                         break;
                     
                     case '3':
-                        await client.query('UPDATE "form" SET "current_form" = ($1), "form-3" = ($2)  WHERE "form_id" = ($3)', ['form-4', formResponese, guestForm['form-id']]);
+                        await db.query('UPDATE "form" SET "current_form" = ($1), "form-3" = ($2)  WHERE "form_id" = ($3)', ['form-4', formResponese, guestForm['form-id']]);
                         res.sendStatus(200);
                         break;
 
@@ -383,7 +378,7 @@ app.post('/form/submit', async (req, res) =>
             else { res.sendStatus(404); }
         }
         catch(err) { res.sendStatus(500); logError(err);}
-        finally { client.end(); }
+        finally { db.end(); }
     }
     else
     {
@@ -391,7 +386,7 @@ app.post('/form/submit', async (req, res) =>
     }
 });
 
-app.post('/cart*', async (req, res, next) =>
+server.post('/cart*', async (req, res, next) =>
 {
     // * purpose: making sure that all requests to the cart path have a valide cart id.
     // Check for the cart id, if valide do nothing, else sends an error and a cookie with a cart id.
@@ -403,9 +398,9 @@ app.post('/cart*', async (req, res, next) =>
 
     if(!cartId)
     {
-        const client = new Client(ClientInfo);
-        await client.connect();
-        let cartIdQueryRes = await client.query('SELECT "cart_id" AS "cart-id" FROM "user" WHERE "email" = ($1) AND "access_token" = ($2) LIMIT 1', [email, accessToken]);
+        const db = new Client(dbConfig);
+        await db.connect();
+        let cartIdQueryRes = await db.query('SELECT "cart_id" AS "cart-id" FROM "user" WHERE "email" = ($1) AND "access_token" = ($2) LIMIT 1', [email, accessToken]);
 
         if(cartIdQueryRes.rowCount === 1)
         {
@@ -421,8 +416,8 @@ app.post('/cart*', async (req, res, next) =>
         {
             // For guest user that doesn't have a cart.
             const newCartId = `c-${crypto.randomUUID()}`;
-            await client.query('INSERT INTO "cart" ("cart_id", "items", "session_id") VALUES(($1), ($2), ($3))', [newCartId, [], sessionId]);
-            await client.query('UPDATE "guest" SET "cart_id" = ($1) WHERE "session_id" = ($2)', [newCartId, sessionId]);
+            await db.query('INSERT INTO "cart" ("cart_id", "items", "session_id") VALUES(($1), ($2), ($3))', [newCartId, [], sessionId]);
+            await db.query('UPDATE "guest" SET "cart_id" = ($1) WHERE "session_id" = ($2)', [newCartId, sessionId]);
 
             res.cookie('cart-id', newCartId, {
                 httpOnly: true,
@@ -431,13 +426,13 @@ app.post('/cart*', async (req, res, next) =>
                 sameSite: 'strict',
             });
         }
-        await client.end();
+        await db.end();
         res.sendStatus(400);
     }
     else { next(); }
 });
 
-app.post('/cart/get', async (req, res) =>
+server.post('/cart/get', async (req, res) =>
 {
     // * sends back a cart associated with the request's session id and or access token and email.
 
@@ -451,7 +446,7 @@ app.post('/cart/get', async (req, res) =>
     let guestCartId: object;
     let cartItems: CartItem[] = [];
 
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
 
     const generateTable = (carts: Table.Cart[]) =>
     {
@@ -489,51 +484,51 @@ app.post('/cart/get', async (req, res) =>
     
     try
     {
-        await client.connect();
+        await db.connect();
 
-        userCartId = (await client.query('SELECT "cart_id" AS "cart-id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2)', [accessToken, email])).rows[0];
-        guestCartId = (await client.query('SELECT "cart_id" AS "cart-id" FROM "guest" WHERE "session_id" = ($1)', [sessionId])).rows[0];
+        userCartId = (await db.query('SELECT "cart_id" AS "cart-id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2)', [accessToken, email])).rows[0];
+        guestCartId = (await db.query('SELECT "cart_id" AS "cart-id" FROM "guest" WHERE "session_id" = ($1)', [sessionId])).rows[0];
 
         if(userCartId && guestCartId)
         {
             // Both the user and guest cart are present.
 
-            let carts: Table.Cart[] = (await client.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1) or "cart_id" = ($2)', [userCartId['cart-id'], guestCartId['cart-id']])).rows;
+            let carts: Table.Cart[] = (await db.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1) or "cart_id" = ($2)', [userCartId['cart-id'], guestCartId['cart-id']])).rows;
 
-            res.send((await client.query(`SELECT "dish"."name", "dish"."ingredients", "dish"."description", "arg"."is_checked", "arg"."serving_amount" from "dish" LEFT JOIN (VALUES ${generateTable(carts)}) AS "arg" (dish_id, is_checked, serving_amount) ON "arg"."dish_id" = "dish"."dish_id";`)).rows);
+            res.send((await db.query(`SELECT "dish"."name", "dish"."ingredients", "dish"."description", "arg"."is_checked", "arg"."serving_amount" from "dish" LEFT JOIN (VALUES ${generateTable(carts)}) AS "arg" (dish_id, is_checked, serving_amount) ON "arg"."dish_id" = "dish"."dish_id";`)).rows);
         }
         else if(userCartId)
         {   
             // User cart present, but guest cart isn't.
 
-            let carts: Table.Cart[] = (await client.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1)', [userCartId['cart-id']])).rows;
+            let carts: Table.Cart[] = (await db.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1)', [userCartId['cart-id']])).rows;
 
-            res.send((await client.query(`SELECT "dish"."name", "dish"."ingredients", "dish"."description", "arg"."is_checked", "arg"."serving_amount" from "dish" LEFT JOIN (VALUES ${generateTable(carts)}) AS "arg" (dish_id, is_checked, serving_amount) ON "arg"."dish_id" = "dish"."dish_id";`)).rows);
+            res.send((await db.query(`SELECT "dish"."name", "dish"."ingredients", "dish"."description", "arg"."is_checked", "arg"."serving_amount" from "dish" LEFT JOIN (VALUES ${generateTable(carts)}) AS "arg" (dish_id, is_checked, serving_amount) ON "arg"."dish_id" = "dish"."dish_id";`)).rows);
         }
         else if(guestCartId)
         {
             // User is a guest and there is a cart.
 
-            let carts: Table.Cart[] = (await client.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1)', [guestCartId['cart-id']])).rows;
+            let carts: Table.Cart[] = (await db.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1)', [guestCartId['cart-id']])).rows;
 
-            res.send((await client.query(`SELECT "dish"."name", "dish"."ingredients", "dish"."description", "arg"."is_checked", "arg"."serving_amount" from "dish" LEFT JOIN (VALUES ${generateTable(carts)}) AS "arg" (dish_id, is_checked, serving_amount) ON "arg"."dish_id" = "dish"."dish_id";`)).rows);
+            res.send((await db.query(`SELECT "dish"."name", "dish"."ingredients", "dish"."description", "arg"."is_checked", "arg"."serving_amount" from "dish" LEFT JOIN (VALUES ${generateTable(carts)}) AS "arg" (dish_id, is_checked, serving_amount) ON "arg"."dish_id" = "dish"."dish_id";`)).rows);
         }
         else
         {
             // Creates a new cart for the guest user.
             const newCartId = `c-${crypto.randomUUID()}`;
             
-            await client.query('INSERT INTO "cart" ("cart_id", "items", "session_id") VALUES (($1), ($2), ($3))', [newCartId, [], sessionId]);
-            await client.query('UPDATE "guest" SET "cart_id" = ($1) WHERE "session_id" = ($2)', [newCartId, sessionId]);
+            await db.query('INSERT INTO "cart" ("cart_id", "items", "session_id") VALUES (($1), ($2), ($3))', [newCartId, [], sessionId]);
+            await db.query('UPDATE "guest" SET "cart_id" = ($1) WHERE "session_id" = ($2)', [newCartId, sessionId]);
 
             res.send({});
         }
     }
     catch(err) { res.sendStatus(500); logError(err); }
-    finally { client.end(); }
+    finally { db.end(); }
 });
 
-app.post('/cart/add', async (req, res) =>
+server.post('/cart/add', async (req, res) =>
 {
     // * adding 1 new item to the user/guest cart
 
@@ -546,19 +541,19 @@ app.post('/cart/add', async (req, res) =>
 
     if(typeof dishId === 'number' && typeof servingAmount === 'number')
     {
-        const client = new Client(ClientInfo);        
+        const db = new Client(dbConfig);        
         try
         {
-            await client.connect();
+            await db.connect();
     
-            const dishCount = (await client.query('SELECT COUNT(*) FROM "dish" WHERE "dish_id" = ($1)', [dishId])).rows[0]['count'];
+            const dishCount = (await db.query('SELECT COUNT(*) FROM "dish" WHERE "dish_id" = ($1)', [dishId])).rows[0]['count'];
             if(dishCount === 1)
             {
-                const userCart: Table.User = (await client.query('SELECT "cart_id" AS "cart-id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2)', [accessToken, email])).rows[0];
+                const userCart: Table.User = (await db.query('SELECT "cart_id" AS "cart-id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2)', [accessToken, email])).rows[0];
                 
                 if(userCart)
                 {
-                    let cartItems: Table.CartItem[] = (await client.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1)', [userCart['cart-id']])).rows[0]['items'];
+                    let cartItems: Table.CartItem[] = (await db.query('SELECT "items" FROM "cart" WHERE "cart_id" = ($1)', [userCart['cart-id']])).rows[0]['items'];
 
                     cartItems.push({
                         'dish-id':          dishId,
@@ -566,11 +561,11 @@ app.post('/cart/add', async (req, res) =>
                         'is-checked':       true,
                     });
 
-                    await client.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [cartItems, userCart['cart-id']]);
+                    await db.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [cartItems, userCart['cart-id']]);
                 }
                 else
                 {
-                    let cartItems: Table.CartItem[] = (await client.query('SELECT "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0]['items'];
+                    let cartItems: Table.CartItem[] = (await db.query('SELECT "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0]['items'];
 
                     cartItems.push({
                         'dish-id':          dishId,
@@ -578,19 +573,19 @@ app.post('/cart/add', async (req, res) =>
                         'is-checked':       true,
                     });
 
-                    await client.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($2) LIMIT 1)', [cartItems, sessionId]);
+                    await db.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($2) LIMIT 1)', [cartItems, sessionId]);
                 }
                 res.sendStatus(200);
             }
             else { res.sendStatus(400); }
         }
         catch(err) { res.sendStatus(500); logError(err); }
-        finally { client.end(); }
+        finally { db.end(); }
     }
     else { res.sendStatus(400); }
 });
 
-app.post('/cart/remove', async (req, res) =>
+server.post('/cart/remove', async (req, res) =>
 {
     // * removing 1 item from the user/guest cart
 
@@ -602,14 +597,14 @@ app.post('/cart/remove', async (req, res) =>
 
     if(typeof dishId === 'number')
     {
-        const client = new Client(ClientInfo);
+        const db = new Client(dbConfig);
         try
         {
-            await client.connect();
+            await db.connect();
 
-            const userCart: Table.Cart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
+            const userCart: Table.Cart = (await db.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
 
-            const guestCart: Table.Cart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
+            const guestCart: Table.Cart = (await db.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
         
             if(userCart)
             {
@@ -621,7 +616,7 @@ app.post('/cart/remove', async (req, res) =>
 
                 res.sendStatus(200);
 
-                await client.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [newCartItems, userCart['cart-id']]);
+                await db.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [newCartItems, userCart['cart-id']]);
             }
             else if(guestCart)
             {
@@ -633,17 +628,17 @@ app.post('/cart/remove', async (req, res) =>
 
                 res.sendStatus(200);
 
-                await client.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [newCartItems, guestCart['cart-id']]);
+                await db.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [newCartItems, guestCart['cart-id']]);
             }
             else { res.sendStatus(404); }
         }
         catch(err) { res.sendStatus(500); logError(err); }
-        finally { client.end(); }
+        finally { db.end(); }
     }
     else { res.sendStatus(400); }
 });
 
-app.post('/cart/check', async (req, res) =>
+server.post('/cart/check', async (req, res) =>
 {
     //* Check cart for consistancy before doing other thing
 
@@ -653,15 +648,15 @@ app.post('/cart/check', async (req, res) =>
 
     const cartItems: Table.CartItem[]   = req.body['cart-items'];
 
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
 
     try
     {
-        await client.connect();
+        await db.connect();
 
-        const userCart: Table.Cart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
+        const userCart: Table.Cart = (await db.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
 
-        const guestCart: Table.Cart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
+        const guestCart: Table.Cart = (await db.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
 
         if(userCart)
         {
@@ -694,10 +689,10 @@ app.post('/cart/check', async (req, res) =>
         logError(err);
         res.sendStatus(500);
     }
-    finally { client.end(); }
+    finally { db.end(); }
 });
 
-app.post('/cart/update', async (req, res) =>
+server.post('/cart/update', async (req, res) =>
 {
     const sessionId: string     = req.cookies['session-id'];
     const accessToken: string   = req.cookies['access-token'];
@@ -707,15 +702,15 @@ app.post('/cart/update', async (req, res) =>
     const newIsCheck            = req.body['is-checked'];
     const newServingAmount      = req.body['serving-amount'];
 
-    const client = new Client(ClientInfo);
+    const db = new Client(dbConfig);
     
     try
     {
-        await client.connect();
+        await db.connect();
 
-        const userCart: Table.Cart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
+        const userCart: Table.Cart = (await db.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
 
-        const guestCart: Table.Cart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
+        const guestCart: Table.Cart = (await db.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "guest" WHERE "session_id" = ($1) LIMIT 1)', [sessionId])).rows[0];
 
         if(userCart)
         {
@@ -728,8 +723,8 @@ app.post('/cart/update', async (req, res) =>
                 }
             });
 
-            client.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [userCart['items'], userCart['cart-id']])
-            .then(() => { client.end(); });
+            db.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [userCart['items'], userCart['cart-id']])
+            .then(() => { db.end(); });
 
             res.sendStatus(200);
         }
@@ -744,14 +739,14 @@ app.post('/cart/update', async (req, res) =>
                 }
             });
 
-            client.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [guestCart['items'], guestCart['cart-id']])
-            .then(() => { client.end(); });
+            db.query('UPDATE "cart" SET "items" = ($1) WHERE "cart_id" = ($2)', [guestCart['items'], guestCart['cart-id']])
+            .then(() => { db.end(); });
 
             res.sendStatus(200);
         }
-        else { res.sendStatus(404); client.end(); }
+        else { res.sendStatus(404); db.end(); }
     }
-    catch(err) { res.sendStatus(500); logError(err); client.end(); }
+    catch(err) { res.sendStatus(500); logError(err); db.end(); }
 });
 
 
@@ -797,9 +792,9 @@ app.post('/cart/update', async (req, res) =>
 //     else { res.sendStatus(400); }
 // });
 
-app.get('/', (req, res) => { res.sendFile(`${__dirname.replace(/\/app.*/, '')}/public/pages/index.html`); });
+server.get('/', (req, res) => { res.sendFile(`${__dirname.replace(/\/app.*/, '')}/public/pages/index.html`); });
 
-app.get('*', (req, res) =>
+server.get('*', (req, res) =>
 {
     // Create a custom http get request for different resources
 
@@ -840,7 +835,7 @@ app.get('*', (req, res) =>
     }
 });
 
-app.all('*', async (req, res) =>
+server.all('*', async (req, res) =>
 {
     // * logs any non-get request that have an invalid path
     res.sendStatus(404);
@@ -851,28 +846,28 @@ app.all('*', async (req, res) =>
 // const httpsPort = 443;
 const httpPort = 80;
 
-// http.createServer(app).listen(httpPort);
+http.createServer(server).listen(httpPort);
 
 (async () =>
 {
     // * The root directory for pages (html) is the pages folder.
     // * The root directory for resources other than pages (html) is the public folder.
 
-    console.log(`Live on http://localhost:${httpPort}`);
+    console.log(`Live on http://localhost`);
     
     console.log('The root directory for everything other than htmls is the public folder.');
     console.log('The root directory for resources other than pages (html) is the public folder.');
 
-    try
-    {
+    // try
+    // {
 
-        const client = new Client(ClientInfo);
-        await client.connect();
-        console.log((await client.query('select * from "($1)" limit 1', ['user'])).rows);
-        await client.end();
-    }
-    catch(err)
-    {
-        console.log(err);
-    }
+    //     const client = new Client(ClientInfo);
+    //     await client.connect();
+    //     console.log((await client.query('select * from "($1)" limit 1', ['user'])).rows);
+    //     await client.end();
+    // }
+    // catch(err)
+    // {
+    //     console.log(err);
+    // }
 })();

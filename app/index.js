@@ -2,17 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const pg_1 = require("pg");
-const { jsPDF } = require('jspdf');
 const fs = require("fs");
-const cookies = require('cookie-parser');
+const cookies = require("cookie-parser");
 const crypto = require("crypto");
-const ClientInfo = {
-    host: 'localhost',
-    user: 'public_user',
-    port: 5432,
-    password: 'test',
-    database: 'main'
-};
+const dbConfig = JSON.parse(fs.readFileSync(`${__dirname.replace(/\/app.*/, '')}/app/client-info.json`).toString());
 async function logError(err) {
     const rootDir = __dirname.replace(/\/app.*/, '');
     fs.appendFileSync(`${rootDir}/log/log.txt`, `${err}. time: ${Date()}\n`, 'utf-8');
@@ -75,7 +68,7 @@ app.all('*', async (req, res, next) => {
     // * sends back a session cookie if there is none.
     let sessionId = req.cookies['session-id'];
     if (sessionId === undefined || sessionId === '') {
-        const client = new pg_1.Client(ClientInfo);
+        const client = new pg_1.Client(dbConfig);
         const newSessionId = crypto.randomUUID();
         const newGuestId = `g-${crypto.randomUUID()}`;
         const newCartId = `c-${crypto.randomUUID()}`;
@@ -106,7 +99,7 @@ app.all('*', async (req, res, next) => {
     next();
 });
 app.post('/search', async (req, res) => {
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     const searchStr = req.body['search-string'];
     if (typeof searchStr === 'string') {
         try {
@@ -134,7 +127,7 @@ app.post('/search', async (req, res) => {
 app.post('/topmenus', async (req, res) => {
     // ? might change the name of the path.
     // todo: change the query;
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     try {
         await client.connect();
         res.send((await client.query('SELECT "name", "rating" FROM "dish" ORDER BY "rating" DESC')).rows);
@@ -156,7 +149,7 @@ app.post('/signup', async (req, res) => {
     const password = req.body['password'];
     const isRememberMe = req.body['remember-me'];
     if (validateEmail(email) && validatePassword(password) && typeof isRememberMe === 'boolean') {
-        const client = new pg_1.Client(ClientInfo);
+        const client = new pg_1.Client(dbConfig);
         try {
             await client.connect();
             if ((await client.query('SELECT COUNT(*) FROM "user" WHERE "email" = ($1)', [email])).rows[0]['count'] === 0) {
@@ -212,7 +205,7 @@ app.post('/signin', async (req, res) => {
     const email = req.body['email'];
     const password = req.body['password'];
     const isRememberMe = req.body['remember-me'];
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     if (validateEmail(email) && validatePassword(password) && typeof isRememberMe === 'boolean') {
         try {
             await client.connect();
@@ -263,7 +256,7 @@ app.post('/form/init', async (req, res) => {
     const sessionId = req.cookies['session-id'];
     const accessToken = req.cookies['access-token'];
     const email = req.cookies['email'];
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     try {
         await client.connect();
         const userForm = (await client.query('SELECT "form_id" AS "form-id", "current_form" AS "current-form", "form-1", "form-2", "form-3" FROM "form" WHERE "form_id" = (SELECT "form_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
@@ -298,7 +291,7 @@ app.post('/form/submit', async (req, res) => {
     const email = req.cookies['email'];
     const currentFormName = req.body['current-form-id'];
     const formResponese = req.body['form-responese'];
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     if (typeof formResponese === 'object' && typeof currentFormName === 'string') {
         try {
             await client.connect();
@@ -364,7 +357,7 @@ app.post('/cart*', async (req, res, next) => {
     const email = req.cookies['email'];
     const cartId = req.cookies['cart-id'];
     if (!cartId) {
-        const client = new pg_1.Client(ClientInfo);
+        const client = new pg_1.Client(dbConfig);
         await client.connect();
         let cartIdQueryRes = await client.query('SELECT "cart_id" AS "cart-id" FROM "user" WHERE "email" = ($1) AND "access_token" = ($2) LIMIT 1', [email, accessToken]);
         if (cartIdQueryRes.rowCount === 1) {
@@ -404,7 +397,7 @@ app.post('/cart/get', async (req, res) => {
     let userCartId;
     let guestCartId;
     let cartItems = [];
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     const generateTable = (carts) => {
         // * solution 4: use anonymous tabe with join in a single query
         // creates the string to be use as a anonymous tabe in the sql query
@@ -479,7 +472,7 @@ app.post('/cart/add', async (req, res) => {
     const dishId = req.body['dish-id'];
     const servingAmount = req.body['serving-amount'];
     if (typeof dishId === 'number' && typeof servingAmount === 'number') {
-        const client = new pg_1.Client(ClientInfo);
+        const client = new pg_1.Client(dbConfig);
         try {
             await client.connect();
             const dishCount = (await client.query('SELECT COUNT(*) FROM "dish" WHERE "dish_id" = ($1)', [dishId])).rows[0]['count'];
@@ -528,7 +521,7 @@ app.post('/cart/remove', async (req, res) => {
     const email = req.cookies['email'];
     const dishId = req.body['dish-id'];
     if (typeof dishId === 'number') {
-        const client = new pg_1.Client(ClientInfo);
+        const client = new pg_1.Client(dbConfig);
         try {
             await client.connect();
             const userCart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
@@ -579,7 +572,7 @@ app.post('/cart/check', async (req, res) => {
     const accessToken = req.cookies['access-token'];
     const email = req.cookies['email'];
     const cartItems = req.body['cart-items'];
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     try {
         await client.connect();
         const userCart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
@@ -619,7 +612,7 @@ app.post('/cart/update', async (req, res) => {
     const itemId = req.body['item-id'];
     const newIsCheck = req.body['is-checked'];
     const newServingAmount = req.body['serving-amount'];
-    const client = new pg_1.Client(ClientInfo);
+    const client = new pg_1.Client(dbConfig);
     try {
         await client.connect();
         const userCart = (await client.query('SELECT "cart_id", "items" FROM "cart" WHERE "cart_id" = (SELECT "cart_id" FROM "user" WHERE "access_token" = ($1) AND "email" = ($2) LIMIT 1)', [accessToken, email])).rows[0];
@@ -691,14 +684,6 @@ app.post('/cart/update', async (req, res) => {
 //     }
 //     else { res.sendStatus(400); }
 // });
-app.post('/error', async (req, res) => {
-    // ! might remove
-    res.sendStatus(200);
-    const body = req.body;
-    Object.keys(body).map((key) => {
-        logError(`error: ${key}: ${body[key]}`);
-    });
-});
 app.get('/', (req, res) => { res.sendFile(`${__dirname.replace(/\/app.*/, '')}/public/pages/index.html`); });
 app.get('*', (req, res) => {
     // Create a custom http get request for different resources
@@ -743,13 +728,15 @@ const httpPort = 80;
     console.log(`Live on http://localhost:${httpPort}`);
     console.log('The root directory for everything other than htmls is the public folder.');
     console.log('The root directory for resources other than pages (html) is the public folder.');
-    try {
-        const client = new pg_1.Client(ClientInfo);
-        await client.connect();
-        console.log((await client.query('select * from "($1)" limit 1', ['user'])).rows);
-        await client.end();
-    }
-    catch (err) {
-        console.log(err);
-    }
+    // try
+    // {
+    //     const client = new Client(ClientInfo);
+    //     await client.connect();
+    //     console.log((await client.query('select * from "($1)" limit 1', ['user'])).rows);
+    //     await client.end();
+    // }
+    // catch(err)
+    // {
+    //     console.log(err);
+    // }
 })();
